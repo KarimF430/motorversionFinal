@@ -1,34 +1,54 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Upload } from "lucide-react";
 import RichTextEditor from "@/components/RichTextEditor";
 import { useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import { useModelForm } from "@/contexts/ModelFormContext";
+import type { Brand } from "@shared/schema";
 
 export default function ModelFormPage1() {
   const [, setLocation] = useLocation();
-  const [formData, setFormData] = useState({
-    brand: 'Honda',
-    modelName: 'City',
-    modelId: 'HOCI0001',
-    isPopular: false,
-    isNew: false,
-    popularRank: '1',
-    newRank: '1',
-    bodyType: '',
-    subBodyType: '',
-    launchDate: '',
-    fuelType: [] as string[],
-    transmission: [] as string[],
-    headerSeo: '',
-    pros: '',
-    cons: '',
-    description: '',
-    exteriorDesign: '',
-    comfortConvenience: '',
+  const { formData, updateFormData } = useModelForm();
+  
+  const { data: brands = [], isLoading } = useQuery<Brand[]>({
+    queryKey: ['/api/brands'],
   });
+
+  const [localData, setLocalData] = useState({
+    brandId: formData.brandId || '',
+    name: formData.name || '',
+    isPopular: formData.isPopular || false,
+    isNew: formData.isNew || false,
+    popularRank: formData.popularRank || null,
+    newRank: formData.newRank || null,
+    bodyType: formData.bodyType || '',
+    subBodyType: formData.subBodyType || '',
+    launchDate: formData.launchDate || '',
+    fuelTypes: formData.fuelTypes || [],
+    transmissions: formData.transmissions || [],
+    headerSeo: formData.headerSeo || '',
+    pros: formData.pros || '',
+    cons: formData.cons || '',
+    description: formData.description || '',
+    exteriorDesign: formData.exteriorDesign || '',
+    comfortConvenience: formData.comfortConvenience || '',
+  });
+
+  const handleNext = () => {
+    updateFormData(localData);
+    setLocation('/models/new/page2');
+  };
+
+  if (isLoading) {
+    return (
+      <div className="p-8">
+        <div className="h-96 bg-muted animate-pulse rounded-lg" />
+      </div>
+    );
+  }
 
   return (
     <div className="p-8">
@@ -68,13 +88,14 @@ export default function ModelFormPage1() {
             <Label>Select Brand</Label>
             <select 
               className="w-full px-3 py-2 border rounded-md"
-              value={formData.brand}
-              onChange={(e) => setFormData({ ...formData, brand: e.target.value })}
+              value={localData.brandId}
+              onChange={(e) => setLocalData({ ...localData, brandId: e.target.value })}
               data-testid="select-brand"
             >
-              <option>Honda</option>
-              <option>Maruti Suzuki</option>
-              <option>Toyota</option>
+              <option value="">Select a brand...</option>
+              {brands.map((brand) => (
+                <option key={brand.id} value={brand.id}>{brand.name}</option>
+              ))}
             </select>
           </div>
 
@@ -83,8 +104,8 @@ export default function ModelFormPage1() {
               <input
                 type="checkbox"
                 id="isPopular"
-                checked={formData.isPopular}
-                onChange={(e) => setFormData({ ...formData, isPopular: e.target.checked })}
+                checked={localData.isPopular}
+                onChange={(e) => setLocalData({ ...localData, isPopular: e.target.checked })}
                 className="w-4 h-4"
                 data-testid="checkbox-is-popular"
               />
@@ -94,8 +115,8 @@ export default function ModelFormPage1() {
               <input
                 type="checkbox"
                 id="isNew"
-                checked={formData.isNew}
-                onChange={(e) => setFormData({ ...formData, isNew: e.target.checked })}
+                checked={localData.isNew}
+                onChange={(e) => setLocalData({ ...localData, isNew: e.target.checked })}
                 className="w-4 h-4"
                 data-testid="checkbox-is-new"
               />
@@ -104,11 +125,16 @@ export default function ModelFormPage1() {
           </div>
         </div>
 
-        {formData.isPopular && (
+        {localData.isPopular && (
           <div className="space-y-2">
             <Label>Popular Model Ranking (1-20)</Label>
-            <select className="w-full md:w-48 px-3 py-2 border rounded-md" data-testid="select-popular-rank">
-              <option>Digit list 1-20</option>
+            <select 
+              className="w-full md:w-48 px-3 py-2 border rounded-md" 
+              value={localData.popularRank || ''}
+              onChange={(e) => setLocalData({ ...localData, popularRank: parseInt(e.target.value) })}
+              data-testid="select-popular-rank"
+            >
+              <option value="">Select...</option>
               {Array.from({ length: 20 }, (_, i) => (
                 <option key={i + 1} value={i + 1}>{i + 1}</option>
               ))}
@@ -116,11 +142,16 @@ export default function ModelFormPage1() {
           </div>
         )}
 
-        {formData.isNew && (
+        {localData.isNew && (
           <div className="space-y-2">
             <Label>New Model Ranking (1-20)</Label>
-            <select className="w-full md:w-48 px-3 py-2 border rounded-md" data-testid="select-new-rank">
-              <option>Digit list 1-20</option>
+            <select 
+              className="w-full md:w-48 px-3 py-2 border rounded-md" 
+              value={localData.newRank || ''}
+              onChange={(e) => setLocalData({ ...localData, newRank: parseInt(e.target.value) })}
+              data-testid="select-new-rank"
+            >
+              <option value="">Select...</option>
               {Array.from({ length: 20 }, (_, i) => (
                 <option key={i + 1} value={i + 1}>{i + 1}</option>
               ))}
@@ -152,7 +183,12 @@ export default function ModelFormPage1() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="space-y-2">
             <Label>Model Name</Label>
-            <Input placeholder="Text field" data-testid="input-model-name" />
+            <Input 
+              placeholder="Text field" 
+              value={localData.name}
+              onChange={(e) => setLocalData({ ...localData, name: e.target.value })}
+              data-testid="input-model-name" 
+            />
           </div>
 
           <div className="space-y-2">
@@ -255,7 +291,7 @@ export default function ModelFormPage1() {
         </div>
 
         <div className="flex justify-end pt-4">
-          <Button onClick={() => setLocation('/models/new/page2')} data-testid="button-next-page">
+          <Button onClick={handleNext} data-testid="button-next-page">
             Next Page
             <svg className="w-4 h-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

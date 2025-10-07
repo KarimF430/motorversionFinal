@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import AppHeader from "@/components/AppHeader";
+import { ModelFormProvider } from "@/contexts/ModelFormContext";
 import Dashboard from "@/pages/Dashboard";
 import BrandList from "@/pages/BrandList";
 import BrandForm from "@/pages/BrandForm";
@@ -38,18 +39,20 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <SidebarProvider>
-          <div className="flex h-screen w-full">
-            <AppSidebar />
-            <div className="flex flex-col flex-1">
-              <AppHeader />
-              <main className="flex-1 overflow-auto">
-                <Router />
-              </main>
+        <ModelFormProvider>
+          <SidebarProvider>
+            <div className="flex h-screen w-full">
+              <AppSidebar />
+              <div className="flex flex-col flex-1">
+                <AppHeader />
+                <main className="flex-1 overflow-auto">
+                  <Router />
+                </main>
+              </div>
             </div>
-          </div>
-        </SidebarProvider>
-        <Toaster />
+          </SidebarProvider>
+          <Toaster />
+        </ModelFormProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

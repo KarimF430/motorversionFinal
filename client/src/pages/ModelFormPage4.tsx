@@ -4,10 +4,56 @@ import { Label } from "@/components/ui/label";
 import { Plus } from "lucide-react";
 import ImageUpload from "@/components/ImageUpload";
 import { useLocation } from "wouter";
+import { useMutation } from "@tanstack/react-query";
+import { queryClient, apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useModelForm } from "@/contexts/ModelFormContext";
+import type { InsertModel } from "@shared/schema";
 
 export default function ModelFormPage4() {
   const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  const { formData, resetFormData } = useModelForm();
   const [colorImages, setColorImages] = useState([{ id: '1' }, { id: '2' }]);
+
+  const createModel = useMutation({
+    mutationFn: async (data: InsertModel) => {
+      return await apiRequest('/api/models', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/models'] });
+      queryClient.invalidateQueries({ queryKey: ['/api/stats'] });
+      toast({
+        title: "Model created",
+        description: "The model has been successfully created.",
+      });
+      resetFormData();
+      setLocation('/models');
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to create model. Please check all required fields.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSubmit = () => {
+    if (!formData.brandId || !formData.name) {
+      toast({
+        title: "Missing information",
+        description: "Please fill in the brand and model name.",
+        variant: "destructive",
+      });
+      setLocation('/models/new');
+      return;
+    }
+    createModel.mutate(formData as InsertModel);
+  };
 
   return (
     <div className="p-8">
@@ -50,10 +96,11 @@ export default function ModelFormPage4() {
             Previous
           </Button>
           <Button 
-            onClick={() => console.log('Save all model data')}
+            onClick={handleSubmit}
+            disabled={createModel.isPending}
             data-testid="button-save-all-data"
           >
-            Save All The Data
+            {createModel.isPending ? 'Saving...' : 'Save All The Data'}
           </Button>
         </div>
       </div>
