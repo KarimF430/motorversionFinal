@@ -70,7 +70,7 @@ export class MemStorage implements IStorage {
       ranking: brand.ranking,
       status: brand.status || "active",
       summary: brand.summary || null,
-      faqs: brand.faqs || null,
+      faqs: (brand.faqs as { question: string; answer: string }[] | null) || null,
       createdAt: new Date(),
     };
     this.brands.push(newBrand);
@@ -130,15 +130,15 @@ export class MemStorage implements IStorage {
       description: model.description || null,
       exteriorDesign: model.exteriorDesign || null,
       comfortConvenience: model.comfortConvenience || null,
-      engineSummaries: model.engineSummaries || null,
-      mileageData: model.mileageData || null,
-      faqs: model.faqs || null,
+      engineSummaries: (model.engineSummaries as any) || null,
+      mileageData: (model.mileageData as any) || null,
+      faqs: (model.faqs as any) || null,
       heroImage: model.heroImage || null,
-      galleryImages: model.galleryImages || null,
-      keyFeatureImages: model.keyFeatureImages || null,
-      spaceComfortImages: model.spaceComfortImages || null,
-      storageConvenienceImages: model.storageConvenienceImages || null,
-      colorImages: model.colorImages || null,
+      galleryImages: (model.galleryImages as any) || null,
+      keyFeatureImages: (model.keyFeatureImages as any) || null,
+      spaceComfortImages: (model.spaceComfortImages as any) || null,
+      storageConvenienceImages: (model.storageConvenienceImages as any) || null,
+      colorImages: (model.colorImages as any) || null,
       createdAt: new Date(),
     };
     this.models.push(newModel);

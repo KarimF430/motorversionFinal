@@ -3,40 +3,53 @@ import { Button } from "@/components/ui/button";
 import { Plus, BarChart3, Upload } from "lucide-react";
 import StatsCard from "@/components/StatsCard";
 import { useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Dashboard() {
   const [, setLocation] = useLocation();
 
-  // todo: remove mock functionality - replace with real data
-  const stats = {
-    totalBrands: 5,
-    totalModels: 12,
-    totalVariants: 48,
-    activeUsers: 1247
-  };
+  const { data: stats, isLoading } = useQuery<{
+    totalBrands: number;
+    totalModels: number;
+    totalVariants: number;
+  }>({
+    queryKey: ['/api/stats'],
+  });
+
+  if (isLoading) {
+    return (
+      <div className="p-8 space-y-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="h-32 bg-muted animate-pulse rounded-lg" />
+          ))}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8 space-y-8">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard
           title="Total Brands"
-          value={stats.totalBrands}
+          value={stats?.totalBrands || 0}
           icon={Building2}
           onClick={() => setLocation('/brands')}
         />
         <StatsCard
           title="Total Models"
-          value={stats.totalModels}
+          value={stats?.totalModels || 0}
           icon={Car}
         />
         <StatsCard
           title="Total Variants"
-          value={stats.totalVariants}
+          value={stats?.totalVariants || 0}
           icon={Gauge}
         />
         <StatsCard
           title="Active Users"
-          value={stats.activeUsers}
+          value="500k/day"
           icon={Users}
         />
       </div>
