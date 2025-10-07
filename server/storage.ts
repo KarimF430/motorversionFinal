@@ -64,8 +64,13 @@ export class MemStorage implements IStorage {
 
   async createBrand(brand: InsertBrand): Promise<Brand> {
     const newBrand: Brand = {
-      ...brand,
       id: this.generateBrandId(),
+      name: brand.name,
+      logo: brand.logo || null,
+      ranking: brand.ranking,
+      status: brand.status || "active",
+      summary: brand.summary || null,
+      faqs: brand.faqs || null,
       createdAt: new Date(),
     };
     this.brands.push(newBrand);
@@ -105,8 +110,35 @@ export class MemStorage implements IStorage {
   async createModel(model: InsertModel): Promise<Model> {
     const brand = await this.getBrand(model.brandId);
     const newModel: Model = {
-      ...model,
       id: this.generateModelId(brand?.name || 'BR', model.name),
+      brandId: model.brandId,
+      name: model.name,
+      isPopular: model.isPopular || null,
+      isNew: model.isNew || null,
+      popularRank: model.popularRank || null,
+      newRank: model.newRank || null,
+      bodyType: model.bodyType || null,
+      subBodyType: model.subBodyType || null,
+      launchDate: model.launchDate || null,
+      fuelTypes: model.fuelTypes || null,
+      transmissions: model.transmissions || null,
+      brochureUrl: model.brochureUrl || null,
+      status: model.status || "active",
+      headerSeo: model.headerSeo || null,
+      pros: model.pros || null,
+      cons: model.cons || null,
+      description: model.description || null,
+      exteriorDesign: model.exteriorDesign || null,
+      comfortConvenience: model.comfortConvenience || null,
+      engineSummaries: model.engineSummaries || null,
+      mileageData: model.mileageData || null,
+      faqs: model.faqs || null,
+      heroImage: model.heroImage || null,
+      galleryImages: model.galleryImages || null,
+      keyFeatureImages: model.keyFeatureImages || null,
+      spaceComfortImages: model.spaceComfortImages || null,
+      storageConvenienceImages: model.storageConvenienceImages || null,
+      colorImages: model.colorImages || null,
       createdAt: new Date(),
     };
     this.models.push(newModel);
@@ -145,8 +177,10 @@ export class MemStorage implements IStorage {
 
   async createVariant(variant: InsertVariant): Promise<Variant> {
     const newVariant: Variant = {
-      ...variant,
       id: Math.random().toString(36).substr(2, 9),
+      modelId: variant.modelId,
+      name: variant.name,
+      status: variant.status || "active",
       createdAt: new Date(),
     };
     this.variants.push(newVariant);
