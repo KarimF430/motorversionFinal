@@ -1,40 +1,185 @@
 [
   {
-    "id": "model-1762320747368",
-    "name": "Test Model 2",
-    "brandId": "3445736621",
+    "id": "honda-city",
+    "name": "City",
+    "brandId": "honda",
     "status": "active",
-    "isPopular": false,
-    "isNew": false,
-    "popularRank": null,
-    "newRank": null,
-    "bodyType": "SUV",
-    "subBodyType": null,
-    "launchDate": null,
+    "isPopular": true,
+    "isNew": true,
+    "popularRank": 1,
+    "newRank": 1,
+    "bodyType": "Sedan",
+    "subBodyType": "Mid Level",
+    "launchDate": "2020-06",
     "seating": 5,
     "fuelTypes": [
-      "Petrol"
+      "petrol"
     ],
     "transmissions": [
-      "Manual"
+      "manual",
+      "cvt"
     ],
     "brochureUrl": null,
-    "headerSeo": null,
-    "pros": null,
-    "cons": null,
-    "description": null,
-    "exteriorDesign": null,
-    "comfortConvenience": null,
+    "headerSeo": "1. The Honda City excels in practicality with comfortable front and rear seats and a large 506-litre boot space. It's reasonably feature-packed, and even gets an ADAS system too. As for the performance, the 1.5-litre petrol engine is refined, responsive and reliable while the manual and CVT gearboxes are impressive in their own way. It starts at Rs. 11.95 lakh (ex-showroom).",
+    "pros": "• This engine is smooth and offers adequate performance for regular driving needs.\n• The cabin feels airy, with ample head, leg and knee room, and comfortable seats.\n• It has sorted road dynamics, making it engaging to drive.\n• It benefits from the safety of Honda Sensing ADAS features.\n• The CVT gearbox displays very little of the rubber-band effect.\n",
+    "cons": "• The manual gear-shifting process, unlike Hondas, results in jerky shifts at low speeds.\n• No diesel engine is on offer for those who need more efficiency to cover long distances.\n• The infotainment system's user interface is similar to an aftermarket unit.\n• Wind noise can be heard in the cabin which is not expected in such a car.",
+    "description": "• It has a 1.5-litre i-VTEC petrol engine with 119bhp and 145Nm of torque and is available with either a six-speed manual gearbox (claimed mileage of 17.8kmpl) or a seven-speed CVT with paddle shifters (claimed 18.4kmpl).\nThis petrol engine delivers a balanced performance with smooth mid-range power, making it perfect for city driving.",
+    "exteriorDesign": "• The CVT transmission is tuned to maximise efficiency, and coupled with adaptive cruise control, makes it even better for city and highway use.\nThe paddle shifters in the automatic provide a quick, responsive drive, minimising the rubber-band effect considerably.\nIt has a quiet ride quality over smooth road surfaces and this Honda saloon feels stable under normal driving conditions.",
+    "comfortConvenience": "• The manual transmission feels jerky at low speeds, especially in lower gears, since clutch bites are hard to modulate.\nThere is some suspension noise when the Honda City is driven over rough surfaces.\nThe manual gearbox needs slicker gear shifts for a more refined driving experience.",
     "summary": null,
-    "heroImage": "/test-image2.jpg",
-    "createdAt": "2025-11-05T05:32:27.368Z",
-    "engineSummaries": [],
-    "mileageData": [],
-    "faqs": [],
-    "galleryImages": [],
-    "keyFeatureImages": [],
-    "spaceComfortImages": [],
-    "storageConvenienceImages": [],
-    "colorImages": []
+    "engineSummaries": [
+      {
+        "title": "1.5 Litre Petrol",
+        "summary": "It has a 1.5-litre i-VTEC petrol engine with 119bhp and 145Nm of torque and is available with either a six-speed manual gearbox (claimed mileage of 17.8kmpl) or a seven-speed CVT with paddle shifters (claimed 18.4kmpl).",
+        "transmission": "manual",
+        "power": "119 Bhp",
+        "torque": "145 Nm",
+        "speed": "6-Speed"
+      },
+      {
+        "title": "1.5 Litre Petrol",
+        "summary": "It has a 1.5-litre i-VTEC petrol engine with 119bhp and 145Nm of torque and is available with either a six-speed manual gearbox (claimed mileage of 17.8kmpl) or a seven-speed CVT with paddle shifters (claimed 18.4kmpl).",
+        "transmission": "cvt",
+        "power": "119 Bhp",
+        "torque": "145 Nm",
+        "speed": "6-Speed"
+      }
+    ],
+    "mileageData": [
+      {
+        "engineName": "1.5 Litre Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "17.8 Kmpl",
+        "highwayRealWorld": "18.4 Kmpl"
+      },
+      {
+        "engineName": "1.5 Litre Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "15 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda City base model?",
+        "answer": "The avg ex-showroom price of Honda City base model is Rs. 12.00 Lakh which includes a registration cost of Rs. 152298, insurance premium of Rs. 53634 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda City top model?",
+        "answer": "The avg ex-showroom price of Honda City top model is Rs. 16.12 Lakh which includes a registration cost of Rs. 203748, insurance premium of Rs. 66229 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the ARAI mileage of Honda City?",
+        "answer": "The ARAI mileage of Honda City is 17.8 to 18.4 kmpl."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda City?",
+        "answer": "Honda City is a 5 seater car."
+      }
+    ],
+    "heroImage": "/uploads/image-1762331459726-263692432.webp",
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1762331460112-95093234.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/image-1762331460127-986647803.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/image-1762331460134-885762098.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/image-1762331460154-399216112.jpg",
+        "caption": ""
+      },
+      {
+        "url": "/uploads/image-1762331460173-186282238.jpg",
+        "caption": ""
+      }
+    ],
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1762331460359-851902077.jpg",
+        "caption": "8-Inch infotainment screen"
+      },
+      {
+        "url": "/uploads/image-1762331460369-909851922.jpg",
+        "caption": "Digital drivers display"
+      },
+      {
+        "url": "/uploads/image-1762331460372-855622758.jpg",
+        "caption": "Dual Zone AC"
+      },
+      {
+        "url": "/uploads/image-1762331460392-366120151.jpg",
+        "caption": "Electric Sunroof"
+      }
+    ],
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1762331460473-830349245.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1762331460491-650132320.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1762331460492-205614361.jpg",
+        "caption": "Rear seat thigh space"
+      },
+      {
+        "url": "/uploads/image-1762331460504-941957520.jpg",
+        "caption": "Rear seat comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1762331460555-256333064.jpg",
+        "caption": "Front door bottle storage"
+      },
+      {
+        "url": "/uploads/image-1762331460545-182279339.jpg",
+        "caption": "Rear door bottle storage"
+      },
+      {
+        "url": "/uploads/image-1762331460546-621974618.jpg",
+        "caption": "Glovebox bottle storage"
+      },
+      {
+        "url": "/uploads/image-1762331460548-275927778.jpg",
+        "caption": "Boot space"
+      }
+    ],
+    "colorImages": [
+      {
+        "url": "/uploads/image-1762331545231-454775506.webp",
+        "caption": "Honda city red"
+      },
+      {
+        "url": "/uploads/image-1762331545232-865570892.webp",
+        "caption": "Honda city white"
+      },
+      {
+        "url": "/uploads/image-1762331545233-648497231.webp",
+        "caption": "Honda city brown"
+      },
+      {
+        "url": "/uploads/image-1762331593088-774532526.webp",
+        "caption": "Honda city grey"
+      },
+      {
+        "url": "/uploads/image-1762331593089-309707425.webp",
+        "caption": "Honda city silver"
+      },
+      {
+        "url": "/uploads/image-1762331593091-567713987.webp",
+        "caption": "Honda city blue"
+      }
+    ],
+    "createdAt": "2025-11-05T08:32:25.288Z"
   }
 ]
