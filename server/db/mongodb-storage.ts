@@ -186,8 +186,29 @@ export class MongoDBStorage implements IStorage {
 
   async createModel(model: InsertModel): Promise<ModelType> {
     try {
+      // Get brand name for slug generation
+      const brand = await Brand.findOne({ id: model.brandId }).lean();
+      const brandSlug = brand ? brand.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') : 'unknown';
+      
+      // Generate unique slug-based ID: brandslug-modelname
+      const modelSlug = model.name.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+      
+      const baseId = `${brandSlug}-${modelSlug}`;
+      
+      // Check for collisions and append number if needed
+      let uniqueId = baseId;
+      let counter = 1;
+      while (await Model.findOne({ id: uniqueId }).lean()) {
+        uniqueId = `${baseId}-${counter}`;
+        counter++;
+      }
+      
       const newModel = new Model({
-        id: `model-${Date.now()}`,
+        id: uniqueId,
         ...model,
         createdAt: new Date()
       });
@@ -259,8 +280,29 @@ export class MongoDBStorage implements IStorage {
 
   async createVariant(variant: InsertVariant): Promise<VariantType> {
     try {
+      // Get model and brand for slug generation
+      const model = await Model.findOne({ id: variant.modelId }).lean();
+      const modelSlug = model ? model.id : 'unknown'; // Model ID already has brand-model format
+      
+      // Generate unique slug-based ID: modelid-variantname
+      const variantSlug = variant.name.toLowerCase()
+        .replace(/\s+/g, '-')
+        .replace(/[^a-z0-9-]/g, '')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+      
+      const baseId = `${modelSlug}-${variantSlug}`;
+      
+      // Check for collisions and append number if needed
+      let uniqueId = baseId;
+      let counter = 1;
+      while (await Variant.findOne({ id: uniqueId }).lean()) {
+        uniqueId = `${baseId}-${counter}`;
+        counter++;
+      }
+      
       const newVariant = new Variant({
-        id: `variant-${Date.now()}`,
+        id: uniqueId,
         ...variant,
         createdAt: new Date()
       });
