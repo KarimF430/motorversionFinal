@@ -75,8 +75,23 @@ export class MongoDBStorage implements IStorage {
         ranking = highestRanked ? (highestRanked.ranking || 0) + 1 : 1;
       }
       
+      // Generate unique slug-based ID from brand name
+      const slug = brand.name.toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with hyphens
+        .replace(/[^a-z0-9-]/g, '')     // Remove special characters
+        .replace(/-+/g, '-')            // Replace multiple hyphens with single
+        .replace(/^-|-$/g, '');         // Remove leading/trailing hyphens
+      
+      // Check if slug already exists, append number if needed
+      let uniqueId = slug;
+      let counter = 1;
+      while (await Brand.findOne({ id: uniqueId }).lean()) {
+        uniqueId = `${slug}-${counter}`;
+        counter++;
+      }
+      
       const newBrand = new Brand({
-        id: `brand-${Date.now()}`,
+        id: uniqueId,
         ...brand,
         ranking,
         createdAt: new Date()
