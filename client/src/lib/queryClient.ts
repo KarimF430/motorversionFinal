@@ -33,6 +33,11 @@ export async function apiRequest(method: string, url: string, data?: any) {
       throw error;
     }
 
+    // Handle 204 No Content (e.g., successful DELETE)
+    if (response.status === 204) {
+      return null;
+    }
+
     return response.json();
   } catch (error: any) {
     // Handle network errors

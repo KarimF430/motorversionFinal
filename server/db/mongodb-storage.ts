@@ -67,9 +67,18 @@ export class MongoDBStorage implements IStorage {
 
   async createBrand(brand: InsertBrand): Promise<BrandType> {
     try {
+      // Auto-assign ranking if not provided
+      let ranking = brand.ranking;
+      if (!ranking) {
+        // Find the highest ranking and add 1
+        const highestRanked = await Brand.findOne().sort({ ranking: -1 }).lean();
+        ranking = highestRanked ? (highestRanked.ranking || 0) + 1 : 1;
+      }
+      
       const newBrand = new Brand({
         id: `brand-${Date.now()}`,
         ...brand,
+        ranking,
         createdAt: new Date()
       });
       await newBrand.save();
