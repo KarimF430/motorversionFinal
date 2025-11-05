@@ -416,6 +416,34 @@ export function registerRoutes(app: Express, storage: IStorage, backupService?: 
     res.json({ url: fileUrl, filename: req.file.filename });
   });
 
+  // Bulk image upload endpoint - upload multiple images at once
+  app.post("/api/upload/images/bulk", upload.array('images', 20), (req, res) => {
+    try {
+      if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
+        return res.status(400).json({ error: "No images uploaded" });
+      }
+      
+      console.log(`📸 Bulk upload: ${req.files.length} images received`);
+      
+      const uploadedFiles = req.files.map(file => ({
+        url: `/uploads/${file.filename}`,
+        filename: file.filename,
+        originalName: file.originalname,
+        size: file.size,
+        mimetype: file.mimetype
+      }));
+      
+      res.json({ 
+        success: true,
+        count: uploadedFiles.length,
+        files: uploadedFiles 
+      });
+    } catch (error) {
+      console.error('❌ Bulk upload error:', error);
+      res.status(500).json({ error: 'Failed to upload images' });
+    }
+  });
+
   // Serve uploaded files
   app.use('/uploads', express.static(uploadDir));
 
