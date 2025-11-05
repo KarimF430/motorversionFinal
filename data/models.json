@@ -1,0 +1,2192 @@
+[
+  {
+    "id": "HOEL1974",
+    "name": "Elevate",
+    "brandId": "3445736621",
+    "status": "active",
+    "isPopular": true,
+    "isNew": true,
+    "popularRank": null,
+    "newRank": null,
+    "bodyType": "SUV",
+    "subBodyType": "Premium Level",
+    "launchDate": "2024-02",
+    "seating": 5,
+    "fuelTypes": [
+      "petrol"
+    ],
+    "transmissions": [
+      "manual",
+      "cvt"
+    ],
+    "brochureUrl": null,
+    "headerSeo": "The Honda Elevate, priced at Rs. 10.99 lakh (ex-showroom), looks sleek and that smoothness and reliability is also found in its 1.5-litre petrol engine mated to six-speed MT or CVT. It gets ADAS, six airbags, and has scored five-star in JNCAP crash safety ratings. It is decently practical with a spacious cabin and a 458-litre boot.",
+    "pros": "• Is a large SUV and is bigger in dimensions than some of its segment rivals.\n• It benefits from the safety of six airbags and ADAS features.\n• The infotainment offers wireless smartphone integration options.\n• Gets the option of either a six-speed manual or CVT gearbox.\n• The large boot space of 458 litres boosts practicality.",
+    "cons": "• The Elevate does not have an NCAP rating.\n• There are no other engine options other than the single petrol engine.\n• It lacks new-age features like a panoramic sunroof or heads-up display.",
+    "description": "• The 119bhp/145Nm 1.5-litre i-VTEC petrol engine is impressively quiet and vibration-free at idle.\n• This naturally aspirated engine provides a predictable power delivery with strong low- and mid-range torque.\n• There’s adequate power, making it suitable for city driving and highway cruising.\n• It has a six-speed manual transmission offering smooth clutch travel and a satisfying gearshift action.",
+    "exteriorDesign": "• The 119bhp/145Nm 1.5-litre i-VTEC petrol engine is impressively quiet and vibration-free at idle.\n• This naturally aspirated engine provides a predictable power delivery with strong low- and mid-range torque.\n• There’s adequate power, making it suitable for city driving and highway cruising.\n• It has a six-speed manual transmission offering smooth clutch travel and a satisfying gearshift action.",
+    "comfortConvenience": "• The 119bhp/145Nm 1.5-litre i-VTEC petrol engine is impressively quiet and vibration-free at idle.\n• This naturally aspirated engine provides a predictable power delivery with strong low- and mid-range torque.\n• There’s adequate power, making it suitable for city driving and highway cruising.\n• It has a six-speed manual transmission offering smooth clutch travel and a satisfying gearshift action.",
+    "summary": null,
+    "engineSummaries": [
+      {
+        "title": "1.5 Litre Petrol",
+        "summary": "he 119bhp/145Nm 1.5-litre i-VTEC petrol engine is impressively quiet and vibration-free at idle.",
+        "transmission": "manual",
+        "power": "119 Bhp",
+        "torque": "200 Nm",
+        "speed": "6-Speed"
+      },
+      {
+        "title": "1.5 Litre Petrol",
+        "summary": "he 119bhp/145Nm 1.5-litre i-VTEC petrol engine is impressively quiet and vibration-free at idle.",
+        "transmission": "cvt",
+        "power": "119 Bhp",
+        "torque": "200 Nm",
+        "speed": "6-Speed"
+      }
+    ],
+    "mileageData": [
+      {
+        "engineName": "1.5 Litre Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.5 Litre Petrol CVT",
+        "companyClaimed": "18 Kmpl",
+        "cityRealWorld": "22 Kmpl",
+        "highwayRealWorld": "14 Kmpl"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Elevate base model?",
+        "answer": "The avg ex-showroom price of Honda Elevate base model is Rs. 11.05 Lakh which includes a registration cost of Rs. 140388, insurance premium of Rs. 50718 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Elevate top model?",
+        "answer": "The avg ex-showroom price of Honda Elevate top model is Rs. 16.64 Lakh which includes a registration cost of Rs. 212318, insurance premium of Rs. 74181 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Elevate?",
+        "answer": "The company claimed mileage of Honda Elevate is 15.31 to 16.92 kmpl. As per users, the mileage came to be 14 to 14.94 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Elevate?",
+        "answer": "Honda Elevate is a 5 seater car."
+      }
+    ],
+    "heroImage": "/uploads/image-1761630330136-978617160.webp",
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761554607473-362828726.jpg",
+        "caption": "Honda Elevate Front"
+      },
+      {
+        "url": "/uploads/image-1761554607480-599800578.jpg",
+        "caption": "Honda Elevate Headlamps"
+      },
+      {
+        "url": "/uploads/image-1761554607497-738785561.jpg",
+        "caption": "Honda Elevate Alloy Wheel"
+      },
+      {
+        "url": "/uploads/image-1761554607576-69110061.jpg",
+        "caption": "Honda Elevate Rear"
+      },
+      {
+        "url": "/uploads/image-1761554607583-547160045.jpg",
+        "caption": "Honda Elevate Side"
+      }
+    ],
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761554607674-975789832.jpg",
+        "caption": "Steering mounted controls"
+      },
+      {
+        "url": "/uploads/image-1761554607676-874809106.jpg",
+        "caption": "Auto dimming IRVM"
+      },
+      {
+        "url": "/uploads/image-1761554607677-671757406.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761554607678-694085213.jpg",
+        "caption": "Rear AC vents"
+      }
+    ],
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761554607704-15527976.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761554607705-893738906.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761554607706-161899901.jpg",
+        "caption": "Rear Seat thigh space"
+      },
+      {
+        "url": "/uploads/image-1761554607707-711261688.jpg",
+        "caption": "Rear seat comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761554607732-575363721.jpg",
+        "caption": "Front door bottle storage"
+      },
+      {
+        "url": "/uploads/image-1761554607732-376130372.jpg",
+        "caption": "Rear door bottle storage"
+      },
+      {
+        "url": "/uploads/image-1761554607733-105809677.jpg",
+        "caption": "Glove box bottle storage"
+      },
+      {
+        "url": "/uploads/image-1761554607738-153331561.jpg",
+        "caption": "Boot space"
+      }
+    ],
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761554762261-955974672.webp",
+        "caption": "Honda Elevate Blue"
+      },
+      {
+        "url": "/uploads/image-1761554762261-707317400.webp",
+        "caption": "Honda Elevate Red"
+      },
+      {
+        "url": "/uploads/image-1761554762262-296256070.webp",
+        "caption": "Honda Elevate White"
+      },
+      {
+        "url": "/uploads/image-1761554762262-775132086.webp",
+        "caption": "Honda Elevate Brown"
+      },
+      {
+        "url": "/uploads/image-1761554762290-124178597.webp",
+        "caption": "Honda Elevate Grey"
+      },
+      {
+        "url": "/uploads/image-1761554762292-784608619.webp",
+        "caption": "Honda Elevate Silver"
+      },
+      {
+        "url": "/uploads/image-1761554762293-575002286.webp",
+        "caption": "Honda Elevate Orange DT"
+      },
+      {
+        "url": "/uploads/image-1761554762291-551593701.webp",
+        "caption": "Honda Elevate White DT"
+      },
+      {
+        "url": "/uploads/image-1761554762291-462961899.webp",
+        "caption": "Honda Elevate Red DT"
+      },
+      {
+        "url": "/uploads/image-1761554762291-614182758.webp",
+        "caption": "Honda Elevate Black"
+      },
+      {
+        "url": "/uploads/image-1761554762307-452749748.webp",
+        "caption": "Honda Elevate Orange"
+      }
+    ],
+    "createdAt": "2025-10-27T08:46:02.340Z"
+  },
+  {
+    "id": "HOAM9607",
+    "name": "Amaze",
+    "brandId": "3445736621",
+    "status": "active",
+    "isPopular": true,
+    "isNew": false,
+    "popularRank": null,
+    "newRank": null,
+    "bodyType": "SUV",
+    "subBodyType": "Premium Level",
+    "launchDate": "2025-06",
+    "seating": 5,
+    "fuelTypes": [
+      "petrol"
+    ],
+    "transmissions": [
+      "manual",
+      "cvt"
+    ],
+    "brochureUrl": null,
+    "headerSeo": "The third generation of the Honda Amaze has a starting price of Rs. 8.19 lakh (ex-showroom). This sub-four-metre sedan gets 1.2-litre petrol engines mated to a five-speed manual and CVT transmission options. It also features a Level 2 ADAS suite and 8-inch infotainment display. It is an E20 fuel compliant model.",
+    "pros": "• The sharp design is similar to the Honda City.\n• It has Level 2 ADAS and other modern features.\n• The cabin is adequately spacious and comfortable.\n• The boot space is sufficient for most requirements.",
+    "cons": "• Missing key features like ventilated seats and a sunroof.\n• Tall people can find the rear headroom restrictive.",
+    "description": "• In terms of features, the new Amaze gets a Level 2 ADAS suite, a feature not offered by any of its rivals at the moment.\n• The model also boasts automatic climate control, larger touchscreen infotainment system, and touch capacitive controls.\n• There are a range of charging options, including USB Type-A, wireless charger, and USB Type-C ports.",
+    "exteriorDesign": "• The new Amaze features six airbags, ABS with EBD, reverse parking sensors, seatbelt reminder system, and a speed alert system as standard.\n• It is also equipped with TPMS, ESP, hill hold control, and more.",
+    "comfortConvenience": "• In terms of features, the new Amaze gets a Level 2 ADAS suite, a feature not offered by any of its rivals at the moment.\n• The model also boasts automatic climate control, larger touchscreen infotainment system, and touch capacitive controls.\n• There are a range of charging options, including USB Type-A, wireless charger, and USB Type-C ports.",
+    "summary": null,
+    "engineSummaries": [
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "manual",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      },
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "cvt",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      }
+    ],
+    "mileageData": [
+      {
+        "engineName": "1.2 Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.2 Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "18 Kmpl",
+        "highwayRealWorld": "16 Kmpl"
+      }
+    ],
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze base model?",
+        "answer": "The avg ex-showroom price of Honda Amaze base model is Rs. 7.45 Lakh which includes a registration cost of Rs. 89147, insurance premium of Rs. 41590 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze top model?",
+        "answer": "The avg ex-showroom price of Honda Amaze top model is Rs. 10.00 Lakh which includes a registration cost of Rs. 126680, insurance premium of Rs. 47615 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Amaze?",
+        "answer": "The company claimed mileage of Honda Amaze is 18.65 to 19.46 kmpl. As per users, the mileage came to be 17.07 to 18 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Amaze?",
+        "answer": "Honda Amaze is a 5 seater car."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze?",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze? 2",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm.2"
+      }
+    ],
+    "heroImage": "/uploads/image-1762253325038-12361168.webp",
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761559647284-698670059.jpg",
+        "caption": "Rear AC Vents"
+      },
+      {
+        "url": "/uploads/image-1761559647297-571934474.jpg",
+        "caption": "Side window line "
+      },
+      {
+        "url": "/uploads/image-1761559647311-331765944.jpg",
+        "caption": "Rear Wheel"
+      }
+    ],
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761559647417-512494000.jpg",
+        "caption": "Steering Mounted Controls"
+      },
+      {
+        "url": "/uploads/image-1761559647428-654163175.jpg",
+        "caption": "Wiper Control"
+      },
+      {
+        "url": "/uploads/image-1761559647458-874258516.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761559647481-391728772.jpg",
+        "caption": "Digital Drivers Display"
+      }
+    ],
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761559647643-192124670.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761559647652-526724318.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761559647668-73759633.jpg",
+        "caption": "Rear Seat Comfort"
+      },
+      {
+        "url": "/uploads/image-1761559647694-125549996.jpg",
+        "caption": "Front Seat Comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761559647830-890242078.jpg",
+        "caption": "Front Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647842-951630019.jpg",
+        "caption": "Rear Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647853-86609724.jpg",
+        "caption": "Boot Space"
+      },
+      {
+        "url": "/uploads/image-1761559647854-90514892.jpg",
+        "caption": "Glovebox Storage"
+      }
+    ],
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761559738151-689349615.webp",
+        "caption": "Honda Amaze Grey"
+      },
+      {
+        "url": "/uploads/image-1761559738152-400520223.webp",
+        "caption": "Honda Amaze Brown"
+      },
+      {
+        "url": "/uploads/image-1761559738153-356462385.webp",
+        "caption": "Honda Amaze White"
+      },
+      {
+        "url": "/uploads/image-1761559738157-192144519.webp",
+        "caption": "Honda Amaze Red"
+      },
+      {
+        "url": "/uploads/image-1761559738159-905761785.webp",
+        "caption": "Honda Amaze Blue"
+      },
+      {
+        "url": "/uploads/image-1761559738163-764881621.webp",
+        "caption": "Honda Amaze Silver"
+      }
+    ],
+    "createdAt": "2025-10-27T10:08:58.246Z"
+  },
+  {
+    "id": "4327260561",
+    "brandId": "3445736621",
+    "name": "City Pro Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹51.50 - 77.25 Lakh",
+    "mileage": "19.8 kmpl",
+    "engineCC": 2199,
+    "power": "140 bhp",
+    "torque": "249 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 1,
+    "createdAt": "2025-10-31T10:39:28.615Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913700774-818413027.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "transmissions": []
+  },
+  {
+    "id": "1688024473",
+    "brandId": "3445736621",
+    "name": "Elite Pro SUB",
+    "bodyType": "SUV",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹199.46 - 299.19 Lakh",
+    "mileage": "17.2 kmpl",
+    "engineCC": 2251,
+    "power": "86 bhp",
+    "torque": "208 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 2,
+    "createdAt": "2025-10-31T10:39:28.648Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913788010-804963730.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "transmissions": []
+  },
+  {
+    "id": "3004416846",
+    "brandId": "3445736621",
+    "name": "Prime Pro Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹128.73 - 193.09 Lakh",
+    "mileage": "22.5 kmpl",
+    "engineCC": 2233,
+    "power": "171 bhp",
+    "torque": "246 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 3,
+    "createdAt": "2025-10-31T10:39:28.656Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913802117-70163972.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "transmissions": []
+  },
+  {
+    "id": "4798517705",
+    "brandId": "2909414098",
+    "name": "Royal Pro Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹165.28 - 247.92 Lakh",
+    "mileage": "18.9 kmpl",
+    "engineCC": 2133,
+    "power": "110 bhp",
+    "torque": "177 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 4,
+    "createdAt": "2025-10-31T10:39:28.667Z",
+    "brochureUrl": null,
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761559738151-689349615.webp",
+        "caption": "Honda Amaze Grey"
+      },
+      {
+        "url": "/uploads/image-1761559738152-400520223.webp",
+        "caption": "Honda Amaze Brown"
+      },
+      {
+        "url": "/uploads/image-1761559738153-356462385.webp",
+        "caption": "Honda Amaze White"
+      },
+      {
+        "url": "/uploads/image-1761559738157-192144519.webp",
+        "caption": "Honda Amaze Red"
+      },
+      {
+        "url": "/uploads/image-1761559738159-905761785.webp",
+        "caption": "Honda Amaze Blue"
+      },
+      {
+        "url": "/uploads/image-1761559738163-764881621.webp",
+        "caption": "Honda Amaze Silver"
+      }
+    ],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "manual",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      },
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "cvt",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      }
+    ],
+    "exteriorDesign": "",
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze base model?",
+        "answer": "The avg ex-showroom price of Honda Amaze base model is Rs. 7.45 Lakh which includes a registration cost of Rs. 89147, insurance premium of Rs. 41590 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze top model?",
+        "answer": "The avg ex-showroom price of Honda Amaze top model is Rs. 10.00 Lakh which includes a registration cost of Rs. 126680, insurance premium of Rs. 47615 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Amaze?",
+        "answer": "The company claimed mileage of Honda Amaze is 18.65 to 19.46 kmpl. As per users, the mileage came to be 17.07 to 18 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Amaze?",
+        "answer": "Honda Amaze is a 5 seater car."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze?",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze? 2",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm.2"
+      }
+    ],
+    "fuelTypes": [],
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761559647284-698670059.jpg",
+        "caption": "Rear AC Vents"
+      },
+      {
+        "url": "/uploads/image-1761559647297-571934474.jpg",
+        "caption": "Side window line "
+      },
+      {
+        "url": "/uploads/image-1761559647311-331765944.jpg",
+        "caption": "Rear Wheel"
+      }
+    ],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913883033-468719102.webp",
+    "isNew": false,
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761559647417-512494000.jpg",
+        "caption": "Steering Mounted Controls"
+      },
+      {
+        "url": "/uploads/image-1761559647428-654163175.jpg",
+        "caption": "Wiper Control"
+      },
+      {
+        "url": "/uploads/image-1761559647458-874258516.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761559647481-391728772.jpg",
+        "caption": "Digital Drivers Display"
+      }
+    ],
+    "launchDate": "",
+    "mileageData": [
+      {
+        "engineName": "1.2 Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.2 Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "18 Kmpl",
+        "highwayRealWorld": "16 Kmpl"
+      }
+    ],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761559647643-192124670.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761559647652-526724318.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761559647668-73759633.jpg",
+        "caption": "Rear Seat Comfort"
+      },
+      {
+        "url": "/uploads/image-1761559647694-125549996.jpg",
+        "caption": "Front Seat Comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761559647830-890242078.jpg",
+        "caption": "Front Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647842-951630019.jpg",
+        "caption": "Rear Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647853-86609724.jpg",
+        "caption": "Boot Space"
+      },
+      {
+        "url": "/uploads/image-1761559647854-90514892.jpg",
+        "caption": "Glovebox Storage"
+      }
+    ],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "1912870171",
+    "brandId": "2909414098",
+    "name": "Grand Pro Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹196.47 - 294.70 Lakh",
+    "mileage": "20.1 kmpl",
+    "engineCC": 1792,
+    "power": "134 bhp",
+    "torque": "123 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 5,
+    "createdAt": "2025-10-31T10:39:28.674Z",
+    "brochureUrl": null,
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761559738151-689349615.webp",
+        "caption": "Honda Amaze Grey"
+      },
+      {
+        "url": "/uploads/image-1761559738152-400520223.webp",
+        "caption": "Honda Amaze Brown"
+      },
+      {
+        "url": "/uploads/image-1761559738153-356462385.webp",
+        "caption": "Honda Amaze White"
+      },
+      {
+        "url": "/uploads/image-1761559738157-192144519.webp",
+        "caption": "Honda Amaze Red"
+      },
+      {
+        "url": "/uploads/image-1761559738159-905761785.webp",
+        "caption": "Honda Amaze Blue"
+      },
+      {
+        "url": "/uploads/image-1761559738163-764881621.webp",
+        "caption": "Honda Amaze Silver"
+      }
+    ],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "manual",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      },
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "cvt",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      }
+    ],
+    "exteriorDesign": "",
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze base model?",
+        "answer": "The avg ex-showroom price of Honda Amaze base model is Rs. 7.45 Lakh which includes a registration cost of Rs. 89147, insurance premium of Rs. 41590 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze top model?",
+        "answer": "The avg ex-showroom price of Honda Amaze top model is Rs. 10.00 Lakh which includes a registration cost of Rs. 126680, insurance premium of Rs. 47615 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Amaze?",
+        "answer": "The company claimed mileage of Honda Amaze is 18.65 to 19.46 kmpl. As per users, the mileage came to be 17.07 to 18 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Amaze?",
+        "answer": "Honda Amaze is a 5 seater car."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze?",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze? 2",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm.2"
+      }
+    ],
+    "fuelTypes": [],
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761559647284-698670059.jpg",
+        "caption": "Rear AC Vents"
+      },
+      {
+        "url": "/uploads/image-1761559647297-571934474.jpg",
+        "caption": "Side window line "
+      },
+      {
+        "url": "/uploads/image-1761559647311-331765944.jpg",
+        "caption": "Rear Wheel"
+      }
+    ],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913903588-656506594.webp",
+    "isNew": false,
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761559647417-512494000.jpg",
+        "caption": "Steering Mounted Controls"
+      },
+      {
+        "url": "/uploads/image-1761559647428-654163175.jpg",
+        "caption": "Wiper Control"
+      },
+      {
+        "url": "/uploads/image-1761559647458-874258516.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761559647481-391728772.jpg",
+        "caption": "Digital Drivers Display"
+      }
+    ],
+    "launchDate": "",
+    "mileageData": [
+      {
+        "engineName": "1.2 Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.2 Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "18 Kmpl",
+        "highwayRealWorld": "16 Kmpl"
+      }
+    ],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761559647643-192124670.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761559647652-526724318.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761559647668-73759633.jpg",
+        "caption": "Rear Seat Comfort"
+      },
+      {
+        "url": "/uploads/image-1761559647694-125549996.jpg",
+        "caption": "Front Seat Comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761559647830-890242078.jpg",
+        "caption": "Front Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647842-951630019.jpg",
+        "caption": "Rear Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647853-86609724.jpg",
+        "caption": "Boot Space"
+      },
+      {
+        "url": "/uploads/image-1761559647854-90514892.jpg",
+        "caption": "Glovebox Storage"
+      }
+    ],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "2335457430",
+    "brandId": "2909414098",
+    "name": "Super Pro Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹135.54 - 203.30 Lakh",
+    "mileage": "21.0 kmpl",
+    "engineCC": 1499,
+    "power": "92 bhp",
+    "torque": "239 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 6,
+    "createdAt": "2025-10-31T10:39:28.680Z",
+    "brochureUrl": null,
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761559738151-689349615.webp",
+        "caption": "Honda Amaze Grey"
+      },
+      {
+        "url": "/uploads/image-1761559738152-400520223.webp",
+        "caption": "Honda Amaze Brown"
+      },
+      {
+        "url": "/uploads/image-1761559738153-356462385.webp",
+        "caption": "Honda Amaze White"
+      },
+      {
+        "url": "/uploads/image-1761559738157-192144519.webp",
+        "caption": "Honda Amaze Red"
+      },
+      {
+        "url": "/uploads/image-1761559738159-905761785.webp",
+        "caption": "Honda Amaze Blue"
+      },
+      {
+        "url": "/uploads/image-1761559738163-764881621.webp",
+        "caption": "Honda Amaze Silver"
+      }
+    ],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "manual",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      },
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "cvt",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      }
+    ],
+    "exteriorDesign": "",
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze base model?",
+        "answer": "The avg ex-showroom price of Honda Amaze base model is Rs. 7.45 Lakh which includes a registration cost of Rs. 89147, insurance premium of Rs. 41590 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze top model?",
+        "answer": "The avg ex-showroom price of Honda Amaze top model is Rs. 10.00 Lakh which includes a registration cost of Rs. 126680, insurance premium of Rs. 47615 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Amaze?",
+        "answer": "The company claimed mileage of Honda Amaze is 18.65 to 19.46 kmpl. As per users, the mileage came to be 17.07 to 18 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Amaze?",
+        "answer": "Honda Amaze is a 5 seater car."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze?",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze? 2",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm.2"
+      }
+    ],
+    "fuelTypes": [],
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761559647284-698670059.jpg",
+        "caption": "Rear AC Vents"
+      },
+      {
+        "url": "/uploads/image-1761559647297-571934474.jpg",
+        "caption": "Side window line "
+      },
+      {
+        "url": "/uploads/image-1761559647311-331765944.jpg",
+        "caption": "Rear Wheel"
+      }
+    ],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913923406-545079271.webp",
+    "isNew": false,
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761559647417-512494000.jpg",
+        "caption": "Steering Mounted Controls"
+      },
+      {
+        "url": "/uploads/image-1761559647428-654163175.jpg",
+        "caption": "Wiper Control"
+      },
+      {
+        "url": "/uploads/image-1761559647458-874258516.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761559647481-391728772.jpg",
+        "caption": "Digital Drivers Display"
+      }
+    ],
+    "launchDate": "",
+    "mileageData": [
+      {
+        "engineName": "1.2 Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.2 Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "18 Kmpl",
+        "highwayRealWorld": "16 Kmpl"
+      }
+    ],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761559647643-192124670.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761559647652-526724318.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761559647668-73759633.jpg",
+        "caption": "Rear Seat Comfort"
+      },
+      {
+        "url": "/uploads/image-1761559647694-125549996.jpg",
+        "caption": "Front Seat Comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761559647830-890242078.jpg",
+        "caption": "Front Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647842-951630019.jpg",
+        "caption": "Rear Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647853-86609724.jpg",
+        "caption": "Boot Space"
+      },
+      {
+        "url": "/uploads/image-1761559647854-90514892.jpg",
+        "caption": "Glovebox Storage"
+      }
+    ],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "5941938239",
+    "brandId": "7756885863",
+    "name": "Ultra Pro SUV",
+    "bodyType": "SUV",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹78.84 - 118.27 Lakh",
+    "mileage": "16.6 kmpl",
+    "engineCC": 2631,
+    "power": "135 bhp",
+    "torque": "276 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 7,
+    "createdAt": "2025-10-31T10:39:28.688Z",
+    "brochureUrl": null,
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761559738151-689349615.webp",
+        "caption": "Honda Amaze Grey"
+      },
+      {
+        "url": "/uploads/image-1761559738152-400520223.webp",
+        "caption": "Honda Amaze Brown"
+      },
+      {
+        "url": "/uploads/image-1761559738153-356462385.webp",
+        "caption": "Honda Amaze White"
+      },
+      {
+        "url": "/uploads/image-1761559738157-192144519.webp",
+        "caption": "Honda Amaze Red"
+      },
+      {
+        "url": "/uploads/image-1761559738159-905761785.webp",
+        "caption": "Honda Amaze Blue"
+      },
+      {
+        "url": "/uploads/image-1761559738163-764881621.webp",
+        "caption": "Honda Amaze Silver"
+      }
+    ],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "manual",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      },
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "cvt",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      }
+    ],
+    "exteriorDesign": "",
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze base model?",
+        "answer": "The avg ex-showroom price of Honda Amaze base model is Rs. 7.45 Lakh which includes a registration cost of Rs. 89147, insurance premium of Rs. 41590 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze top model?",
+        "answer": "The avg ex-showroom price of Honda Amaze top model is Rs. 10.00 Lakh which includes a registration cost of Rs. 126680, insurance premium of Rs. 47615 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Amaze?",
+        "answer": "The company claimed mileage of Honda Amaze is 18.65 to 19.46 kmpl. As per users, the mileage came to be 17.07 to 18 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Amaze?",
+        "answer": "Honda Amaze is a 5 seater car."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze?",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze? 2",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm.2"
+      }
+    ],
+    "fuelTypes": [],
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761559647284-698670059.jpg",
+        "caption": "Rear AC Vents"
+      },
+      {
+        "url": "/uploads/image-1761559647297-571934474.jpg",
+        "caption": "Side window line "
+      },
+      {
+        "url": "/uploads/image-1761559647311-331765944.jpg",
+        "caption": "Rear Wheel"
+      }
+    ],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913965676-839350934.webp",
+    "isNew": false,
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761559647417-512494000.jpg",
+        "caption": "Steering Mounted Controls"
+      },
+      {
+        "url": "/uploads/image-1761559647428-654163175.jpg",
+        "caption": "Wiper Control"
+      },
+      {
+        "url": "/uploads/image-1761559647458-874258516.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761559647481-391728772.jpg",
+        "caption": "Digital Drivers Display"
+      }
+    ],
+    "launchDate": "",
+    "mileageData": [
+      {
+        "engineName": "1.2 Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.2 Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "18 Kmpl",
+        "highwayRealWorld": "16 Kmpl"
+      }
+    ],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761559647643-192124670.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761559647652-526724318.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761559647668-73759633.jpg",
+        "caption": "Rear Seat Comfort"
+      },
+      {
+        "url": "/uploads/image-1761559647694-125549996.jpg",
+        "caption": "Front Seat Comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761559647830-890242078.jpg",
+        "caption": "Front Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647842-951630019.jpg",
+        "caption": "Rear Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647853-86609724.jpg",
+        "caption": "Boot Space"
+      },
+      {
+        "url": "/uploads/image-1761559647854-90514892.jpg",
+        "caption": "Glovebox Storage"
+      }
+    ],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "8345880341",
+    "brandId": "7756885863",
+    "name": "Mega Pro Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹130.31 - 195.46 Lakh",
+    "mileage": "19.2 kmpl",
+    "engineCC": 2927,
+    "power": "190 bhp",
+    "torque": "198 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 8,
+    "createdAt": "2025-10-31T10:39:28.695Z",
+    "brochureUrl": null,
+    "colorImages": [
+      {
+        "url": "/uploads/image-1761559738151-689349615.webp",
+        "caption": "Honda Amaze Grey"
+      },
+      {
+        "url": "/uploads/image-1761559738152-400520223.webp",
+        "caption": "Honda Amaze Brown"
+      },
+      {
+        "url": "/uploads/image-1761559738153-356462385.webp",
+        "caption": "Honda Amaze White"
+      },
+      {
+        "url": "/uploads/image-1761559738157-192144519.webp",
+        "caption": "Honda Amaze Red"
+      },
+      {
+        "url": "/uploads/image-1761559738159-905761785.webp",
+        "caption": "Honda Amaze Blue"
+      },
+      {
+        "url": "/uploads/image-1761559738163-764881621.webp",
+        "caption": "Honda Amaze Silver"
+      }
+    ],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "manual",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      },
+      {
+        "title": "1.2 Petrol",
+        "summary": "Under the hood, the next-gen Amaze soldiers on with the same 1.2-litre petrol engine.\n",
+        "transmission": "cvt",
+        "power": "89 Bhp",
+        "torque": "110 Nm",
+        "speed": "5-Speed"
+      }
+    ],
+    "exteriorDesign": "",
+    "faqs": [
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze base model?",
+        "answer": "The avg ex-showroom price of Honda Amaze base model is Rs. 7.45 Lakh which includes a registration cost of Rs. 89147, insurance premium of Rs. 41590 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the avg ex-showroom price of Honda Amaze top model?",
+        "answer": "The avg ex-showroom price of Honda Amaze top model is Rs. 10.00 Lakh which includes a registration cost of Rs. 126680, insurance premium of Rs. 47615 and additional charges of Rs. 500."
+      },
+      {
+        "question": "Q: What is the real world versus claimed mileage of Honda Amaze?",
+        "answer": "The company claimed mileage of Honda Amaze is 18.65 to 19.46 kmpl. As per users, the mileage came to be 17.07 to 18 kmpl in the real world."
+      },
+      {
+        "question": "Q: What is the seating capacity in Honda Amaze?",
+        "answer": "Honda Amaze is a 5 seater car."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze?",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm."
+      },
+      {
+        "question": "Q: What are the dimensions of Honda Amaze? 2",
+        "answer": "The dimensions of Honda Amaze include its length of 3995 mm, width of 1733 mm and height of 1500 mm. The wheelbase of the Honda Amaze is 2470 mm.2"
+      }
+    ],
+    "fuelTypes": [],
+    "galleryImages": [
+      {
+        "url": "/uploads/image-1761559647284-698670059.jpg",
+        "caption": "Rear AC Vents"
+      },
+      {
+        "url": "/uploads/image-1761559647297-571934474.jpg",
+        "caption": "Side window line "
+      },
+      {
+        "url": "/uploads/image-1761559647311-331765944.jpg",
+        "caption": "Rear Wheel"
+      }
+    ],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913984764-54420032.webp",
+    "isNew": false,
+    "keyFeatureImages": [
+      {
+        "url": "/uploads/image-1761559647417-512494000.jpg",
+        "caption": "Steering Mounted Controls"
+      },
+      {
+        "url": "/uploads/image-1761559647428-654163175.jpg",
+        "caption": "Wiper Control"
+      },
+      {
+        "url": "/uploads/image-1761559647458-874258516.jpg",
+        "caption": "Touchscreen Infotainment"
+      },
+      {
+        "url": "/uploads/image-1761559647481-391728772.jpg",
+        "caption": "Digital Drivers Display"
+      }
+    ],
+    "launchDate": "",
+    "mileageData": [
+      {
+        "engineName": "1.2 Petrol Manual",
+        "companyClaimed": "22 Kmpl",
+        "cityRealWorld": "19 Kmpl",
+        "highwayRealWorld": "17 Kmpl"
+      },
+      {
+        "engineName": "1.2 Petrol CVT",
+        "companyClaimed": "20 Kmpl",
+        "cityRealWorld": "18 Kmpl",
+        "highwayRealWorld": "16 Kmpl"
+      }
+    ],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [
+      {
+        "url": "/uploads/image-1761559647643-192124670.jpg",
+        "caption": "Rear Seat Headroom"
+      },
+      {
+        "url": "/uploads/image-1761559647652-526724318.jpg",
+        "caption": "Rear Seat Kneeroom"
+      },
+      {
+        "url": "/uploads/image-1761559647668-73759633.jpg",
+        "caption": "Rear Seat Comfort"
+      },
+      {
+        "url": "/uploads/image-1761559647694-125549996.jpg",
+        "caption": "Front Seat Comfort"
+      }
+    ],
+    "storageConvenienceImages": [
+      {
+        "url": "/uploads/image-1761559647830-890242078.jpg",
+        "caption": "Front Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647842-951630019.jpg",
+        "caption": "Rear Door Bottle Storage"
+      },
+      {
+        "url": "/uploads/image-1761559647853-86609724.jpg",
+        "caption": "Boot Space"
+      },
+      {
+        "url": "/uploads/image-1761559647854-90514892.jpg",
+        "caption": "Glovebox Storage"
+      }
+    ],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "4408881303",
+    "brandId": "7756885863",
+    "name": "City Plus Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹138.29 - 207.43 Lakh",
+    "mileage": "23.9 kmpl",
+    "engineCC": 2654,
+    "power": "145 bhp",
+    "torque": "134 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 9,
+    "createdAt": "2025-10-31T10:39:28.702Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [
+      "electric"
+    ],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761913999796-673351939.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "transmissions": [
+      "automatic"
+    ],
+    "seating": 5,
+    "summary": null
+  },
+  {
+    "id": "7489530203",
+    "brandId": "4741969225",
+    "name": "Elite Plus Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹37.31 - 55.97 Lakh",
+    "mileage": "21.4 kmpl",
+    "engineCC": 1044,
+    "power": "154 bhp",
+    "torque": "143 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": true,
+    "popularRank": 10,
+    "createdAt": "2025-10-31T10:39:28.708Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761914015102-532868047.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "7217001382",
+    "brandId": "4741969225",
+    "name": "Prime Plus Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹179.98 - 269.96 Lakh",
+    "mileage": "15.8 kmpl",
+    "engineCC": 1855,
+    "power": "158 bhp",
+    "torque": "307 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.715Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761914029767-907775020.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "8645772067",
+    "brandId": "4741969225",
+    "name": "Royal Plus SUV",
+    "bodyType": "SUV",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹33.55 - 50.33 Lakh",
+    "mileage": "15.2 kmpl",
+    "engineCC": 2397,
+    "power": "108 bhp",
+    "torque": "212 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.722Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761914046419-777256209.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "9315326891",
+    "brandId": "7908567021",
+    "name": "Grand Plus Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹189.52 - 284.28 Lakh",
+    "mileage": "20.1 kmpl",
+    "engineCC": 1885,
+    "power": "136 bhp",
+    "torque": "291 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.728Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761914065073-94431664.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "9218286865",
+    "brandId": "7908567021",
+    "name": "Super Plus Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹150.93 - 226.40 Lakh",
+    "mileage": "17.7 kmpl",
+    "engineCC": 2269,
+    "power": "96 bhp",
+    "torque": "208 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.735Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761914080236-221611488.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "4252008787",
+    "brandId": "7908567021",
+    "name": "Ultra Plus Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹161.45 - 242.17 Lakh",
+    "mileage": "23.3 kmpl",
+    "engineCC": 2488,
+    "power": "147 bhp",
+    "torque": "262 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.741Z",
+    "brochureUrl": null,
+    "colorImages": [],
+    "comfortConvenience": "",
+    "cons": "",
+    "description": "",
+    "engineSummaries": [],
+    "exteriorDesign": "",
+    "faqs": [],
+    "fuelTypes": [],
+    "galleryImages": [],
+    "headerSeo": "",
+    "heroImage": "/uploads/image-1761914094561-47569057.webp",
+    "isNew": false,
+    "keyFeatureImages": [],
+    "launchDate": "",
+    "mileageData": [],
+    "pros": "",
+    "seating": 5,
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "subBodyType": "",
+    "summary": null,
+    "transmissions": []
+  },
+  {
+    "id": "3155641276",
+    "brandId": "5724417330",
+    "name": "Mega Plus Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹152.01 - 228.02 Lakh",
+    "mileage": "18.4 kmpl",
+    "engineCC": 2844,
+    "power": "186 bhp",
+    "torque": "266 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.748Z"
+  },
+  {
+    "id": "6183512359",
+    "brandId": "5724417330",
+    "name": "City Max SUV",
+    "bodyType": "SUV",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹127.12 - 190.68 Lakh",
+    "mileage": "23.6 kmpl",
+    "engineCC": 1335,
+    "power": "125 bhp",
+    "torque": "164 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.756Z"
+  },
+  {
+    "id": "6575437095",
+    "brandId": "5724417330",
+    "name": "Elite Max Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹128.08 - 192.12 Lakh",
+    "mileage": "24.3 kmpl",
+    "engineCC": 2652,
+    "power": "162 bhp",
+    "torque": "193 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.762Z"
+  },
+  {
+    "id": "2636426269",
+    "brandId": "2634087081",
+    "name": "Prime Max Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹132.45 - 198.67 Lakh",
+    "mileage": "20.0 kmpl",
+    "engineCC": 2771,
+    "power": "93 bhp",
+    "torque": "291 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.770Z"
+  },
+  {
+    "id": "6874933702",
+    "brandId": "2634087081",
+    "name": "Royal Max Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹83.42 - 125.13 Lakh",
+    "mileage": "22.3 kmpl",
+    "engineCC": 1903,
+    "power": "186 bhp",
+    "torque": "243 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.778Z"
+  },
+  {
+    "id": "7941476695",
+    "brandId": "2634087081",
+    "name": "Grand Max Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹89.01 - 133.52 Lakh",
+    "mileage": "19.9 kmpl",
+    "engineCC": 2068,
+    "power": "116 bhp",
+    "torque": "137 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.785Z"
+  },
+  {
+    "id": "2333596916",
+    "brandId": "6903791767",
+    "name": "Super Max SUV",
+    "bodyType": "SUV",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹76.26 - 114.39 Lakh",
+    "mileage": "19.5 kmpl",
+    "engineCC": 2089,
+    "power": "91 bhp",
+    "torque": "223 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.795Z"
+  },
+  {
+    "id": "2096561655",
+    "brandId": "6903791767",
+    "name": "Ultra Max Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹21.26 - 31.89 Lakh",
+    "mileage": "23.3 kmpl",
+    "engineCC": 2192,
+    "power": "144 bhp",
+    "torque": "209 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.802Z"
+  },
+  {
+    "id": "3327377404",
+    "brandId": "6903791767",
+    "name": "Mega Max Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹155.05 - 232.58 Lakh",
+    "mileage": "18.0 kmpl",
+    "engineCC": 2393,
+    "power": "131 bhp",
+    "torque": "179 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.812Z"
+  },
+  {
+    "id": "7722374116",
+    "brandId": "7937169158",
+    "name": "City Sport Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹52.78 - 79.17 Lakh",
+    "mileage": "20.5 kmpl",
+    "engineCC": 1018,
+    "power": "110 bhp",
+    "torque": "198 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.819Z"
+  },
+  {
+    "id": "3935281941",
+    "brandId": "7937169158",
+    "name": "Elite Sport Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹37.68 - 56.52 Lakh",
+    "mileage": "23.3 kmpl",
+    "engineCC": 2370,
+    "power": "187 bhp",
+    "torque": "148 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.827Z"
+  },
+  {
+    "id": "6163312801",
+    "brandId": "7937169158",
+    "name": "Prime Sport SUV",
+    "bodyType": "SUV",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹177.44 - 266.16 Lakh",
+    "mileage": "20.6 kmpl",
+    "engineCC": 1513,
+    "power": "129 bhp",
+    "torque": "313 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.833Z"
+  },
+  {
+    "id": "6490933200",
+    "brandId": "5598114000",
+    "name": "Royal Sport Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹155.38 - 233.07 Lakh",
+    "mileage": "20.7 kmpl",
+    "engineCC": 1366,
+    "power": "80 bhp",
+    "torque": "173 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.842Z"
+  },
+  {
+    "id": "4126030271",
+    "brandId": "5598114000",
+    "name": "Grand Sport Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹98.68 - 148.03 Lakh",
+    "mileage": "21.6 kmpl",
+    "engineCC": 2971,
+    "power": "185 bhp",
+    "torque": "205 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.849Z"
+  },
+  {
+    "id": "7633188200",
+    "brandId": "5598114000",
+    "name": "Super Sport Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹70.87 - 106.31 Lakh",
+    "mileage": "20.7 kmpl",
+    "engineCC": 2127,
+    "power": "169 bhp",
+    "torque": "180 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.856Z"
+  },
+  {
+    "id": "3378062105",
+    "brandId": "1979958324",
+    "name": "Ultra Sport Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹61.60 - 92.39 Lakh",
+    "mileage": "23.9 kmpl",
+    "engineCC": 1467,
+    "power": "96 bhp",
+    "torque": "240 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.863Z"
+  },
+  {
+    "id": "7001484770",
+    "brandId": "1979958324",
+    "name": "Mega Sport SUV",
+    "bodyType": "SUV",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹17.97 - 26.95 Lakh",
+    "mileage": "23.2 kmpl",
+    "engineCC": 1572,
+    "power": "187 bhp",
+    "torque": "153 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.869Z"
+  },
+  {
+    "id": "6258542041",
+    "brandId": "1979958324",
+    "name": "City Luxury Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹165.64 - 248.46 Lakh",
+    "mileage": "23.0 kmpl",
+    "engineCC": 2316,
+    "power": "187 bhp",
+    "torque": "266 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.876Z"
+  },
+  {
+    "id": "2622334206",
+    "brandId": "4227157455",
+    "name": "Elite Luxury Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹105.34 - 158.01 Lakh",
+    "mileage": "24.9 kmpl",
+    "engineCC": 2648,
+    "power": "175 bhp",
+    "torque": "217 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.883Z"
+  },
+  {
+    "id": "7661509869",
+    "brandId": "4227157455",
+    "name": "Prime Luxury Crossover",
+    "bodyType": "Crossover",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹195.27 - 292.90 Lakh",
+    "mileage": "20.5 kmpl",
+    "engineCC": 2021,
+    "power": "99 bhp",
+    "torque": "279 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.891Z"
+  },
+  {
+    "id": "9868661611",
+    "brandId": "4227157455",
+    "name": "Royal Luxury Sedan",
+    "bodyType": "Sedan",
+    "fuelType": "hybrid",
+    "transmission": "dct",
+    "seatingCapacity": 7,
+    "priceRange": "₹110.11 - 165.17 Lakh",
+    "mileage": "18.6 kmpl",
+    "engineCC": 2487,
+    "power": "177 bhp",
+    "torque": "231 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.902Z"
+  },
+  {
+    "id": "9763094275",
+    "brandId": "7985907284",
+    "name": "Grand Luxury SUV",
+    "bodyType": "SUV",
+    "fuelType": "petrol",
+    "transmission": "manual",
+    "seatingCapacity": 5,
+    "priceRange": "₹136.98 - 205.47 Lakh",
+    "mileage": "20.3 kmpl",
+    "engineCC": 1321,
+    "power": "166 bhp",
+    "torque": "187 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.909Z"
+  },
+  {
+    "id": "5175329938",
+    "brandId": "7985907284",
+    "name": "Super Luxury Hatchback",
+    "bodyType": "Hatchback",
+    "fuelType": "diesel",
+    "transmission": "automatic",
+    "seatingCapacity": 7,
+    "priceRange": "₹141.30 - 211.96 Lakh",
+    "mileage": "25.0 kmpl",
+    "engineCC": 2397,
+    "power": "94 bhp",
+    "torque": "275 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.915Z"
+  },
+  {
+    "id": "5386947699",
+    "brandId": "7985907284",
+    "name": "Ultra Luxury Coupe",
+    "bodyType": "Coupe",
+    "fuelType": "electric",
+    "transmission": "cvt",
+    "seatingCapacity": 5,
+    "priceRange": "₹36.36 - 54.54 Lakh",
+    "mileage": "15.5 kmpl",
+    "engineCC": 2511,
+    "power": "161 bhp",
+    "torque": "196 Nm",
+    "images": {},
+    "status": "active",
+    "isPopular": false,
+    "popularRank": null,
+    "createdAt": "2025-10-31T10:39:28.922Z"
+  }
+]

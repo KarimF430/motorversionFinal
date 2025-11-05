@@ -1,4 +1,4 @@
-import { LayoutDashboard, Building2, Car, Gauge } from "lucide-react";
+import { LayoutDashboard, Building2, Car, Gauge, GitCompare } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -31,6 +31,11 @@ const menuItems = [
     title: "Variants",
     url: "/variants",
     icon: Gauge,
+  },
+  {
+    title: "Popular Comparison",
+    url: "/popular-comparisons",
+    icon: GitCompare,
   },
 ];
 

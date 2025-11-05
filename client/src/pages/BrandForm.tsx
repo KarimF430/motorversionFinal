@@ -13,42 +13,59 @@ import type { Brand, InsertBrand } from "@shared/schema";
 
 export default function BrandForm() {
   const { id } = useParams<{ id: string }>();
-  const [, setLocation] = useLocation();
   const { toast } = useToast();
   const isEditing = !!id;
 
   const [formData, setFormData] = useState({
     name: '',
-    ranking: 1,
+    ranking: 0, // Will be auto-assigned by backend
     status: 'active',
     summary: '',
+    logo: '',
     faqs: [] as { question: string; answer: string }[],
   });
 
-  // Fetch brand data if editing
-  const { data: brand, isLoading } = useQuery<Brand>({
+  const [logoFile, setLogoFile] = useState<File | null>(null);
+  const [logoPreview, setLogoPreview] = useState<string>('');
+
+  const { data: brand, isLoading, error } = useQuery<Brand>({
     queryKey: ['/api/brands', id],
+    queryFn: async () => {
+      console.log('Fetching brand with ID:', id);
+      const data = await apiRequest('GET', `/api/brands/${id}`);
+      console.log('Fetched brand data:', data);
+      return data;
+    },
     enabled: isEditing,
   });
 
+  console.log('BrandForm state:', { id, isEditing, isLoading, hasBrand: !!brand, error });
+
   useEffect(() => {
-    if (brand && isEditing) {
+    if (brand && isEditing && !isLoading) {
+      console.log('Loading brand data:', brand);
+      const brandFaqs = Array.isArray(brand.faqs) ? brand.faqs : [];
       setFormData({
-        name: brand.name,
-        ranking: brand.ranking,
-        status: brand.status,
+        name: brand.name || '',
+        ranking: brand.ranking || 0,
+        status: brand.status || 'active',
         summary: brand.summary || '',
-        faqs: (brand.faqs as { question: string; answer: string }[]) || [],
+        logo: brand.logo || '',
+        faqs: brandFaqs.map((faq: any, index: number) => ({ 
+          question: faq.question || '', 
+          answer: faq.answer || '',
+          id: index.toString() 
+        })),
       });
+      if (brand.logo) {
+        setLogoPreview(brand.logo);
+      }
     }
-  }, [brand, isEditing]);
+  }, [brand, isEditing, isLoading]);
 
   const createBrand = useMutation({
     mutationFn: async (data: InsertBrand) => {
-      return await apiRequest('/api/brands', {
-        method: 'POST',
-        body: JSON.stringify(data),
-      });
+      return await apiRequest('POST', '/api/brands', data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/brands'] });
@@ -70,10 +87,7 @@ export default function BrandForm() {
 
   const updateBrand = useMutation({
     mutationFn: async (data: Partial<InsertBrand>) => {
-      return await apiRequest(`/api/brands/${id}`, {
-        method: 'PATCH',
-        body: JSON.stringify(data),
-      });
+      return await apiRequest('PATCH', `/api/brands/${id}`, data);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/brands'] });
@@ -93,12 +107,92 @@ export default function BrandForm() {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleLogoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (file.type !== 'image/png') {
+      toast({
+        title: "Invalid file type",
+        description: "Only PNG files are allowed for brand logos.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Validate file size (5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast({
+        title: "File too large",
+        description: "Logo file must be smaller than 5MB.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setLogoFile(file);
+    
+    // Create preview
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setLogoPreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const uploadLogo = async (): Promise<string | null> => {
+    if (!logoFile) return formData.logo || null;
+
+    const formDataUpload = new FormData();
+    formDataUpload.append('logo', logoFile);
+
+    try {
+      const response = await fetch('/api/upload/logo', {
+        method: 'POST',
+        body: formDataUpload,
+      });
+
+      if (!response.ok) {
+        throw new Error('Upload failed');
+      }
+
+      const result = await response.json();
+      return result.url;
+    } catch (error) {
+      toast({
+        title: "Upload failed",
+        description: "Failed to upload logo. Please try again.",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Upload logo if there's a new file
+    let logoUrl = formData.logo;
+    if (logoFile) {
+      const uploadedUrl = await uploadLogo();
+      if (!uploadedUrl) return; // Upload failed
+      logoUrl = uploadedUrl;
+    }
+
+    // Convert FAQs back to database format (remove id field)
+    // Remove ranking from submit data - it's auto-assigned by backend
+    const { ranking, ...dataWithoutRanking } = formData;
+    const submitData = {
+      ...dataWithoutRanking,
+      logo: logoUrl,
+      faqs: formData.faqs.map(({ question, answer }) => ({ question, answer }))
+    };
+    
     if (isEditing) {
-      updateBrand.mutate(formData);
+      updateBrand.mutate(submitData);
     } else {
-      createBrand.mutate(formData);
+      createBrand.mutate(submitData);
     }
   };
 
@@ -115,36 +209,45 @@ export default function BrandForm() {
       <form onSubmit={handleSubmit} className="space-y-6 max-w-4xl">
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold">{isEditing ? 'Edit Brand' : 'Add New Brand'}</h1>
-          {isEditing && brand && (
-            <div className="flex items-center gap-2">
-              <Label className="text-sm font-normal">id:</Label>
-              <Input 
-                value={brand.id}
-                disabled
-                className="w-40 font-mono text-sm bg-muted"
-                data-testid="input-brand-id"
-              />
+          <div className="flex items-center gap-4">
+            <div className="flex gap-2">
+              <Button 
+                type="button"
+                className={`px-6 py-2 rounded-md font-medium ${
+                  formData.status === 'active' 
+                    ? 'bg-green-500 hover:bg-green-600 text-white' 
+                    : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                }`}
+                onClick={() => setFormData({ ...formData, status: 'active' })}
+                data-testid="button-activate-brand"
+              >
+                activate Brand
+              </Button>
+              <Button 
+                type="button"
+                className={`px-6 py-2 rounded-md font-medium ${
+                  formData.status === 'inactive' 
+                    ? 'bg-red-500 hover:bg-red-600 text-white' 
+                    : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
+                }`}
+                onClick={() => setFormData({ ...formData, status: 'inactive' })}
+                data-testid="button-deactivate-brand"
+              >
+                Deactivate Brand
+              </Button>
             </div>
-          )}
-        </div>
-
-        <div className="flex gap-4">
-          <Button 
-            type="button"
-            variant={formData.status === 'active' ? 'default' : 'outline'}
-            onClick={() => setFormData({ ...formData, status: 'active' })}
-            data-testid="button-activate-brand"
-          >
-            activate Brand
-          </Button>
-          <Button 
-            type="button"
-            variant={formData.status === 'inactive' ? 'destructive' : 'outline'}
-            onClick={() => setFormData({ ...formData, status: 'inactive' })}
-            data-testid="button-deactivate-brand"
-          >
-            Deactivate Brand
-          </Button>
+            {isEditing && brand && (
+              <div className="flex items-center gap-2">
+                <Label className="text-sm font-normal">id:</Label>
+                <Input 
+                  value={brand.id}
+                  disabled
+                  className="w-32 font-mono text-sm bg-muted"
+                  data-testid="input-brand-id"
+                />
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -159,28 +262,57 @@ export default function BrandForm() {
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="brandRanking">Brand Ranking</Label>
-            <select 
-              id="brandRanking"
-              className="w-full px-3 py-2 border rounded-md"
-              value={formData.ranking}
-              onChange={(e) => setFormData({ ...formData, ranking: parseInt(e.target.value) })}
-              data-testid="select-brand-ranking"
-            >
-              {Array.from({ length: 20 }, (_, i) => (
-                <option key={i + 1} value={i + 1}>{i + 1}</option>
-              ))}
-            </select>
-          </div>
+          {isEditing && (
+            <div className="space-y-2">
+              <Label htmlFor="brandRanking">Brand Position (Auto-assigned)</Label>
+              <input 
+                id="brandRanking"
+                type="text"
+                className="w-full px-3 py-2 border rounded-md bg-gray-100"
+                value={`Position ${formData.ranking}`}
+                disabled
+                readOnly
+              />
+              <p className="text-xs text-gray-500">Position is automatically assigned based on creation order</p>
+            </div>
+          )}
 
           <div className="space-y-2">
             <Label>Brand Logo</Label>
-            <label className="flex flex-col items-center justify-center h-20 border-2 border-dashed rounded-md cursor-pointer hover-elevate active-elevate-2">
-              <Upload className="w-5 h-5 text-muted-foreground mb-1" />
-              <span className="text-xs text-muted-foreground">Upload Logo</span>
-              <input type="file" className="hidden" accept="image/*" data-testid="input-brand-logo" />
-            </label>
+            {logoPreview ? (
+              <div className="relative">
+                <img 
+                  src={logoPreview} 
+                  alt="Logo preview" 
+                  className="w-20 h-20 object-contain border rounded-md"
+                />
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  className="mt-2"
+                  onClick={() => {
+                    setLogoFile(null);
+                    setLogoPreview('');
+                    setFormData({ ...formData, logo: '' });
+                  }}
+                >
+                  Remove Logo
+                </Button>
+              </div>
+            ) : (
+              <label className="flex flex-col items-center justify-center h-20 border-2 border-dashed rounded-md cursor-pointer hover:border-primary/50 transition-colors">
+                <Upload className="w-5 h-5 text-muted-foreground mb-1" />
+                <span className="text-xs text-muted-foreground">Upload PNG Logo</span>
+                <input 
+                  type="file" 
+                  className="hidden" 
+                  accept="image/png" 
+                  onChange={handleLogoChange}
+                  data-testid="input-brand-logo" 
+                />
+              </label>
+            )}
           </div>
         </div>
 

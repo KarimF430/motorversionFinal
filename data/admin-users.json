@@ -1,0 +1,13 @@
+[
+  {
+    "id": "admin-1761817088213",
+    "email": "admin@motoroctane.com",
+    "password": "$2b$12$sJcYy1RK.2BBnZXrxxyRSuKR2YrlPDAQ92aBLotpZZ5PibGJt0rqS",
+    "name": "Admin",
+    "role": "super_admin",
+    "isActive": true,
+    "lastLogin": "2025-10-30T09:43:17.094Z",
+    "createdAt": "2025-10-30T09:38:08.213Z",
+    "updatedAt": "2025-10-30T09:43:17.094Z"
+  }
+]

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Trash2 } from "lucide-react";
@@ -18,6 +18,13 @@ export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
   const [faqs, setFaqs] = useState<FAQItem[]>(items.length > 0 ? items : [
     { id: '1', question: '', answer: '' }
   ]);
+
+  // Sync with parent when items change
+  useEffect(() => {
+    if (items.length > 0) {
+      setFaqs(items);
+    }
+  }, [items]);
 
   const addFAQ = () => {
     const newFaqs = [...faqs, { id: Date.now().toString(), question: '', answer: '' }];
@@ -54,6 +61,7 @@ export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
             />
             {faqs.length > 1 && (
               <Button
+                type="button"
                 size="icon"
                 variant="ghost"
                 onClick={() => removeFAQ(faq.id)}
@@ -72,6 +80,7 @@ export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
         </div>
       ))}
       <Button 
+        type="button"
         variant="outline" 
         className="w-full" 
         onClick={addFAQ}

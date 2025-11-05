@@ -1,29 +1,49 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
 
+type UnauthorizedBehavior = "returnNull" | "throw";
+
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
-    const text = (await res.text()) || res.statusText;
-    throw new Error(`${res.status}: ${text}`);
+    const errorData = await res.json().catch(() => ({}));
+    throw new Error(errorData.error || `HTTP ${res.status}`);
   }
 }
 
-export async function apiRequest(
-  method: string,
-  url: string,
-  data?: unknown | undefined,
-): Promise<Response> {
-  const res = await fetch(url, {
+export async function apiRequest(method: string, url: string, data?: any) {
+  const config: RequestInit = {
     method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
-  });
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
 
-  await throwIfResNotOk(res);
-  return res;
+  if (data) {
+    config.body = JSON.stringify(data);
+  }
+
+  try {
+    // Use environment variable or fallback to localhost
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+    const response = await fetch(`${baseUrl}${url}`, config);
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      const error = new Error(errorData.error || `HTTP ${response.status}`) as any;
+      error.status = response.status;
+      throw error;
+    }
+
+    return response.json();
+  } catch (error: any) {
+    // Handle network errors
+    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+      console.error('Network error - server may be down:', error);
+      throw new Error('Unable to connect to server. Please check if the server is running.');
+    }
+    throw error;
+  }
 }
 
-type UnauthorizedBehavior = "returnNull" | "throw";
 export const getQueryFn: <T>(options: {
   on401: UnauthorizedBehavior;
 }) => QueryFunction<T> =

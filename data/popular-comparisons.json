@@ -1,0 +1,18 @@
+[
+  {
+    "id": "comparison-1761814755415-0",
+    "model1Id": "HOAM9607",
+    "model2Id": "HOEL1974",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2025-10-30T08:59:15.415Z"
+  },
+  {
+    "id": "comparison-1761814755415-1",
+    "model1Id": "HOEL1974",
+    "model2Id": "HOAM9607",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2025-10-30T08:59:15.415Z"
+  }
+]
