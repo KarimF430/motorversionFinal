@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "id": "model-1762320747368",
+    "name": "Test Model 2",
+    "brandId": "3445736621",
+    "status": "active",
+    "isPopular": false,
+    "isNew": false,
+    "popularRank": null,
+    "newRank": null,
+    "bodyType": "SUV",
+    "subBodyType": null,
+    "launchDate": null,
+    "seating": 5,
+    "fuelTypes": [
+      "Petrol"
+    ],
+    "transmissions": [
+      "Manual"
+    ],
+    "brochureUrl": null,
+    "headerSeo": null,
+    "pros": null,
+    "cons": null,
+    "description": null,
+    "exteriorDesign": null,
+    "comfortConvenience": null,
+    "summary": null,
+    "heroImage": "/test-image2.jpg",
+    "createdAt": "2025-11-05T05:32:27.368Z",
+    "engineSummaries": [],
+    "mileageData": [],
+    "faqs": [],
+    "galleryImages": [],
+    "keyFeatureImages": [],
+    "spaceComfortImages": [],
+    "storageConvenienceImages": [],
+    "colorImages": []
+  }
+]

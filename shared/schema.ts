@@ -171,8 +171,8 @@ export const variants = pgTable("variants", {
 // Zod schemas for validation
 export const insertBrandSchema = createInsertSchema(brands).omit({ 
   id: true,
-  createdAt: true,
-  ranking: true // Ranking is auto-assigned by backend
+  createdAt: true
+  // ranking is required - not auto-assigned
 });
 export type InsertBrand = z.infer<typeof insertBrandSchema>;
 export type Brand = typeof brands.$inferSelect;

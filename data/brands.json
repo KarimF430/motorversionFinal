@@ -414,5 +414,15 @@
       }
     ],
     "createdAt": "2025-10-31T10:39:28.533Z"
+  },
+  {
+    "id": "brand-1762322922797",
+    "name": "TestBrand_Cascade",
+    "logo": "/test-logo.png",
+    "ranking": 99,
+    "status": "active",
+    "summary": "Test brand for cascade delete",
+    "createdAt": "2025-11-05T06:08:42.797Z",
+    "faqs": []
   }
 ]
