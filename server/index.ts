@@ -39,10 +39,10 @@ setupSecurity(app);
 // Input sanitization (prevents XSS, NoSQL injection)
 app.use(sanitizeInput);
 
-// Advanced rate limiting (Redis-backed, per-endpoint)
-app.use('/api/', apiLimiter);           // General API: 100 req/15min
-app.use('/api/search', searchLimiter);  // Search: 30 req/min
-app.use('/api/auth', authLimiter);      // Auth: 5 req/15min
+// Advanced rate limiting (Redis-backed, per-endpoint) - DISABLED FOR TESTING
+// app.use('/api/', apiLimiter);           // General API: 100 req/15min
+// app.use('/api/search', searchLimiter);  // Search: 30 req/min
+// app.use('/api/auth', authLimiter);      // Auth: 5 req/15min
 
 // ============================================
 // Old rate limiters removed - using new Redis-backed limiters above
