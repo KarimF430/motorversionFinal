@@ -280,9 +280,24 @@ export class MongoDBStorage implements IStorage {
 
   async createVariant(variant: InsertVariant): Promise<VariantType> {
     try {
-      // Get model and brand for slug generation
+      // Validate that brand exists
+      const brand = await Brand.findOne({ id: variant.brandId }).lean();
+      if (!brand) {
+        console.error('❌ Brand not found:', variant.brandId);
+        throw new Error(`Brand with ID ${variant.brandId} not found`);
+      }
+      
+      // Validate that model exists and belongs to the brand
       const model = await Model.findOne({ id: variant.modelId }).lean();
-      const modelSlug = model ? model.id : 'unknown'; // Model ID already has brand-model format
+      if (!model) {
+        console.error('❌ Model not found:', variant.modelId);
+        throw new Error(`Model with ID ${variant.modelId} not found`);
+      }
+      
+      if (model.brandId !== variant.brandId) {
+        console.error('❌ Model does not belong to brand:', { modelId: variant.modelId, modelBrandId: model.brandId, variantBrandId: variant.brandId });
+        throw new Error(`Model ${variant.modelId} does not belong to brand ${variant.brandId}`);
+      }
       
       // Generate unique slug-based ID: modelid-variantname
       const variantSlug = variant.name.toLowerCase()
@@ -291,7 +306,7 @@ export class MongoDBStorage implements IStorage {
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
       
-      const baseId = `${modelSlug}-${variantSlug}`;
+      const baseId = `${model.id}-${variantSlug}`;
       
       // Check for collisions and append number if needed
       let uniqueId = baseId;
@@ -300,6 +315,8 @@ export class MongoDBStorage implements IStorage {
         uniqueId = `${baseId}-${counter}`;
         counter++;
       }
+      
+      console.log('✅ Creating variant with ID:', uniqueId);
       
       const newVariant = new Variant({
         id: uniqueId,
@@ -310,6 +327,9 @@ export class MongoDBStorage implements IStorage {
       return newVariant.toObject() as VariantType;
     } catch (error) {
       console.error('createVariant error:', error);
+      if (error instanceof Error) {
+        throw error; // Re-throw the original error with specific message
+      }
       throw new Error('Failed to create variant');
     }
   }

@@ -312,7 +312,10 @@ const variantSchema = new mongoose.Schema({
   warranty: { type: String, default: null },
   
   // Images
-  highlightImages: { type: [String], default: [] },
+  highlightImages: [{
+    url: { type: String },
+    caption: { type: String }
+  }],
   
   // Connected Car Tech
   connectedCarTech: { type: String, default: null },

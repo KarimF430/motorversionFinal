@@ -676,11 +676,16 @@ export function registerRoutes(app: Express, storage: IStorage, backupService?: 
       
       const variant = await storage.createVariant(req.body);
       console.log('✅ Variant created successfully:', variant.id);
+      
+      // Backup after create
+      await triggerBackup('variants');
+      
       res.status(201).json(variant);
     } catch (error) {
       console.error('❌ Variant creation error:', error);
       if (error instanceof Error) {
-        res.status(400).json({ error: error.message, stack: error.stack });
+        // Return specific error message without stack trace in production
+        res.status(400).json({ error: error.message });
       } else {
         res.status(400).json({ error: "Invalid variant data" });
       }
