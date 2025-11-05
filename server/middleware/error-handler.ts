@@ -19,12 +19,7 @@ export class AppError extends Error {
 /**
  * Error Handler Middleware
  */
-export function errorHandler(
-  err: any,
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export function errorHandler(err: any, req: Request, res: Response, next: NextFunction) {
   let error = { ...err };
   error.message = err.message;
 
@@ -78,11 +73,7 @@ export function errorHandler(
 /**
  * Async Handler - Wraps async functions to catch errors
  */
-export const asyncHandler = (fn: Function) => (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const asyncHandler = (fn: Function) => (req: Request, res: Response, next: NextFunction) => {
   Promise.resolve(fn(req, res, next)).catch(next);
 };
 

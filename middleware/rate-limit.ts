@@ -1,6 +1,6 @@
-import rateLimit from 'express-rate-limit'
-import RedisStore from 'rate-limit-redis'
-import { redis } from './cache'
+import rateLimit from 'express-rate-limit';
+import RedisStore from 'rate-limit-redis';
+import { redis } from './cache';
 
 /**
  * General API rate limiting
@@ -11,26 +11,26 @@ export const apiLimiter = rateLimit({
   store: new RedisStore({
     // @ts-ignore - Redis client compatibility
     sendCommand: (...args: string[]) => redis.call(...args),
-    prefix: 'rl:api:'
+    prefix: 'rl:api:',
   }),
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: process.env.NODE_ENV === 'production' ? 200 : 1000, // Higher limit for development
   message: {
     success: false,
-    error: 'Too many requests from this IP, please try again after 15 minutes'
+    error: 'Too many requests from this IP, please try again after 15 minutes',
   },
   standardHeaders: true,
   legacyHeaders: false,
   // Skip rate limiting for certain IPs (optional)
   skip: (req) => {
-    const trustedIPs = process.env.TRUSTED_IPS?.split(',') || []
+    const trustedIPs = process.env.TRUSTED_IPS?.split(',') || [];
     // Skip for localhost in development
     if (process.env.NODE_ENV !== 'production' && (req.ip === '127.0.0.1' || req.ip === '::1')) {
-      return true
+      return true;
     }
-    return trustedIPs.includes(req.ip || '')
-  }
-})
+    return trustedIPs.includes(req.ip || '');
+  },
+});
 
 /**
  * Strict rate limiting for search endpoints
@@ -40,17 +40,17 @@ export const searchLimiter = rateLimit({
   store: new RedisStore({
     // @ts-ignore
     sendCommand: (...args: string[]) => redis.call(...args),
-    prefix: 'rl:search:'
+    prefix: 'rl:search:',
   }),
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 30,
   message: {
     success: false,
-    error: 'Too many search requests, please slow down'
+    error: 'Too many search requests, please slow down',
   },
   standardHeaders: true,
-  legacyHeaders: false
-})
+  legacyHeaders: false,
+});
 
 /**
  * Very strict rate limiting for authentication endpoints
@@ -60,18 +60,18 @@ export const authLimiter = rateLimit({
   store: new RedisStore({
     // @ts-ignore
     sendCommand: (...args: string[]) => redis.call(...args),
-    prefix: 'rl:auth:'
+    prefix: 'rl:auth:',
   }),
   windowMs: 15 * 60 * 1000,
   max: 5,
   message: {
     success: false,
-    error: 'Too many authentication attempts, please try again later'
+    error: 'Too many authentication attempts, please try again later',
   },
   standardHeaders: true,
   legacyHeaders: false,
-  skipSuccessfulRequests: true // Don't count successful requests
-})
+  skipSuccessfulRequests: true, // Don't count successful requests
+});
 
 /**
  * Moderate rate limiting for data modification
@@ -81,17 +81,17 @@ export const modifyLimiter = rateLimit({
   store: new RedisStore({
     // @ts-ignore
     sendCommand: (...args: string[]) => redis.call(...args),
-    prefix: 'rl:modify:'
+    prefix: 'rl:modify:',
   }),
   windowMs: 5 * 60 * 1000,
   max: 20,
   message: {
     success: false,
-    error: 'Too many modification requests, please slow down'
+    error: 'Too many modification requests, please slow down',
   },
   standardHeaders: true,
-  legacyHeaders: false
-})
+  legacyHeaders: false,
+});
 
 /**
  * Lenient rate limiting for static content
@@ -101,10 +101,10 @@ export const staticLimiter = rateLimit({
   store: new RedisStore({
     // @ts-ignore
     sendCommand: (...args: string[]) => redis.call(...args),
-    prefix: 'rl:static:'
+    prefix: 'rl:static:',
   }),
   windowMs: 15 * 60 * 1000,
   max: 200,
   standardHeaders: true,
-  legacyHeaders: false
-})
+  legacyHeaders: false,
+});

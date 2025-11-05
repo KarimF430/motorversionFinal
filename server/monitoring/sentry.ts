@@ -6,7 +6,7 @@ import type { Express } from 'express';
  */
 export function initSentry(app: Express) {
   const sentryDsn = process.env.SENTRY_DSN;
-  
+
   if (!sentryDsn) {
     console.log('⚠️  Sentry DSN not configured. Error tracking disabled.');
     console.log('   Set SENTRY_DSN in .env to enable Sentry');
@@ -16,10 +16,10 @@ export function initSentry(app: Express) {
   Sentry.init({
     dsn: sentryDsn,
     environment: process.env.NODE_ENV || 'development',
-    
+
     // Performance Monitoring
     tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.1 : 1.0,
-    
+
     // Filter out sensitive data
     beforeSend(event, hint) {
       // Remove sensitive headers
@@ -27,16 +27,16 @@ export function initSentry(app: Express) {
         delete event.request.headers['authorization'];
         delete event.request.headers['cookie'];
       }
-      
+
       // Remove sensitive data from context
       if (event.contexts?.user) {
         delete event.contexts.user.email;
       }
-      
+
       return event;
     },
   });
-  
+
   console.log('✅ Sentry initialized for error tracking');
   console.log(`   Environment: ${process.env.NODE_ENV || 'development'}`);
 }

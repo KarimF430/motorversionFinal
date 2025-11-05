@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useLocation, useParams } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { Variant } from "@shared/schema";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useLocation, useParams } from 'wouter';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { Variant } from '@shared/schema';
 
 export default function VariantFormPage5() {
   const [, setLocation] = useLocation();
@@ -29,7 +29,7 @@ export default function VariantFormPage5() {
     wheelbase: '',
     turningRadius: '',
     kerbWeight: '',
-    
+
     // Tyre & Suspension
     frontTyreProfile: '',
     rearTyreProfile: '',
@@ -37,7 +37,7 @@ export default function VariantFormPage5() {
     spareWheelType: '',
     frontSuspension: '',
     rearSuspension: '',
-    
+
     // Storage
     cupholders: '',
     fuelTankCapacity: '',
@@ -65,13 +65,14 @@ export default function VariantFormPage5() {
         cupholders: (existingVariant as any).cupholders || '',
         fuelTankCapacity: (existingVariant as any).fuelTankCapacity || '',
         bootSpace: (existingVariant as any).bootSpace || '',
-        bootSpaceAfterFoldingRearRowSeats: (existingVariant as any).bootSpaceAfterFoldingRearRowSeats || '',
+        bootSpaceAfterFoldingRearRowSeats:
+          (existingVariant as any).bootSpaceAfterFoldingRearRowSeats || '',
       });
     }
   }, [existingVariant]);
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const saveMutation = useMutation({
@@ -85,16 +86,16 @@ export default function VariantFormPage5() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
       toast({
-        title: "Success",
-        description: "All variant data saved successfully!",
+        title: 'Success',
+        description: 'All variant data saved successfully!',
       });
       setLocation('/variants');
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error.message || "Failed to save variant data.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'Failed to save variant data.',
+        variant: 'destructive',
       });
     },
   });
@@ -114,7 +115,7 @@ export default function VariantFormPage5() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Dimensions</h3>
-          
+
           <div className="grid grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label>Ground Clearance</Label>
@@ -186,7 +187,7 @@ export default function VariantFormPage5() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Tyre & Suspension</h3>
-          
+
           <div className="grid grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label>Front Tyre Profile</Label>
@@ -249,7 +250,7 @@ export default function VariantFormPage5() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Storage</h3>
-          
+
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label>Cupholders</Label>
@@ -284,7 +285,9 @@ export default function VariantFormPage5() {
               <Label>Boot Space after folding rear row seats</Label>
               <Input
                 value={formData.bootSpaceAfterFoldingRearRowSeats}
-                onChange={(e) => handleInputChange('bootSpaceAfterFoldingRearRowSeats', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange('bootSpaceAfterFoldingRearRowSeats', e.target.value)
+                }
                 placeholder="Text Box"
               />
             </div>
@@ -293,15 +296,17 @@ export default function VariantFormPage5() {
 
         {/* Final Save Button */}
         <div className="flex justify-between pt-6 border-t">
-          <Button 
-            variant="outline" 
-            onClick={() => setLocation(isEditMode ? `/variants/${params.id}/edit/page4` : '/variants/new/page4')}
+          <Button
+            variant="outline"
+            onClick={() =>
+              setLocation(isEditMode ? `/variants/${params.id}/edit/page4` : '/variants/new/page4')
+            }
           >
             ← Previous Page
           </Button>
-          
-          <Button 
-            onClick={handleSaveAllData} 
+
+          <Button
+            onClick={handleSaveAllData}
             disabled={saveMutation.isPending}
             className="bg-green-600 hover:bg-green-700 text-white px-8"
           >

@@ -1,12 +1,12 @@
-import express from 'express'
-import { searchCars, getAutocompleteSuggestions, getSearchFacets } from '../services/elasticsearch'
+import express from 'express';
+import { searchCars, getAutocompleteSuggestions, getSearchFacets } from '../services/elasticsearch';
 
-const router = express.Router()
+const router = express.Router();
 
 /**
  * Advanced car search with Elasticsearch
  * GET /api/search/cars
- * 
+ *
  * Query params:
  * - q: Search query
  * - brands: Comma-separated brand names
@@ -39,8 +39,8 @@ router.get('/cars', async (req, res) => {
       sortBy,
       sortOrder,
       page,
-      size
-    } = req.query
+      size,
+    } = req.query;
 
     const searchParams = {
       query: q as string,
@@ -56,10 +56,10 @@ router.get('/cars', async (req, res) => {
       sortBy: sortBy as any,
       sortOrder: sortOrder as any,
       page: page ? parseInt(page as string) : 1,
-      size: size ? parseInt(size as string) : 20
-    }
+      size: size ? parseInt(size as string) : 20,
+    };
 
-    const results = await searchCars(searchParams)
+    const results = await searchCars(searchParams);
 
     res.json({
       success: true,
@@ -68,55 +68,52 @@ router.get('/cars', async (req, res) => {
         page: results.page,
         size: results.size,
         total: results.total,
-        totalPages: results.totalPages
-      }
-    })
+        totalPages: results.totalPages,
+      },
+    });
   } catch (error) {
-    console.error('Search error:', error)
+    console.error('Search error:', error);
     res.status(500).json({
       success: false,
       error: 'Search failed',
-      message: error instanceof Error ? error.message : 'Unknown error'
-    })
+      message: error instanceof Error ? error.message : 'Unknown error',
+    });
   }
-})
+});
 
 /**
  * Autocomplete suggestions
  * GET /api/search/autocomplete
- * 
+ *
  * Query params:
  * - q: Search query
  * - size: Number of suggestions (default: 10)
  */
 router.get('/autocomplete', async (req, res) => {
   try {
-    const { q, size } = req.query
+    const { q, size } = req.query;
 
     if (!q || typeof q !== 'string') {
       return res.status(400).json({
         success: false,
-        error: 'Query parameter "q" is required'
-      })
+        error: 'Query parameter "q" is required',
+      });
     }
 
-    const suggestions = await getAutocompleteSuggestions(
-      q,
-      size ? parseInt(size as string) : 10
-    )
+    const suggestions = await getAutocompleteSuggestions(q, size ? parseInt(size as string) : 10);
 
     res.json({
       success: true,
-      data: suggestions
-    })
+      data: suggestions,
+    });
   } catch (error) {
-    console.error('Autocomplete error:', error)
+    console.error('Autocomplete error:', error);
     res.status(500).json({
       success: false,
-      error: 'Autocomplete failed'
-    })
+      error: 'Autocomplete failed',
+    });
   }
-})
+});
 
 /**
  * Get search facets for filters
@@ -124,19 +121,19 @@ router.get('/autocomplete', async (req, res) => {
  */
 router.get('/facets', async (req, res) => {
   try {
-    const facets = await getSearchFacets()
+    const facets = await getSearchFacets();
 
     res.json({
       success: true,
-      data: facets
-    })
+      data: facets,
+    });
   } catch (error) {
-    console.error('Facets error:', error)
+    console.error('Facets error:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch facets'
-    })
+      error: 'Failed to fetch facets',
+    });
   }
-})
+});
 
-export default router
+export default router;

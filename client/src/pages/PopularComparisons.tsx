@@ -9,7 +9,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 import { Save, Loader2 } from 'lucide-react';
 
 interface Brand {
@@ -35,13 +35,15 @@ export default function PopularComparisons() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [comparisons, setComparisons] = useState<Comparison[]>(
-    Array(10).fill(null).map((_, i) => ({
-      model1Id: '',
-      model2Id: '',
-      model1BrandId: '',
-      model2BrandId: '',
-      order: i + 1
-    }))
+    Array(10)
+      .fill(null)
+      .map((_, i) => ({
+        model1Id: '',
+        model2Id: '',
+        model1BrandId: '',
+        model2BrandId: '',
+        order: i + 1,
+      }))
   );
 
   // Fetch brands
@@ -63,18 +65,18 @@ export default function PopularComparisons() {
   useEffect(() => {
     if (existingComparisons && Array.isArray(existingComparisons) && models.length > 0) {
       const loaded = existingComparisons.map((comp: any, index: number) => {
-        const model1 = models.find(m => m.id === comp.model1Id);
-        const model2 = models.find(m => m.id === comp.model2Id);
-        
+        const model1 = models.find((m) => m.id === comp.model1Id);
+        const model2 = models.find((m) => m.id === comp.model2Id);
+
         return {
           model1Id: comp.model1Id || '',
           model2Id: comp.model2Id || '',
           model1BrandId: model1?.brandId || '',
           model2BrandId: model2?.brandId || '',
-          order: comp.order || index + 1
+          order: comp.order || index + 1,
         };
       });
-      
+
       // Fill remaining slots
       while (loaded.length < 10) {
         loaded.push({
@@ -82,10 +84,10 @@ export default function PopularComparisons() {
           model2Id: '',
           model1BrandId: '',
           model2BrandId: '',
-          order: loaded.length + 1
+          order: loaded.length + 1,
         });
       }
-      
+
       setComparisons(loaded);
     }
   }, [existingComparisons, models]);
@@ -99,13 +101,13 @@ export default function PopularComparisons() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data),
       });
-      
+
       if (!response.ok) {
         const errorText = await response.text();
         console.error('API Error:', errorText);
         throw new Error(`Failed to save comparisons: ${errorText}`);
       }
-      
+
       const result = await response.json();
       console.log('API Response:', result);
       return result;
@@ -131,20 +133,20 @@ export default function PopularComparisons() {
   const handleSave = () => {
     // Filter out empty comparisons and format for API
     const validComparisons = comparisons
-      .filter(c => c.model1Id && c.model2Id)
-      .map(c => ({
+      .filter((c) => c.model1Id && c.model2Id)
+      .map((c) => ({
         model1Id: c.model1Id,
         model2Id: c.model2Id,
         order: c.order,
-        isActive: true
+        isActive: true,
       }));
-    
+
     console.log('Saving comparisons:', validComparisons);
     saveMutation.mutate(validComparisons);
   };
 
   const getModelsByBrand = (brandId: string) => {
-    return models.filter(m => m.brandId === brandId);
+    return models.filter((m) => m.brandId === brandId);
   };
 
   const updateBrand = (index: number, side: 'model1' | 'model2', brandId: string) => {
@@ -153,13 +155,13 @@ export default function PopularComparisons() {
       newComparisons[index] = {
         ...newComparisons[index],
         model1BrandId: brandId,
-        model1Id: '' // Reset model when brand changes
+        model1Id: '', // Reset model when brand changes
       };
     } else {
       newComparisons[index] = {
         ...newComparisons[index],
         model2BrandId: brandId,
-        model2Id: '' // Reset model when brand changes
+        model2Id: '', // Reset model when brand changes
       };
     }
     setComparisons(newComparisons);
@@ -179,11 +181,7 @@ export default function PopularComparisons() {
     <div className="p-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold">Popular Comparison</h1>
-        <Button
-          onClick={handleSave}
-          disabled={saveMutation.isPending}
-          size="lg"
-        >
+        <Button onClick={handleSave} disabled={saveMutation.isPending} size="lg">
           {saveMutation.isPending ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
@@ -203,16 +201,12 @@ export default function PopularComparisons() {
           <Card key={index} className="p-6">
             <div className="flex items-center gap-8">
               {/* Comparison Number */}
-              <div className="text-3xl font-bold text-gray-400 w-12">
-                {index + 1}
-              </div>
+              <div className="text-3xl font-bold text-gray-400 w-12">{index + 1}</div>
 
               {/* Model 1 */}
               <div className="flex-1 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Select Brand
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Select Brand</label>
                   <Select
                     value={comparison.model1BrandId}
                     onValueChange={(brandId) => updateBrand(index, 'model1', brandId)}
@@ -221,7 +215,7 @@ export default function PopularComparisons() {
                       <SelectValue placeholder="Select Brand" />
                     </SelectTrigger>
                     <SelectContent>
-                      {brands.map(brand => (
+                      {brands.map((brand) => (
                         <SelectItem key={brand.id} value={brand.id}>
                           {brand.name}
                         </SelectItem>
@@ -231,9 +225,7 @@ export default function PopularComparisons() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Select Model
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Select Model</label>
                   <Select
                     value={comparison.model1Id}
                     onValueChange={(value) => updateModel(index, 'model1', value)}
@@ -243,7 +235,7 @@ export default function PopularComparisons() {
                       <SelectValue placeholder="Select Model" />
                     </SelectTrigger>
                     <SelectContent>
-                      {getModelsByBrand(comparison.model1BrandId).map(model => (
+                      {getModelsByBrand(comparison.model1BrandId).map((model) => (
                         <SelectItem key={model.id} value={model.id}>
                           {model.name}
                         </SelectItem>
@@ -263,9 +255,7 @@ export default function PopularComparisons() {
               {/* Model 2 */}
               <div className="flex-1 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Select Brand
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Select Brand</label>
                   <Select
                     value={comparison.model2BrandId}
                     onValueChange={(brandId) => updateBrand(index, 'model2', brandId)}
@@ -274,7 +264,7 @@ export default function PopularComparisons() {
                       <SelectValue placeholder="Select Brand" />
                     </SelectTrigger>
                     <SelectContent>
-                      {brands.map(brand => (
+                      {brands.map((brand) => (
                         <SelectItem key={brand.id} value={brand.id}>
                           {brand.name}
                         </SelectItem>
@@ -284,9 +274,7 @@ export default function PopularComparisons() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Select Model
-                  </label>
+                  <label className="block text-sm font-medium mb-2">Select Model</label>
                   <Select
                     value={comparison.model2Id}
                     onValueChange={(value) => updateModel(index, 'model2', value)}
@@ -296,7 +284,7 @@ export default function PopularComparisons() {
                       <SelectValue placeholder="Select Model" />
                     </SelectTrigger>
                     <SelectContent>
-                      {getModelsByBrand(comparison.model2BrandId).map(model => (
+                      {getModelsByBrand(comparison.model2BrandId).map((model) => (
                         <SelectItem key={model.id} value={model.id}>
                           {model.name}
                         </SelectItem>
@@ -311,11 +299,7 @@ export default function PopularComparisons() {
       </div>
 
       <div className="mt-8 flex justify-end">
-        <Button
-          onClick={handleSave}
-          disabled={saveMutation.isPending}
-          size="lg"
-        >
+        <Button onClick={handleSave} disabled={saveMutation.isPending} size="lg">
           {saveMutation.isPending ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />

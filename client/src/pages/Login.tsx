@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast';
 export default function Login() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -75,11 +75,9 @@ export default function Login() {
           <CardTitle className="text-3xl font-bold bg-gradient-to-r from-red-600 to-orange-500 bg-clip-text text-transparent">
             MotorOctane Admin
           </CardTitle>
-          <CardDescription className="text-base">
-            Sign in to access the admin panel
-          </CardDescription>
+          <CardDescription className="text-base">Sign in to access the admin panel</CardDescription>
         </CardHeader>
-        
+
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
@@ -127,11 +125,7 @@ export default function Login() {
                   className="absolute right-3 top-3 text-gray-400 hover:text-gray-600"
                   disabled={isLoading}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5" />
-                  ) : (
-                    <Eye className="h-5 w-5" />
-                  )}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
             </div>
@@ -153,12 +147,8 @@ export default function Login() {
           </form>
 
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Default credentials for testing:
-            </p>
-            <p className="text-xs text-gray-500 mt-1">
-              admin@motoroctane.com / Admin@123
-            </p>
+            <p className="text-sm text-gray-600">Default credentials for testing:</p>
+            <p className="text-xs text-gray-500 mt-1">admin@motoroctane.com / Admin@123</p>
           </div>
 
           <div className="mt-6 pt-6 border-t border-gray-200">

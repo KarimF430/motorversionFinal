@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 import { IStorage } from '../storage';
 import { Brand, Model, Variant, AdminUser, PopularComparison } from './schemas';
-import type { 
-  Brand as BrandType, 
+import type {
+  Brand as BrandType,
   InsertBrand,
   Model as ModelType,
   InsertModel,
@@ -11,7 +11,7 @@ import type {
   PopularComparison as PopularComparisonType,
   InsertPopularComparison,
   AdminUser as AdminUserType,
-  InsertAdminUser
+  InsertAdminUser,
 } from '@shared/schema';
 
 export class MongoDBStorage implements IStorage {
@@ -21,16 +21,16 @@ export class MongoDBStorage implements IStorage {
     try {
       await mongoose.connect(uri);
       console.log('✅ Connected to MongoDB');
-      
+
       // Setup connection event handlers
       mongoose.connection.on('error', (error) => {
         console.error('❌ MongoDB connection error:', error);
       });
-      
+
       mongoose.connection.on('disconnected', () => {
         console.warn('⚠️  MongoDB disconnected');
       });
-      
+
       mongoose.connection.on('reconnected', () => {
         console.log('✅ MongoDB reconnected');
       });
@@ -74,14 +74,15 @@ export class MongoDBStorage implements IStorage {
         const highestRanked = await Brand.findOne().sort({ ranking: -1 }).lean();
         ranking = highestRanked ? (highestRanked.ranking || 0) + 1 : 1;
       }
-      
+
       // Generate unique slug-based ID from brand name
-      const slug = brand.name.toLowerCase()
-        .replace(/\s+/g, '-')           // Replace spaces with hyphens
-        .replace(/[^a-z0-9-]/g, '')     // Remove special characters
-        .replace(/-+/g, '-')            // Replace multiple hyphens with single
-        .replace(/^-|-$/g, '');         // Remove leading/trailing hyphens
-      
+      const slug = brand.name
+        .toLowerCase()
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/[^a-z0-9-]/g, '') // Remove special characters
+        .replace(/-+/g, '-') // Replace multiple hyphens with single
+        .replace(/^-|-$/g, ''); // Remove leading/trailing hyphens
+
       // Check if slug already exists, append number if needed
       let uniqueId = slug;
       let counter = 1;
@@ -89,12 +90,12 @@ export class MongoDBStorage implements IStorage {
         uniqueId = `${slug}-${counter}`;
         counter++;
       }
-      
+
       const newBrand = new Brand({
         id: uniqueId,
         ...brand,
         ranking,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
       await newBrand.save();
       return newBrand.toObject() as BrandType;
@@ -106,11 +107,7 @@ export class MongoDBStorage implements IStorage {
 
   async updateBrand(id: string, brand: Partial<InsertBrand>): Promise<BrandType | undefined> {
     try {
-      const updated = await Brand.findOneAndUpdate(
-        { id },
-        { $set: brand },
-        { new: true }
-      ).lean();
+      const updated = await Brand.findOneAndUpdate({ id }, { $set: brand }, { new: true }).lean();
       return updated ? (updated as BrandType) : undefined;
     } catch (error) {
       console.error('updateBrand error:', error);
@@ -122,22 +119,22 @@ export class MongoDBStorage implements IStorage {
     try {
       // First, get all models for this brand
       const models = await Model.find({ brandId: id }).lean();
-      const modelIds = models.map(m => m.id);
-      
+      const modelIds = models.map((m) => m.id);
+
       // Delete all variants for these models
       if (modelIds.length > 0) {
         await Variant.deleteMany({ modelId: { $in: modelIds } });
         console.log(`Deleted variants for ${modelIds.length} models`);
       }
-      
+
       // Delete all models for this brand
       await Model.deleteMany({ brandId: id });
       console.log(`Deleted models for brand: ${id}`);
-      
+
       // Finally, delete the brand itself
       const result = await Brand.deleteOne({ id });
       console.log(`Delete brand result:`, result);
-      
+
       return result.deletedCount > 0;
     } catch (error) {
       console.error('deleteBrand error:', error);
@@ -149,10 +146,10 @@ export class MongoDBStorage implements IStorage {
     try {
       const filter = excludeBrandId ? { id: { $ne: excludeBrandId } } : {};
       const brands = await Brand.find(filter).select('ranking').lean();
-      const takenRankings = brands.map(b => b.ranking);
-      
+      const takenRankings = brands.map((b) => b.ranking);
+
       const allRankings = Array.from({ length: 50 }, (_, i) => i + 1);
-      return allRankings.filter(ranking => !takenRankings.includes(ranking));
+      return allRankings.filter((ranking) => !takenRankings.includes(ranking));
     } catch (error) {
       console.error('getAvailableRankings error:', error);
       throw new Error('Failed to fetch available rankings');
@@ -188,17 +185,23 @@ export class MongoDBStorage implements IStorage {
     try {
       // Get brand name for slug generation
       const brand = await Brand.findOne({ id: model.brandId }).lean();
-      const brandSlug = brand ? brand.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '') : 'unknown';
-      
+      const brandSlug = brand
+        ? brand.name
+            .toLowerCase()
+            .replace(/\s+/g, '-')
+            .replace(/[^a-z0-9-]/g, '')
+        : 'unknown';
+
       // Generate unique slug-based ID: brandslug-modelname
-      const modelSlug = model.name.toLowerCase()
+      const modelSlug = model.name
+        .toLowerCase()
         .replace(/\s+/g, '-')
         .replace(/[^a-z0-9-]/g, '')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
-      
+
       const baseId = `${brandSlug}-${modelSlug}`;
-      
+
       // Check for collisions and append number if needed
       let uniqueId = baseId;
       let counter = 1;
@@ -206,11 +209,11 @@ export class MongoDBStorage implements IStorage {
         uniqueId = `${baseId}-${counter}`;
         counter++;
       }
-      
+
       const newModel = new Model({
         id: uniqueId,
         ...model,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
       await newModel.save();
       return newModel.toObject() as ModelType;
@@ -222,11 +225,7 @@ export class MongoDBStorage implements IStorage {
 
   async updateModel(id: string, model: Partial<InsertModel>): Promise<ModelType | undefined> {
     try {
-      const updated = await Model.findOneAndUpdate(
-        { id },
-        { $set: model },
-        { new: true }
-      ).lean();
+      const updated = await Model.findOneAndUpdate({ id }, { $set: model }, { new: true }).lean();
       return updated ? (updated as ModelType) : undefined;
     } catch (error) {
       console.error('updateModel error:', error);
@@ -239,11 +238,11 @@ export class MongoDBStorage implements IStorage {
       // First, delete all variants associated with this model
       await Variant.deleteMany({ modelId: id });
       console.log(`Deleted variants for model: ${id}`);
-      
+
       // Then delete the model itself
       const result = await Model.deleteOne({ id });
       console.log(`Delete model result:`, result);
-      
+
       return result.deletedCount > 0;
     } catch (error) {
       console.error('deleteModel error:', error);
@@ -286,28 +285,33 @@ export class MongoDBStorage implements IStorage {
         console.error('❌ Brand not found:', variant.brandId);
         throw new Error(`Brand with ID ${variant.brandId} not found`);
       }
-      
+
       // Validate that model exists and belongs to the brand
       const model = await Model.findOne({ id: variant.modelId }).lean();
       if (!model) {
         console.error('❌ Model not found:', variant.modelId);
         throw new Error(`Model with ID ${variant.modelId} not found`);
       }
-      
+
       if (model.brandId !== variant.brandId) {
-        console.error('❌ Model does not belong to brand:', { modelId: variant.modelId, modelBrandId: model.brandId, variantBrandId: variant.brandId });
+        console.error('❌ Model does not belong to brand:', {
+          modelId: variant.modelId,
+          modelBrandId: model.brandId,
+          variantBrandId: variant.brandId,
+        });
         throw new Error(`Model ${variant.modelId} does not belong to brand ${variant.brandId}`);
       }
-      
+
       // Generate unique slug-based ID: modelid-variantname
-      const variantSlug = variant.name.toLowerCase()
+      const variantSlug = variant.name
+        .toLowerCase()
         .replace(/\s+/g, '-')
         .replace(/[^a-z0-9-]/g, '')
         .replace(/-+/g, '-')
         .replace(/^-|-$/g, '');
-      
+
       const baseId = `${model.id}-${variantSlug}`;
-      
+
       // Check for collisions and append number if needed
       let uniqueId = baseId;
       let counter = 1;
@@ -315,13 +319,13 @@ export class MongoDBStorage implements IStorage {
         uniqueId = `${baseId}-${counter}`;
         counter++;
       }
-      
+
       console.log('✅ Creating variant with ID:', uniqueId);
-      
+
       const newVariant = new Variant({
         id: uniqueId,
         ...variant,
-        createdAt: new Date()
+        createdAt: new Date(),
       });
       await newVariant.save();
       return newVariant.toObject() as VariantType;
@@ -334,7 +338,10 @@ export class MongoDBStorage implements IStorage {
     }
   }
 
-  async updateVariant(id: string, variant: Partial<InsertVariant>): Promise<VariantType | undefined> {
+  async updateVariant(
+    id: string,
+    variant: Partial<InsertVariant>
+  ): Promise<VariantType | undefined> {
     try {
       const updated = await Variant.findOneAndUpdate(
         { id },
@@ -374,20 +381,22 @@ export class MongoDBStorage implements IStorage {
     }
   }
 
-  async savePopularComparisons(comparisons: InsertPopularComparison[]): Promise<PopularComparisonType[]> {
+  async savePopularComparisons(
+    comparisons: InsertPopularComparison[]
+  ): Promise<PopularComparisonType[]> {
     try {
       // Clear existing
       await PopularComparison.deleteMany({});
-      
+
       // Create new
       const newComparisons = comparisons.map((comp, index) => ({
         id: `comparison-${Date.now()}-${index}`,
         ...comp,
         order: comp.order || index + 1,
         isActive: comp.isActive ?? true,
-        createdAt: new Date()
+        createdAt: new Date(),
       }));
-      
+
       await PopularComparison.insertMany(newComparisons);
       return await this.getPopularComparisons();
     } catch (error) {
@@ -426,7 +435,7 @@ export class MongoDBStorage implements IStorage {
         id: `admin-${Date.now()}`,
         ...user,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
       });
       await newUser.save();
       return newUser.toObject() as AdminUserType;
@@ -440,11 +449,11 @@ export class MongoDBStorage implements IStorage {
     try {
       await AdminUser.findOneAndUpdate(
         { id },
-        { 
-          $set: { 
+        {
+          $set: {
             lastLogin: new Date(),
-            updatedAt: new Date()
-          }
+            updatedAt: new Date(),
+          },
         }
       );
     } catch (error) {
@@ -483,9 +492,9 @@ export class MongoDBStorage implements IStorage {
       const [totalBrands, totalModels, totalVariants] = await Promise.all([
         Brand.countDocuments(),
         Model.countDocuments(),
-        Variant.countDocuments()
+        Variant.countDocuments(),
       ]);
-      
+
       return { totalBrands, totalModels, totalVariants };
     } catch (error) {
       console.error('getStats error:', error);

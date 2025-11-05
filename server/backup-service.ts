@@ -16,12 +16,12 @@ export class BackupService {
     this.storage = storage;
     this.dataDir = dataDir;
     this.isBackupEnabled = process.env.ENABLE_JSON_BACKUP !== 'false'; // Enabled by default
-    
+
     // Ensure data directory exists
     if (!fs.existsSync(this.dataDir)) {
       fs.mkdirSync(this.dataDir, { recursive: true });
     }
-    
+
     if (this.isBackupEnabled) {
       console.log('📦 JSON Backup Service: ENABLED');
       console.log(`📁 Backup Directory: ${this.dataDir}`);
@@ -38,15 +38,15 @@ export class BackupService {
 
     try {
       console.log('🔄 Starting full backup to JSON files...');
-      
+
       await Promise.all([
         this.backupBrands(),
         this.backupModels(),
         this.backupVariants(),
         this.backupAdminUsers(),
-        this.backupPopularComparisons()
+        this.backupPopularComparisons(),
       ]);
-      
+
       console.log('✅ Full backup completed successfully');
     } catch (error) {
       console.error('❌ Backup failed:', error);
@@ -63,10 +63,10 @@ export class BackupService {
     try {
       const brands = await this.storage.getBrands(true); // Include inactive
       const filePath = path.join(this.dataDir, 'brands.json');
-      
+
       // Remove MongoDB-specific fields
-      const cleanBrands = brands.map(brand => this.cleanMongoDocument(brand));
-      
+      const cleanBrands = brands.map((brand) => this.cleanMongoDocument(brand));
+
       fs.writeFileSync(filePath, JSON.stringify(cleanBrands, null, 2), 'utf-8');
       console.log(`✅ Backed up ${brands.length} brands to ${filePath}`);
     } catch (error) {
@@ -83,10 +83,10 @@ export class BackupService {
     try {
       const models = await this.storage.getModels(); // All models
       const filePath = path.join(this.dataDir, 'models.json');
-      
+
       // Remove MongoDB-specific fields
-      const cleanModels = models.map(model => this.cleanMongoDocument(model));
-      
+      const cleanModels = models.map((model) => this.cleanMongoDocument(model));
+
       fs.writeFileSync(filePath, JSON.stringify(cleanModels, null, 2), 'utf-8');
       console.log(`✅ Backed up ${models.length} models to ${filePath}`);
     } catch (error) {
@@ -103,10 +103,10 @@ export class BackupService {
     try {
       const variants = await this.storage.getVariants(); // All variants
       const filePath = path.join(this.dataDir, 'variants.json');
-      
+
       // Remove MongoDB-specific fields
-      const cleanVariants = variants.map(variant => this.cleanMongoDocument(variant));
-      
+      const cleanVariants = variants.map((variant) => this.cleanMongoDocument(variant));
+
       fs.writeFileSync(filePath, JSON.stringify(cleanVariants, null, 2), 'utf-8');
       console.log(`✅ Backed up ${variants.length} variants to ${filePath}`);
     } catch (error) {
@@ -138,10 +138,10 @@ export class BackupService {
     try {
       const comparisons = await this.storage.getPopularComparisons();
       const filePath = path.join(this.dataDir, 'popular-comparisons.json');
-      
+
       // Remove MongoDB-specific fields
-      const cleanComparisons = comparisons.map(comp => this.cleanMongoDocument(comp));
-      
+      const cleanComparisons = comparisons.map((comp) => this.cleanMongoDocument(comp));
+
       fs.writeFileSync(filePath, JSON.stringify(cleanComparisons, null, 2), 'utf-8');
       console.log(`✅ Backed up ${comparisons.length} popular comparisons to ${filePath}`);
     } catch (error) {
@@ -160,15 +160,18 @@ export class BackupService {
     }
 
     console.log(`⏰ Auto-backup scheduled every ${intervalMinutes} minutes`);
-    
+
     // Initial backup
-    this.backupAll().catch(err => console.error('Initial backup failed:', err));
-    
+    this.backupAll().catch((err) => console.error('Initial backup failed:', err));
+
     // Schedule periodic backups
-    setInterval(() => {
-      console.log('⏰ Running scheduled backup...');
-      this.backupAll().catch(err => console.error('Scheduled backup failed:', err));
-    }, intervalMinutes * 60 * 1000);
+    setInterval(
+      () => {
+        console.log('⏰ Running scheduled backup...');
+        this.backupAll().catch((err) => console.error('Scheduled backup failed:', err));
+      },
+      intervalMinutes * 60 * 1000
+    );
   }
 
   /**
@@ -176,11 +179,11 @@ export class BackupService {
    */
   private cleanMongoDocument(doc: any): any {
     const cleaned = { ...doc };
-    
+
     // Remove MongoDB internal fields
     delete cleaned._id;
     delete cleaned.__v;
-    
+
     // Remove _id from nested arrays
     if (cleaned.faqs && Array.isArray(cleaned.faqs)) {
       cleaned.faqs = cleaned.faqs.map((faq: any) => {
@@ -188,56 +191,56 @@ export class BackupService {
         return rest;
       });
     }
-    
+
     if (cleaned.galleryImages && Array.isArray(cleaned.galleryImages)) {
       cleaned.galleryImages = cleaned.galleryImages.map((img: any) => {
         const { _id, ...rest } = img;
         return rest;
       });
     }
-    
+
     if (cleaned.keyFeatureImages && Array.isArray(cleaned.keyFeatureImages)) {
       cleaned.keyFeatureImages = cleaned.keyFeatureImages.map((img: any) => {
         const { _id, ...rest } = img;
         return rest;
       });
     }
-    
+
     if (cleaned.spaceComfortImages && Array.isArray(cleaned.spaceComfortImages)) {
       cleaned.spaceComfortImages = cleaned.spaceComfortImages.map((img: any) => {
         const { _id, ...rest } = img;
         return rest;
       });
     }
-    
+
     if (cleaned.storageConvenienceImages && Array.isArray(cleaned.storageConvenienceImages)) {
       cleaned.storageConvenienceImages = cleaned.storageConvenienceImages.map((img: any) => {
         const { _id, ...rest } = img;
         return rest;
       });
     }
-    
+
     if (cleaned.colorImages && Array.isArray(cleaned.colorImages)) {
       cleaned.colorImages = cleaned.colorImages.map((img: any) => {
         const { _id, ...rest } = img;
         return rest;
       });
     }
-    
+
     if (cleaned.engineSummaries && Array.isArray(cleaned.engineSummaries)) {
       cleaned.engineSummaries = cleaned.engineSummaries.map((eng: any) => {
         const { _id, ...rest } = eng;
         return rest;
       });
     }
-    
+
     if (cleaned.mileageData && Array.isArray(cleaned.mileageData)) {
       cleaned.mileageData = cleaned.mileageData.map((mil: any) => {
         const { _id, ...rest } = mil;
         return rest;
       });
     }
-    
+
     return cleaned;
   }
 
@@ -251,34 +254,50 @@ export class BackupService {
 
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const backupDir = path.join(this.dataDir, 'backups', timestamp);
-    
+
     // Create backup directory
     fs.mkdirSync(backupDir, { recursive: true });
-    
+
     // Backup all data
     const brands = await this.storage.getBrands(true);
     const models = await this.storage.getModels();
     const variants = await this.storage.getVariants();
     const comparisons = await this.storage.getPopularComparisons();
-    
+
     // Write to timestamped directory
     fs.writeFileSync(
       path.join(backupDir, 'brands.json'),
-      JSON.stringify(brands.map(b => this.cleanMongoDocument(b)), null, 2)
+      JSON.stringify(
+        brands.map((b) => this.cleanMongoDocument(b)),
+        null,
+        2
+      )
     );
     fs.writeFileSync(
       path.join(backupDir, 'models.json'),
-      JSON.stringify(models.map(m => this.cleanMongoDocument(m)), null, 2)
+      JSON.stringify(
+        models.map((m) => this.cleanMongoDocument(m)),
+        null,
+        2
+      )
     );
     fs.writeFileSync(
       path.join(backupDir, 'variants.json'),
-      JSON.stringify(variants.map(v => this.cleanMongoDocument(v)), null, 2)
+      JSON.stringify(
+        variants.map((v) => this.cleanMongoDocument(v)),
+        null,
+        2
+      )
     );
     fs.writeFileSync(
       path.join(backupDir, 'popular-comparisons.json'),
-      JSON.stringify(comparisons.map(c => this.cleanMongoDocument(c)), null, 2)
+      JSON.stringify(
+        comparisons.map((c) => this.cleanMongoDocument(c)),
+        null,
+        2
+      )
     );
-    
+
     console.log(`✅ Timestamped backup created: ${backupDir}`);
     return backupDir;
   }

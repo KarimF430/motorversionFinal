@@ -1,7 +1,7 @@
-import express, { Request, Response } from 'express'
-import { redis } from '../middleware/cache.js'
+import express, { Request, Response } from 'express';
+import { redis } from '../middleware/cache.js';
 
-const router = express.Router()
+const router = express.Router();
 
 /**
  * Batch endpoint for homepage data
@@ -11,54 +11,50 @@ const router = express.Router()
 router.get('/homepage', async (req: Request, res: Response) => {
   try {
     // Check Redis cache first
-    const cacheKey = 'homepage:data:v1'
-    const cached = await redis.get(cacheKey)
-    
+    const cacheKey = 'homepage:data:v1';
+    const cached = await redis.get(cacheKey);
+
     if (cached) {
-      console.log('✅ Homepage data served from cache')
+      console.log('✅ Homepage data served from cache');
       return res.json({
         success: true,
         data: JSON.parse(cached),
         cached: true,
-        timestamp: Date.now()
-      })
+        timestamp: Date.now(),
+      });
     }
 
-    console.log('📊 Fetching fresh homepage data...')
+    console.log('📊 Fetching fresh homepage data...');
 
     // Import storage
-    const { MongoDBStorage } = await import('../server/db/mongodb-storage.js')
-    const storage = new MongoDBStorage()
+    const { MongoDBStorage } = await import('../server/db/mongodb-storage.js');
+    const storage = new MongoDBStorage();
 
     // Fetch all data in parallel for maximum speed
-    const [
-      allBrands,
-      allModels,
-      allVariants
-    ] = await Promise.all([
+    const [allBrands, allModels, allVariants] = await Promise.all([
       storage.getBrands(),
       storage.getModels(),
-      storage.getVariants()
-    ])
+      storage.getVariants(),
+    ]);
 
     // Filter active brands
     const brands = allBrands
       .filter((b: any) => b.status === 'active')
       .sort((a: any, b: any) => (a.ranking || 999) - (b.ranking || 999))
-      .slice(0, 16) // Top 16 brands
+      .slice(0, 16); // Top 16 brands
 
     // Filter and categorize models
-    const activeModels = allModels.filter((m: any) => m.status === 'active')
-    
+    const activeModels = allModels.filter((m: any) => m.status === 'active');
+
     const popularModels = activeModels
       .filter((m: any) => m.isPopular)
       .sort((a: any, b: any) => (a.popularRank || 999) - (b.popularRank || 999))
-      .slice(0, 10)
+      .slice(0, 10);
 
     const newModels = activeModels
       .filter((m: any) => m.isNew)
       .sort((a: any, b: any) => (b.launchDate || '').localeCompare(a.launchDate || ''))
-      .slice(0, 10)
+      .slice(0, 10);
 
     // Budget categories
     const budgetModels = {
@@ -77,14 +73,14 @@ router.get('/homepage', async (req: Request, res: Response) => {
       under15: activeModels
         .filter((m: any) => m.startingPrice && m.startingPrice <= 1500000)
         .sort((a: any, b: any) => a.startingPrice - b.startingPrice)
-        .slice(0, 10)
-    }
+        .slice(0, 10),
+    };
 
     // Popular comparisons (simple logic - can be enhanced)
     const popularComparisons = popularModels.slice(0, 5).map((model: any, index: number) => ({
       model1: model,
-      model2: popularModels[index + 1] || popularModels[0]
-    }))
+      model2: popularModels[index + 1] || popularModels[0],
+    }));
 
     // Build response
     const data = {
@@ -96,47 +92,46 @@ router.get('/homepage', async (req: Request, res: Response) => {
       stats: {
         totalBrands: brands.length,
         totalModels: activeModels.length,
-        totalVariants: allVariants.length
-      }
-    }
+        totalVariants: allVariants.length,
+      },
+    };
 
     // Cache for 5 minutes (300 seconds)
-    await redis.setex(cacheKey, 300, JSON.stringify(data))
+    await redis.setex(cacheKey, 300, JSON.stringify(data));
 
-    console.log('✅ Homepage data cached successfully')
+    console.log('✅ Homepage data cached successfully');
 
     res.json({
       success: true,
       data,
       cached: false,
-      timestamp: Date.now()
-    })
-
+      timestamp: Date.now(),
+    });
   } catch (error) {
-    console.error('❌ Homepage data fetch error:', error)
+    console.error('❌ Homepage data fetch error:', error);
     res.status(500).json({
       success: false,
-      error: 'Failed to fetch homepage data'
-    })
+      error: 'Failed to fetch homepage data',
+    });
   }
-})
+});
 
 /**
  * Clear homepage cache (for admin use)
  */
 router.post('/homepage/clear-cache', async (req: Request, res: Response) => {
   try {
-    await redis.del('homepage:data:v1')
+    await redis.del('homepage:data:v1');
     res.json({
       success: true,
-      message: 'Homepage cache cleared'
-    })
+      message: 'Homepage cache cleared',
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: 'Failed to clear cache'
-    })
+      error: 'Failed to clear cache',
+    });
   }
-})
+});
 
-export default router
+export default router;

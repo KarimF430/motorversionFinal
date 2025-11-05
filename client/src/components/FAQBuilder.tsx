@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Plus, Trash2 } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Plus, Trash2 } from 'lucide-react';
 
 interface FAQItem {
   id: string;
@@ -15,9 +15,9 @@ interface FAQBuilderProps {
 }
 
 export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
-  const [faqs, setFaqs] = useState<FAQItem[]>(items.length > 0 ? items : [
-    { id: '1', question: '', answer: '' }
-  ]);
+  const [faqs, setFaqs] = useState<FAQItem[]>(
+    items.length > 0 ? items : [{ id: '1', question: '', answer: '' }]
+  );
 
   // Sync with parent when items change
   useEffect(() => {
@@ -34,16 +34,14 @@ export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
   };
 
   const removeFAQ = (id: string) => {
-    const newFaqs = faqs.filter(faq => faq.id !== id);
+    const newFaqs = faqs.filter((faq) => faq.id !== id);
     setFaqs(newFaqs);
     onChange?.(newFaqs);
     console.log('Removed FAQ:', id);
   };
 
   const updateFAQ = (id: string, field: 'question' | 'answer', value: string) => {
-    const newFaqs = faqs.map(faq => 
-      faq.id === id ? { ...faq, [field]: value } : faq
-    );
+    const newFaqs = faqs.map((faq) => (faq.id === id ? { ...faq, [field]: value } : faq));
     setFaqs(newFaqs);
     onChange?.(newFaqs);
   };
@@ -51,7 +49,11 @@ export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
   return (
     <div className="space-y-4">
       {faqs.map((faq, index) => (
-        <div key={faq.id} className="space-y-3 p-4 border rounded-lg" data-testid={`faq-item-${index}`}>
+        <div
+          key={faq.id}
+          className="space-y-3 p-4 border rounded-lg"
+          data-testid={`faq-item-${index}`}
+        >
           <div className="flex items-center gap-2">
             <Input
               placeholder={`Q${index + 1}. Add FAQ`}
@@ -79,10 +81,10 @@ export default function FAQBuilder({ items = [], onChange }: FAQBuilderProps) {
           />
         </div>
       ))}
-      <Button 
+      <Button
         type="button"
-        variant="outline" 
-        className="w-full" 
+        variant="outline"
+        className="w-full"
         onClick={addFAQ}
         data-testid="button-add-faq"
       >

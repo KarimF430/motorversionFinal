@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Verify token with backend
       const response = await fetch('/api/auth/me', {
         headers: {
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 
@@ -74,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       await fetch('/api/auth/logout', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
     } catch (error) {

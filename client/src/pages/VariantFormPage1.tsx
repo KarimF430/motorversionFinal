@@ -1,23 +1,23 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Upload, X } from "lucide-react";
-import RichTextEditor from "@/components/RichTextEditor";
-import { useLocation, useParams } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { Brand, Model, Variant } from "@shared/schema";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Upload, X } from 'lucide-react';
+import RichTextEditor from '@/components/RichTextEditor';
+import { useLocation, useParams } from 'wouter';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { Brand, Model, Variant } from '@shared/schema';
 
 export default function VariantFormPage1() {
   const [, setLocation] = useLocation();
   const params = useParams();
   const { toast } = useToast();
   const isEditMode = !!params.id;
-  
+
   const { data: brands = [] } = useQuery<Brand[]>({
     queryKey: ['/api/brands'],
   });
@@ -45,7 +45,9 @@ export default function VariantFormPage1() {
     comfortConvenience: '',
   });
 
-  const [highlightImages, setHighlightImages] = useState<Array<{ url: string; caption: string }>>([]);
+  const [highlightImages, setHighlightImages] = useState<Array<{ url: string; caption: string }>>(
+    []
+  );
   const [generatedId, setGeneratedId] = useState('');
 
   // Load existing variant data
@@ -72,9 +74,9 @@ export default function VariantFormPage1() {
   // Generate ID when brand, model, and variant name are selected
   useEffect(() => {
     if (formData.brandId && formData.modelId && formData.name && !isEditMode) {
-      const brand = brands.find(b => b.id === formData.brandId);
-      const model = models.find(m => m.id === formData.modelId);
-      
+      const brand = brands.find((b) => b.id === formData.brandId);
+      const model = models.find((m) => m.id === formData.modelId);
+
       if (brand && model) {
         const brandPrefix = brand.name.substring(0, 2).toUpperCase();
         const modelPrefix = model.name.substring(0, 2).toUpperCase();
@@ -86,7 +88,7 @@ export default function VariantFormPage1() {
   }, [formData.brandId, formData.modelId, formData.name, brands, models, isEditMode]);
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,29 +104,27 @@ export default function VariantFormPage1() {
         body: formData,
       });
       const data = await response.json();
-      
-      setHighlightImages(prev => [...prev, { url: data.url, caption: '' }]);
+
+      setHighlightImages((prev) => [...prev, { url: data.url, caption: '' }]);
       toast({
-        title: "Image uploaded",
-        description: "Image has been successfully uploaded.",
+        title: 'Image uploaded',
+        description: 'Image has been successfully uploaded.',
       });
     } catch (error) {
       toast({
-        title: "Upload failed",
-        description: "Failed to upload image. Please try again.",
-        variant: "destructive",
+        title: 'Upload failed',
+        description: 'Failed to upload image. Please try again.',
+        variant: 'destructive',
       });
     }
   };
 
   const handleRemoveImage = (index: number) => {
-    setHighlightImages(prev => prev.filter((_, i) => i !== index));
+    setHighlightImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleCaptionChange = (index: number, caption: string) => {
-    setHighlightImages(prev => prev.map((img, i) => 
-      i === index ? { ...img, caption } : img
-    ));
+    setHighlightImages((prev) => prev.map((img, i) => (i === index ? { ...img, caption } : img)));
   };
 
   const saveMutation = useMutation({
@@ -140,7 +140,7 @@ export default function VariantFormPage1() {
       console.log('Variant saved successfully:', response);
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
       toast({
-        title: "Success",
+        title: 'Success',
         description: `Variant ${isEditMode ? 'updated' : 'created'} successfully.`,
       });
       setLocation('/variants');
@@ -148,28 +148,34 @@ export default function VariantFormPage1() {
     onError: (error: any) => {
       console.error('Error saving variant:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to save variant.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'Failed to save variant.',
+        variant: 'destructive',
       });
     },
   });
 
   const handleSave = () => {
     console.log('🔍 handleSave called with formData:', formData);
-    
+
     // Validate required fields
-    if (!formData.brandId || !formData.modelId || !formData.name || !formData.price || formData.price.trim() === '') {
+    if (
+      !formData.brandId ||
+      !formData.modelId ||
+      !formData.name ||
+      !formData.price ||
+      formData.price.trim() === ''
+    ) {
       console.error('❌ Validation failed - missing fields:', {
         brandId: formData.brandId,
         modelId: formData.modelId,
         name: formData.name,
-        price: formData.price
+        price: formData.price,
       });
       toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields (Brand, Model, Name, Price).",
-        variant: "destructive",
+        title: 'Validation Error',
+        description: 'Please fill in all required fields (Brand, Model, Name, Price).',
+        variant: 'destructive',
       });
       return;
     }
@@ -178,9 +184,9 @@ export default function VariantFormPage1() {
     if (isNaN(price) || price <= 0) {
       console.error('❌ Invalid price:', formData.price);
       toast({
-        title: "Validation Error",
-        description: "Please enter a valid price.",
-        variant: "destructive",
+        title: 'Validation Error',
+        description: 'Please enter a valid price.',
+        variant: 'destructive',
       });
       return;
     }
@@ -216,10 +222,10 @@ export default function VariantFormPage1() {
       console.log('Variant saved, navigating to page 2');
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
       toast({
-        title: "Success",
-        description: "Page 1 data saved. Moving to Page 2.",
+        title: 'Success',
+        description: 'Page 1 data saved. Moving to Page 2.',
       });
-      
+
       // Navigate to page 2 with the variant ID
       if (isEditMode) {
         setLocation(`/variants/${params.id}/edit/page2`);
@@ -232,20 +238,26 @@ export default function VariantFormPage1() {
     onError: (error: any) => {
       console.error('Error saving variant:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to save variant.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'Failed to save variant.',
+        variant: 'destructive',
       });
     },
   });
 
   const handleNextPage = () => {
     // Validate required fields first
-    if (!formData.brandId || !formData.modelId || !formData.name || !formData.price || formData.price.trim() === '') {
+    if (
+      !formData.brandId ||
+      !formData.modelId ||
+      !formData.name ||
+      !formData.price ||
+      formData.price.trim() === ''
+    ) {
       toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields (Brand, Model, Name, Price).",
-        variant: "destructive",
+        title: 'Validation Error',
+        description: 'Please fill in all required fields (Brand, Model, Name, Price).',
+        variant: 'destructive',
       });
       return;
     }
@@ -253,9 +265,9 @@ export default function VariantFormPage1() {
     const price = parseFloat(formData.price);
     if (isNaN(price) || price <= 0) {
       toast({
-        title: "Validation Error",
-        description: "Please enter a valid price.",
-        variant: "destructive",
+        title: 'Validation Error',
+        description: 'Please enter a valid price.',
+        variant: 'destructive',
       });
       return;
     }
@@ -281,8 +293,8 @@ export default function VariantFormPage1() {
   };
 
   // Filter models by selected brand
-  const filteredModels = formData.brandId 
-    ? models.filter(m => m.brandId === formData.brandId)
+  const filteredModels = formData.brandId
+    ? models.filter((m) => m.brandId === formData.brandId)
     : [];
 
   return (
@@ -306,8 +318,10 @@ export default function VariantFormPage1() {
               required
             >
               <option value="">Choose Brand</option>
-              {brands.map(brand => (
-                <option key={brand.id} value={brand.id}>{brand.name}</option>
+              {brands.map((brand) => (
+                <option key={brand.id} value={brand.id}>
+                  {brand.name}
+                </option>
               ))}
             </select>
           </div>
@@ -323,8 +337,10 @@ export default function VariantFormPage1() {
               disabled={!formData.brandId}
             >
               <option value="">Choose Model</option>
-              {filteredModels.map(model => (
-                <option key={model.id} value={model.id}>{model.name}</option>
+              {filteredModels.map((model) => (
+                <option key={model.id} value={model.id}>
+                  {model.name}
+                </option>
               ))}
             </select>
           </div>
@@ -334,15 +350,22 @@ export default function VariantFormPage1() {
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label>Variant Status</Label>
-            <RadioGroup value={formData.status} onValueChange={(value) => handleInputChange('status', value)}>
+            <RadioGroup
+              value={formData.status}
+              onValueChange={(value) => handleInputChange('status', value)}
+            >
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="active" id="active" />
-                  <Label htmlFor="active" className="font-normal cursor-pointer">Active Variant</Label>
+                  <Label htmlFor="active" className="font-normal cursor-pointer">
+                    Active Variant
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="inactive" id="inactive" />
-                  <Label htmlFor="inactive" className="font-normal cursor-pointer">Deactivate Variant</Label>
+                  <Label htmlFor="inactive" className="font-normal cursor-pointer">
+                    Deactivate Variant
+                  </Label>
                 </div>
               </div>
             </RadioGroup>
@@ -350,18 +373,22 @@ export default function VariantFormPage1() {
 
           <div className="space-y-2">
             <Label>Is Variant Value for Money</Label>
-            <RadioGroup 
-              value={formData.isValueForMoney ? 'yes' : 'no'} 
+            <RadioGroup
+              value={formData.isValueForMoney ? 'yes' : 'no'}
               onValueChange={(value) => handleInputChange('isValueForMoney', value === 'yes')}
             >
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="yes" id="vfm-yes" />
-                  <Label htmlFor="vfm-yes" className="font-normal cursor-pointer">Yes</Label>
+                  <Label htmlFor="vfm-yes" className="font-normal cursor-pointer">
+                    Yes
+                  </Label>
                 </div>
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem value="no" id="vfm-no" />
-                  <Label htmlFor="vfm-no" className="font-normal cursor-pointer">No</Label>
+                  <Label htmlFor="vfm-no" className="font-normal cursor-pointer">
+                    No
+                  </Label>
                 </div>
               </div>
             </RadioGroup>
@@ -442,7 +469,7 @@ export default function VariantFormPage1() {
                 </Button>
               </div>
             ))}
-            
+
             <div className="border-2 border-dashed rounded-lg p-8 text-center">
               <input
                 type="file"
@@ -462,7 +489,7 @@ export default function VariantFormPage1() {
         {/* Variant SEO Summary */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Variant SEO Summary</h3>
-          
+
           <div className="space-y-2">
             <Label>Description</Label>
             <RichTextEditor

@@ -8,11 +8,13 @@ const brandSchema = new mongoose.Schema({
   ranking: { type: Number, default: 999 }, // Auto-assign high ranking if not provided
   status: { type: String, default: 'active' },
   summary: { type: String, default: null },
-  faqs: [{
-    question: { type: String, required: true },
-    answer: { type: String, required: true }
-  }],
-  createdAt: { type: Date, default: Date.now }
+  faqs: [
+    {
+      question: { type: String, required: true },
+      answer: { type: String, required: true },
+    },
+  ],
+  createdAt: { type: Date, default: Date.now },
 });
 
 // Create indexes for better performance
@@ -26,13 +28,13 @@ const modelSchema = new mongoose.Schema({
   name: { type: String, required: true },
   brandId: { type: String, required: true },
   status: { type: String, default: 'active' },
-  
+
   // Popularity & Rankings
   isPopular: { type: Boolean, default: false },
   isNew: { type: Boolean, default: false },
   popularRank: { type: Number, default: null },
   newRank: { type: Number, default: null },
-  
+
   // Basic Info
   bodyType: { type: String, default: null },
   subBodyType: { type: String, default: null },
@@ -41,7 +43,7 @@ const modelSchema = new mongoose.Schema({
   fuelTypes: { type: [String], default: [] },
   transmissions: { type: [String], default: [] },
   brochureUrl: { type: String, default: null },
-  
+
   // SEO & Content
   headerSeo: { type: String, default: null },
   pros: { type: String, default: null },
@@ -50,55 +52,71 @@ const modelSchema = new mongoose.Schema({
   exteriorDesign: { type: String, default: null },
   comfortConvenience: { type: String, default: null },
   summary: { type: String, default: null },
-  
+
   // Engine Summaries
-  engineSummaries: [{
-    title: { type: String },
-    summary: { type: String },
-    transmission: { type: String },
-    power: { type: String },
-    torque: { type: String },
-    speed: { type: String }
-  }],
-  
+  engineSummaries: [
+    {
+      title: { type: String },
+      summary: { type: String },
+      transmission: { type: String },
+      power: { type: String },
+      torque: { type: String },
+      speed: { type: String },
+    },
+  ],
+
   // Mileage Data
-  mileageData: [{
-    engineName: { type: String },
-    companyClaimed: { type: String },
-    cityRealWorld: { type: String },
-    highwayRealWorld: { type: String }
-  }],
-  
+  mileageData: [
+    {
+      engineName: { type: String },
+      companyClaimed: { type: String },
+      cityRealWorld: { type: String },
+      highwayRealWorld: { type: String },
+    },
+  ],
+
   // FAQs
-  faqs: [{
-    question: { type: String, required: true },
-    answer: { type: String, required: true }
-  }],
-  
+  faqs: [
+    {
+      question: { type: String, required: true },
+      answer: { type: String, required: true },
+    },
+  ],
+
   // Images
   heroImage: { type: String, default: null },
-  galleryImages: [{
-    url: { type: String },
-    caption: { type: String }
-  }],
-  keyFeatureImages: [{
-    url: { type: String },
-    caption: { type: String }
-  }],
-  spaceComfortImages: [{
-    url: { type: String },
-    caption: { type: String }
-  }],
-  storageConvenienceImages: [{
-    url: { type: String },
-    caption: { type: String }
-  }],
-  colorImages: [{
-    url: { type: String },
-    caption: { type: String }
-  }],
-  
-  createdAt: { type: Date, default: Date.now }
+  galleryImages: [
+    {
+      url: { type: String },
+      caption: { type: String },
+    },
+  ],
+  keyFeatureImages: [
+    {
+      url: { type: String },
+      caption: { type: String },
+    },
+  ],
+  spaceComfortImages: [
+    {
+      url: { type: String },
+      caption: { type: String },
+    },
+  ],
+  storageConvenienceImages: [
+    {
+      url: { type: String },
+      caption: { type: String },
+    },
+  ],
+  colorImages: [
+    {
+      url: { type: String },
+      caption: { type: String },
+    },
+  ],
+
+  createdAt: { type: Date, default: Date.now },
 });
 
 modelSchema.index({ id: 1 }, { unique: true });
@@ -114,16 +132,16 @@ const variantSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   status: { type: String, default: 'active' },
   description: { type: String, default: null },
-  
+
   // Key Features
   isValueForMoney: { type: Boolean, default: false },
   keyFeatures: { type: String, default: null },
   headerSummary: { type: String, default: null },
-  
+
   // Design & Styling
   exteriorDesign: { type: String, default: null },
   comfortConvenience: { type: String, default: null },
-  
+
   // Engine Specifications
   engineName: { type: String, default: null },
   engineSummary: { type: String, default: null },
@@ -139,7 +157,7 @@ const variantSchema = new mongoose.Schema({
   driveType: { type: String, default: null },
   fuelType: { type: String, default: null },
   fuel: { type: String, default: null },
-  
+
   // Mileage
   mileageEngineName: { type: String, default: null },
   mileageCompanyClaimed: { type: String, default: null },
@@ -149,7 +167,7 @@ const variantSchema = new mongoose.Schema({
   mileageHighway: { type: String, default: null },
   fuelTankCapacity: { type: String, default: null },
   emissionStandard: { type: String, default: null },
-  
+
   // Dimensions
   groundClearance: { type: String, default: null },
   length: { type: String, default: null },
@@ -167,7 +185,7 @@ const variantSchema = new mongoose.Schema({
   bootSpaceAfterFoldingRearRowSeats: { type: String, default: null },
   seatingCapacity: { type: String, default: null },
   doors: { type: String, default: null },
-  
+
   // Performance
   engineNamePage4: { type: String, default: null },
   engineCapacity: { type: String, default: null },
@@ -191,18 +209,18 @@ const variantSchema = new mongoose.Schema({
   differentialLock: { type: String, default: null },
   limitedSlipDifferential: { type: String, default: null },
   acceleration: { type: String, default: null },
-  
+
   // Suspension & Brakes
   frontSuspension: { type: String, default: null },
   rearSuspension: { type: String, default: null },
   frontBrake: { type: String, default: null },
   rearBrake: { type: String, default: null },
-  
+
   // Wheels & Tyres
   wheelSize: { type: String, default: null },
   tyreSize: { type: String, default: null },
   spareTyre: { type: String, default: null },
-  
+
   // Safety Features
   globalNCAPRating: { type: String, default: null },
   airbags: { type: String, default: null },
@@ -233,7 +251,7 @@ const variantSchema = new mongoose.Schema({
   parkingSensors: { type: String, default: null },
   parkingCamera: { type: String, default: null },
   blindSpotMonitor: { type: String, default: null },
-  
+
   // Comfort & Convenience
   ventilatedSeats: { type: String, default: null },
   sunroof: { type: String, default: null },
@@ -262,7 +280,7 @@ const variantSchema = new mongoose.Schema({
   pushButtonStart: { type: String, default: null },
   powerWindows: { type: String, default: null },
   powerSteering: { type: String, default: null },
-  
+
   // Infotainment
   touchScreenInfotainment: { type: String, default: null },
   androidAppleCarplay: { type: String, default: null },
@@ -279,7 +297,7 @@ const variantSchema = new mongoose.Schema({
   aux: { type: String, default: null },
   androidAuto: { type: String, default: null },
   appleCarPlay: { type: String, default: null },
-  
+
   // Lighting
   headLights: { type: String, default: null },
   tailLight: { type: String, default: null },
@@ -289,7 +307,7 @@ const variantSchema = new mongoose.Schema({
   drl: { type: String, default: null },
   fogLights: { type: String, default: null },
   tailLights: { type: String, default: null },
-  
+
   // Exterior
   roofRails: { type: String, default: null },
   radioAntenna: { type: String, default: null },
@@ -298,7 +316,7 @@ const variantSchema = new mongoose.Schema({
   rearWindshieldWiper: { type: String, default: null },
   orvm: { type: String, default: null },
   alloyWheels: { type: String, default: null },
-  
+
   // Seating
   seatUpholstery: { type: String, default: null },
   seatsAdjustment: { type: String, default: null },
@@ -307,20 +325,22 @@ const variantSchema = new mongoose.Schema({
   rearSeatAdjustment: { type: String, default: null },
   welcomeSeats: { type: String, default: null },
   memorySeats: { type: String, default: null },
-  
+
   // Warranty
   warranty: { type: String, default: null },
-  
+
   // Images
-  highlightImages: [{
-    url: { type: String },
-    caption: { type: String }
-  }],
-  
+  highlightImages: [
+    {
+      url: { type: String },
+      caption: { type: String },
+    },
+  ],
+
   // Connected Car Tech
   connectedCarTech: { type: String, default: null },
-  
-  createdAt: { type: Date, default: Date.now }
+
+  createdAt: { type: Date, default: Date.now },
 });
 
 variantSchema.index({ id: 1 }, { unique: true });
@@ -337,7 +357,7 @@ const adminUserSchema = new mongoose.Schema({
   isActive: { type: Boolean, default: true },
   lastLogin: { type: Date, default: null },
   createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now }
+  updatedAt: { type: Date, default: Date.now },
 });
 
 adminUserSchema.index({ email: 1 }, { unique: true });
@@ -350,7 +370,7 @@ const popularComparisonSchema = new mongoose.Schema({
   model2Id: { type: String, required: true },
   order: { type: Number, required: true },
   isActive: { type: Boolean, default: true },
-  createdAt: { type: Date, default: Date.now }
+  createdAt: { type: Date, default: Date.now },
 });
 
 popularComparisonSchema.index({ id: 1 }, { unique: true });

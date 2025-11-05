@@ -1,6 +1,6 @@
-import { QueryClient, QueryFunction } from "@tanstack/react-query";
+import { QueryClient, QueryFunction } from '@tanstack/react-query';
 
-type UnauthorizedBehavior = "returnNull" | "throw";
+type UnauthorizedBehavior = 'returnNull' | 'throw';
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -25,7 +25,7 @@ export async function apiRequest(method: string, url: string, data?: any) {
     // Use environment variable or fallback to localhost
     const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
     const response = await fetch(`${baseUrl}${url}`, config);
-    
+
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       const error = new Error(errorData.error || `HTTP ${response.status}`) as any;
@@ -49,16 +49,14 @@ export async function apiRequest(method: string, url: string, data?: any) {
   }
 }
 
-export const getQueryFn: <T>(options: {
-  on401: UnauthorizedBehavior;
-}) => QueryFunction<T> =
+export const getQueryFn: <T>(options: { on401: UnauthorizedBehavior }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey.join("/") as string, {
-      credentials: "include",
+    const res = await fetch(queryKey.join('/') as string, {
+      credentials: 'include',
     });
 
-    if (unauthorizedBehavior === "returnNull" && res.status === 401) {
+    if (unauthorizedBehavior === 'returnNull' && res.status === 401) {
       return null;
     }
 
@@ -69,7 +67,7 @@ export const getQueryFn: <T>(options: {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: getQueryFn({ on401: "throw" }),
+      queryFn: getQueryFn({ on401: 'throw' }),
       refetchInterval: false,
       refetchOnWindowFocus: false,
       staleTime: Infinity,

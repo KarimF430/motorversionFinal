@@ -19,13 +19,7 @@ export async function optimizeImage(
   options: ImageOptimizationOptions = {}
 ): Promise<{ success: boolean; size: number; originalSize: number }> {
   try {
-    const {
-      width,
-      height,
-      quality = 85,
-      format = 'webp',
-      fit = 'inside',
-    } = options;
+    const { width, height, quality = 85, format = 'webp', fit = 'inside' } = options;
 
     // Get original file size
     const stats = await fs.stat(inputPath);
@@ -62,8 +56,10 @@ export async function optimizeImage(
     const optimizedStats = await fs.stat(outputPath);
     const optimizedSize = optimizedStats.size;
 
-    const savings = ((originalSize - optimizedSize) / originalSize * 100).toFixed(2);
-    console.log(`✅ Image optimized: ${originalSize} → ${optimizedSize} bytes (${savings}% reduction)`);
+    const savings = (((originalSize - optimizedSize) / originalSize) * 100).toFixed(2);
+    console.log(
+      `✅ Image optimized: ${originalSize} → ${optimizedSize} bytes (${savings}% reduction)`
+    );
 
     return {
       success: true,
@@ -100,7 +96,7 @@ export async function createResponsiveImages(
 
   for (const [sizeName, dimensions] of Object.entries(sizes)) {
     const outputPath = path.join(outputDir, `${basename}-${sizeName}.webp`);
-    
+
     await optimizeImage(inputPath, outputPath, {
       width: dimensions.width,
       height: dimensions.height,
@@ -138,16 +134,11 @@ export async function getImageMetadata(imagePath: string) {
 /**
  * Compress image in place
  */
-export async function compressImage(
-  imagePath: string,
-  quality: number = 85
-): Promise<boolean> {
+export async function compressImage(imagePath: string, quality: number = 85): Promise<boolean> {
   try {
     const tempPath = `${imagePath}.tmp`;
-    
-    await sharp(imagePath)
-      .webp({ quality })
-      .toFile(tempPath);
+
+    await sharp(imagePath).webp({ quality }).toFile(tempPath);
 
     // Replace original with compressed version
     await fs.unlink(imagePath);
@@ -174,9 +165,7 @@ export async function batchOptimizeImages(
 
   try {
     const files = await fs.readdir(inputDir);
-    const imageFiles = files.filter(file => 
-      /\.(jpg|jpeg|png|webp)$/i.test(file)
-    );
+    const imageFiles = files.filter((file) => /\.(jpg|jpeg|png|webp)$/i.test(file));
 
     console.log(`📦 Optimizing ${imageFiles.length} images...`);
 
@@ -185,7 +174,7 @@ export async function batchOptimizeImages(
       const outputPath = path.join(outputDir, file.replace(/\.[^.]+$/, '.webp'));
 
       const result = await optimizeImage(inputPath, outputPath, options);
-      
+
       if (result.success) {
         success++;
       } else {

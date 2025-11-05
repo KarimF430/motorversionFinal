@@ -33,10 +33,7 @@ export async function hashPassword(password: string): Promise<string> {
 /**
  * Compare password with hashed password
  */
-export async function comparePassword(
-  password: string,
-  hashedPassword: string
-): Promise<boolean> {
+export async function comparePassword(password: string, hashedPassword: string): Promise<boolean> {
   return bcrypt.compare(password, hashedPassword);
 }
 
@@ -85,11 +82,7 @@ export function verifyToken(token: string): any {
  * Authentication middleware
  * Protects routes by verifying JWT token
  */
-export function authenticateToken(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export function authenticateToken(req: Request, res: Response, next: NextFunction) {
   // Get token from Authorization header or cookie
   const authHeader = req.headers['authorization'];
   const token = authHeader?.split(' ')[1] || req.cookies?.token;

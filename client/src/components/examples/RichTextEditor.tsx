@@ -6,11 +6,7 @@ export default function RichTextEditorExample() {
 
   return (
     <div className="p-6 max-w-2xl">
-      <RichTextEditor 
-        value={value}
-        onChange={setValue}
-        placeholder="Enter your content here..."
-      />
+      <RichTextEditor value={value} onChange={setValue} placeholder="Enter your content here..." />
     </div>
   );
 }

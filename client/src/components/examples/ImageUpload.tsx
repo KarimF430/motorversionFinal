@@ -6,7 +6,7 @@ export default function ImageUploadExample() {
 
   return (
     <div className="p-6 max-w-md">
-      <ImageUpload 
+      <ImageUpload
         caption={caption}
         onCaptionChange={setCaption}
         onDelete={() => console.log('Delete image')}

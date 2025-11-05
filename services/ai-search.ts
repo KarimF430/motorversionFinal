@@ -1,4 +1,4 @@
-import Groq from 'groq-sdk'
+import Groq from 'groq-sdk';
 
 /**
  * AI-Powered Car Search Service
@@ -7,33 +7,33 @@ import Groq from 'groq-sdk'
 
 // Check if API key is configured
 if (!process.env.GROQ_API_KEY || process.env.GROQ_API_KEY.length < 20) {
-  console.warn('⚠️  WARNING: Groq API key not configured properly!')
-  console.warn('   Get your free API key from: https://console.groq.com')
-  console.warn('   Add it to backend/.env as: GROQ_API_KEY=your_key_here')
+  console.warn('⚠️  WARNING: Groq API key not configured properly!');
+  console.warn('   Get your free API key from: https://console.groq.com');
+  console.warn('   Add it to backend/.env as: GROQ_API_KEY=your_key_here');
 }
 
 const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY || ''
-})
+  apiKey: process.env.GROQ_API_KEY || '',
+});
 
 interface CarQuery {
-  budget?: { min: number; max: number }
-  bodyType?: string[]
-  fuelType?: string[]
-  transmission?: string[]
-  seating?: number
-  features?: string[]
-  brand?: string[]
-  mileage?: { min: number }
-  segment?: string
-  sortBy?: 'price' | 'mileage' | 'popularity'
+  budget?: { min: number; max: number };
+  bodyType?: string[];
+  fuelType?: string[];
+  transmission?: string[];
+  seating?: number;
+  features?: string[];
+  brand?: string[];
+  mileage?: { min: number };
+  segment?: string;
+  sortBy?: 'price' | 'mileage' | 'popularity';
 }
 
 interface AISearchResult {
-  query: CarQuery
-  explanation: string
-  confidence: number
-  suggestions: string[]
+  query: CarQuery;
+  explanation: string;
+  confidence: number;
+  suggestions: string[];
 }
 
 /**
@@ -41,7 +41,7 @@ interface AISearchResult {
  */
 export async function parseNaturalLanguageQuery(userQuery: string): Promise<AISearchResult> {
   try {
-    console.log('🧠 Using Groq AI (Llama 3) to parse query...')
+    console.log('🧠 Using Groq AI (Llama 3) to parse query...');
 
     const prompt = `
 You are a car recommendation expert for the Indian market. Parse this user query into structured filters with HIGH ACCURACY.
@@ -102,45 +102,45 @@ Query: "family car with 7 seats"
 {"query":{"seating":7,"bodyType":["SUV","MUV"]},"explanation":"Looking for 7-seater family vehicles","confidence":0.85}
 
 Now parse: "${userQuery}"
-`
+`;
 
     const completion = await groq.chat.completions.create({
       messages: [
         {
           role: 'user',
-          content: prompt
-        }
+          content: prompt,
+        },
       ],
       model: 'llama-3.1-70b-versatile',
       temperature: 0.3,
       max_tokens: 1024,
-    })
+    });
 
-    const response = completion.choices[0]?.message?.content || ''
-    
-    console.log('✅ Groq AI response received')
-    console.log('📝 Raw response:', response.substring(0, 200))
-    
+    const response = completion.choices[0]?.message?.content || '';
+
+    console.log('✅ Groq AI response received');
+    console.log('📝 Raw response:', response.substring(0, 200));
+
     // Clean response (remove markdown if present)
-    let cleanResponse = response.trim()
+    let cleanResponse = response.trim();
     if (cleanResponse.startsWith('```json')) {
-      cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '')
+      cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '');
     }
     if (cleanResponse.startsWith('```')) {
-      cleanResponse = cleanResponse.replace(/```\n?/g, '')
+      cleanResponse = cleanResponse.replace(/```\n?/g, '');
     }
-    
-    const parsed = JSON.parse(cleanResponse)
-    
-    console.log('✅ Groq AI parsed successfully:', JSON.stringify(parsed.query))
-    
-    return parsed as AISearchResult
+
+    const parsed = JSON.parse(cleanResponse);
+
+    console.log('✅ Groq AI parsed successfully:', JSON.stringify(parsed.query));
+
+    return parsed as AISearchResult;
   } catch (error) {
-    console.error('❌ Groq AI parsing error:', error)
-    console.log('⚠️  Falling back to keyword matching...')
-    
+    console.error('❌ Groq AI parsing error:', error);
+    console.log('⚠️  Falling back to keyword matching...');
+
     // Fallback: Basic keyword matching
-    return fallbackParser(userQuery)
+    return fallbackParser(userQuery);
   }
 }
 
@@ -148,78 +148,78 @@ Now parse: "${userQuery}"
  * Fallback parser using keyword matching
  */
 function fallbackParser(query: string): AISearchResult {
-  console.log('🔄 Using fallback keyword parser (Groq failed)')
-  const lowerQuery = query.toLowerCase()
+  console.log('🔄 Using fallback keyword parser (Groq failed)');
+  const lowerQuery = query.toLowerCase();
   const result: AISearchResult = {
     query: {},
     explanation: 'Searching based on keywords',
     confidence: 0.6,
-    suggestions: []
-  }
+    suggestions: [],
+  };
 
   // Budget extraction
-  const budgetMatch = lowerQuery.match(/(\d+)\s*(lakh|lakhs|l)/i)
+  const budgetMatch = lowerQuery.match(/(\d+)\s*(lakh|lakhs|l)/i);
   if (budgetMatch) {
-    const amount = parseInt(budgetMatch[1]) * 100000
-    result.query.budget = { min: 0, max: amount }
+    const amount = parseInt(budgetMatch[1]) * 100000;
+    result.query.budget = { min: 0, max: amount };
   }
 
   // Body type
-  if (lowerQuery.includes('suv')) result.query.bodyType = ['SUV']
-  if (lowerQuery.includes('sedan')) result.query.bodyType = ['Sedan']
-  if (lowerQuery.includes('hatchback')) result.query.bodyType = ['Hatchback']
+  if (lowerQuery.includes('suv')) result.query.bodyType = ['SUV'];
+  if (lowerQuery.includes('sedan')) result.query.bodyType = ['Sedan'];
+  if (lowerQuery.includes('hatchback')) result.query.bodyType = ['Hatchback'];
   if (lowerQuery.includes('muv') || lowerQuery.includes('family')) {
-    result.query.bodyType = ['MUV', 'SUV']
-    result.query.seating = 7
+    result.query.bodyType = ['MUV', 'SUV'];
+    result.query.seating = 7;
   }
 
   // Fuel type
   if (lowerQuery.includes('electric') || lowerQuery.includes('ev')) {
-    result.query.fuelType = ['Electric']
+    result.query.fuelType = ['Electric'];
   }
-  if (lowerQuery.includes('diesel')) result.query.fuelType = ['Diesel']
-  if (lowerQuery.includes('petrol')) result.query.fuelType = ['Petrol']
-  if (lowerQuery.includes('cng')) result.query.fuelType = ['CNG']
+  if (lowerQuery.includes('diesel')) result.query.fuelType = ['Diesel'];
+  if (lowerQuery.includes('petrol')) result.query.fuelType = ['Petrol'];
+  if (lowerQuery.includes('cng')) result.query.fuelType = ['CNG'];
 
   // Transmission (be specific)
   if (lowerQuery.includes('dct') || lowerQuery.includes('dual clutch')) {
-    result.query.transmission = ['DCT']
+    result.query.transmission = ['DCT'];
   } else if (lowerQuery.includes('cvt')) {
-    result.query.transmission = ['CVT']
+    result.query.transmission = ['CVT'];
   } else if (lowerQuery.includes('amt')) {
-    result.query.transmission = ['AMT']
+    result.query.transmission = ['AMT'];
   } else if (lowerQuery.includes('automatic') || lowerQuery.includes('auto')) {
-    result.query.transmission = ['Automatic', 'AMT', 'CVT', 'DCT']
+    result.query.transmission = ['Automatic', 'AMT', 'CVT', 'DCT'];
   } else if (lowerQuery.includes('manual')) {
-    result.query.transmission = ['Manual']
+    result.query.transmission = ['Manual'];
   }
 
   // Features
-  const features = []
+  const features = [];
   if (lowerQuery.includes('dual zone') || lowerQuery.includes('dual-zone')) {
-    features.push('Dual Zone AC')
+    features.push('Dual Zone AC');
   }
   if (lowerQuery.includes('sunroof') || lowerQuery.includes('panoramic')) {
-    features.push('Sunroof')
+    features.push('Sunroof');
   }
-  if (lowerQuery.includes('ventilated seat')) features.push('Ventilated Seats')
-  if (lowerQuery.includes('wireless charging')) features.push('Wireless Charging')
-  if (lowerQuery.includes('360 camera')) features.push('360 Camera')
+  if (lowerQuery.includes('ventilated seat')) features.push('Ventilated Seats');
+  if (lowerQuery.includes('wireless charging')) features.push('Wireless Charging');
+  if (lowerQuery.includes('360 camera')) features.push('360 Camera');
   if (lowerQuery.includes('adas') || lowerQuery.includes('advanced safety')) {
-    features.push('ADAS')
+    features.push('ADAS');
   }
-  if (lowerQuery.includes('cruise control')) features.push('Cruise Control')
-  
-  if (features.length > 0) result.query.features = features
+  if (lowerQuery.includes('cruise control')) features.push('Cruise Control');
+
+  if (features.length > 0) result.query.features = features;
 
   // Sorting
   if (lowerQuery.includes('mileage') || lowerQuery.includes('fuel efficient')) {
-    result.query.sortBy = 'mileage'
+    result.query.sortBy = 'mileage';
   } else if (lowerQuery.includes('cheap') || lowerQuery.includes('affordable')) {
-    result.query.sortBy = 'price'
+    result.query.sortBy = 'price';
   }
 
-  return result
+  return result;
 }
 
 /**
@@ -229,15 +229,15 @@ export async function generateRecommendations(
   userQuery: string,
   availableCars: any[]
 ): Promise<{
-  recommendations: any[]
-  explanation: string
-  alternatives: any[]
+  recommendations: any[];
+  explanation: string;
+  alternatives: any[];
 }> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     // Get top 10 cars from filtered results
-    const topCars = availableCars.slice(0, 10)
+    const topCars = availableCars.slice(0, 10);
 
     const prompt = `
 You are a car recommendation expert. Based on the user's query and available cars, recommend the best options.
@@ -245,7 +245,9 @@ You are a car recommendation expert. Based on the user's query and available car
 User Query: "${userQuery}"
 
 Available Cars:
-${topCars.map((car, i) => `
+${topCars
+  .map(
+    (car, i) => `
 ${i + 1}. ${car.brand} ${car.name}
    - Price: ₹${(car.startingPrice / 100000).toFixed(2)}L
    - Body Type: ${car.bodyType}
@@ -253,7 +255,9 @@ ${i + 1}. ${car.brand} ${car.name}
    - Mileage: ${car.mileage || 'N/A'} km/l
    - Seating: ${car.seating}
    - Key Features: ${car.keyFeatures?.slice(0, 3).join(', ') || 'N/A'}
-`).join('\n')}
+`
+  )
+  .join('\n')}
 
 Provide recommendations in JSON format:
 {
@@ -261,32 +265,32 @@ Provide recommendations in JSON format:
   "explanation": "Why these cars are recommended",
   "alternatives": [2, 4] // Alternative options (max 3)
 }
-`
+`;
 
-    const result = await model.generateContent(prompt)
-    const response = result.response.text()
-    
-    let cleanResponse = response.trim()
+    const result = await model.generateContent(prompt);
+    const response = result.response.text();
+
+    let cleanResponse = response.trim();
     if (cleanResponse.startsWith('```json')) {
-      cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '')
+      cleanResponse = cleanResponse.replace(/```json\n?/g, '').replace(/```\n?/g, '');
     }
-    
-    const parsed = JSON.parse(cleanResponse)
-    
+
+    const parsed = JSON.parse(cleanResponse);
+
     return {
       recommendations: parsed.recommendations.map((i: number) => topCars[i - 1]).filter(Boolean),
       explanation: parsed.explanation,
-      alternatives: parsed.alternatives.map((i: number) => topCars[i - 1]).filter(Boolean)
-    }
+      alternatives: parsed.alternatives.map((i: number) => topCars[i - 1]).filter(Boolean),
+    };
   } catch (error) {
-    console.error('Recommendation generation error:', error)
-    
+    console.error('Recommendation generation error:', error);
+
     // Fallback: Return top 5 cars
     return {
       recommendations: availableCars.slice(0, 5),
       explanation: 'Top matching cars based on your criteria',
-      alternatives: availableCars.slice(5, 8)
-    }
+      alternatives: availableCars.slice(5, 8),
+    };
   }
 }
 
@@ -295,7 +299,7 @@ Provide recommendations in JSON format:
  */
 export async function generateComparison(car1: any, car2: any): Promise<string> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     const prompt = `
 Compare these two cars and provide a detailed analysis:
@@ -326,13 +330,13 @@ Provide a comparison in this format:
 - Final verdict
 
 Keep it concise and user-friendly.
-`
+`;
 
-    const result = await model.generateContent(prompt)
-    return result.response.text()
+    const result = await model.generateContent(prompt);
+    return result.response.text();
   } catch (error) {
-    console.error('Comparison generation error:', error)
-    return 'Unable to generate comparison at this time.'
+    console.error('Comparison generation error:', error);
+    return 'Unable to generate comparison at this time.';
   }
 }
 
@@ -344,7 +348,7 @@ export async function generateConversationalResponse(
   context: any
 ): Promise<string> {
   try {
-    const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+    const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
 
     const prompt = `
 You are a friendly car buying assistant. Respond to the user's message naturally.
@@ -353,12 +357,12 @@ Context: ${JSON.stringify(context)}
 User Message: "${userMessage}"
 
 Provide a helpful, conversational response. Be concise and friendly.
-`
+`;
 
-    const result = await model.generateContent(prompt)
-    return result.response.text()
+    const result = await model.generateContent(prompt);
+    return result.response.text();
   } catch (error) {
-    console.error('Conversational response error:', error)
-    return 'I understand. Let me help you find the perfect car!'
+    console.error('Conversational response error:', error);
+    return 'I understand. Let me help you find the perfect car!';
   }
 }

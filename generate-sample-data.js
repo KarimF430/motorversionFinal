@@ -63,16 +63,16 @@ function generateBrandFAQs(brandName) {
   return [
     {
       question: `Q: What are the popular ${brandName} cars in India?`,
-      answer: `${brandName} offers several popular models in India across different segments including sedans, SUVs, and hatchbacks.`
+      answer: `${brandName} offers several popular models in India across different segments including sedans, SUVs, and hatchbacks.`,
     },
     {
       question: `Q: What is the price range of ${brandName} cars?`,
-      answer: `${brandName} cars are available in a wide price range from ₹8 Lakh to ₹2 Crore, catering to different customer segments.`
+      answer: `${brandName} cars are available in a wide price range from ₹8 Lakh to ₹2 Crore, catering to different customer segments.`,
     },
     {
       question: `Q: Does ${brandName} offer electric vehicles?`,
-      answer: `Yes, ${brandName} has electric and hybrid options in its portfolio for environmentally conscious customers.`
-    }
+      answer: `Yes, ${brandName} has electric and hybrid options in its portfolio for environmentally conscious customers.`,
+    },
   ];
 }
 
@@ -87,10 +87,11 @@ function generateModelName(index) {
 // Generate variant name
 function generateVariantName(modelName, index) {
   const prefix = variantPrefixes[index % variantPrefixes.length];
-  const suffix = variantSuffixes[Math.floor(index / variantPrefixes.length) % variantSuffixes.length];
+  const suffix =
+    variantSuffixes[Math.floor(index / variantPrefixes.length) % variantSuffixes.length];
   const fuel = fuelTypes[index % fuelTypes.length];
   const transmission = transmissions[Math.floor(index / fuelTypes.length) % transmissions.length];
-  
+
   return `${prefix}${suffix ? ' ' + suffix : ''} ${fuel} ${transmission}`;
 }
 
@@ -115,13 +116,13 @@ async function generateData() {
 
     // Get existing images from models
     const existingModels = await modelsCollection.find({}).limit(2).toArray();
-    const sampleImages = existingModels.map(m => m.images || {});
+    const sampleImages = existingModels.map((m) => m.images || {});
     console.log(`📸 Found ${sampleImages.length} sample image sets\n`);
 
     // Generate 10 new brands
     console.log('📦 Generating 10 new brands...');
     const createdBrands = [];
-    
+
     for (let i = 0; i < newBrands.length; i++) {
       const brandData = {
         id: generateId(),
@@ -153,14 +154,14 @@ async function generateData() {
     let modelIndex = 0;
     for (const brand of allBrands) {
       const modelsForThisBrand = Math.min(modelsPerBrand, 40 - modelIndex);
-      
+
       for (let i = 0; i < modelsForThisBrand && modelIndex < 40; i++) {
         const modelName = generateModelName(modelIndex);
         const basePrice = generatePrice(800000, 20000000); // 8L to 2Cr
-        
+
         // Use sample images cyclically
         const imageSet = sampleImages[modelIndex % sampleImages.length] || {};
-        
+
         const modelData = {
           id: generateId(),
           brandId: brand.id,
@@ -195,19 +196,21 @@ async function generateData() {
     let totalVariants = 0;
 
     for (const model of createdModels) {
-      const basePrice = parseInt(model.priceRange.split('₹')[1].split(' ')[0].replace('.', '')) * 100000;
-      
+      const basePrice =
+        parseInt(model.priceRange.split('₹')[1].split(' ')[0].replace('.', '')) * 100000;
+
       for (let i = 0; i < 20; i++) {
         const variantName = generateVariantName(model.name, i);
         const variantPrice = generatePrice(basePrice, basePrice * 1.5);
-        
+
         const variantData = {
           id: generateId(),
           modelId: model.id,
           name: variantName,
           price: variantPrice,
           fuelType: fuelTypes[i % fuelTypes.length].toLowerCase(),
-          transmission: transmissions[Math.floor(i / fuelTypes.length) % transmissions.length].toLowerCase(),
+          transmission:
+            transmissions[Math.floor(i / fuelTypes.length) % transmissions.length].toLowerCase(),
           engineCC: model.engineCC,
           power: model.power,
           torque: model.torque,
@@ -226,7 +229,7 @@ async function generateData() {
 
         await variantsCollection.insertOne(variantData);
         totalVariants++;
-        
+
         if (totalVariants % 100 === 0) {
           console.log(`  ✅ Generated ${totalVariants} variants...`);
         }
@@ -249,7 +252,6 @@ async function generateData() {
     console.log('');
     console.log('🎉 Your database is now populated with sample data!');
     console.log('');
-
   } catch (error) {
     console.error('❌ Error:', error);
     throw error;

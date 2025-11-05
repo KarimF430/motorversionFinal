@@ -16,7 +16,7 @@ export interface CSVVariant {
   description: string;
   exteriorDesign: string;
   comfortConvenience: string;
-  
+
   // Page 2 Fields
   engineName: string;
   engineSummary: string;
@@ -51,7 +51,7 @@ export interface CSVVariant {
   rearWindshieldDefogger: string;
   frontWindshieldDefogger: string;
   cooledGlovebox: string;
-  
+
   // Page 3 Fields
   globalNCAPRating: string;
   airbags: string;
@@ -85,7 +85,7 @@ export interface CSVVariant {
   twelvevChargingPorts: string;
   wirelessCharging: string;
   connectedCarTech: string;
-  
+
   // Page 4 Fields
   engineNamePage4: string;
   engineCapacity: string;
@@ -127,7 +127,7 @@ export interface CSVVariant {
   daytimeRunningLights: string;
   sideIndicator: string;
   rearWindshieldWiper: string;
-  
+
   // Page 5 Fields
   groundClearance: string;
   length: string;
@@ -156,10 +156,10 @@ export interface ValidationError {
 }
 
 export const downloadVariantsCSV = (variants: any[], brands: any[], models: any[]) => {
-  const csvData: CSVVariant[] = variants.map(variant => {
-    const brand = brands.find(b => b.id === variant.brandId);
-    const model = models.find(m => m.id === variant.modelId);
-    
+  const csvData: CSVVariant[] = variants.map((variant) => {
+    const brand = brands.find((b) => b.id === variant.brandId);
+    const model = models.find((m) => m.id === variant.modelId);
+
     return {
       variantId: variant.id || '',
       variantName: variant.name || '',
@@ -175,7 +175,7 @@ export const downloadVariantsCSV = (variants: any[], brands: any[], models: any[
       description: variant.description || '',
       exteriorDesign: variant.exteriorDesign || '',
       comfortConvenience: variant.comfortConvenience || '',
-      
+
       // Page 2
       engineName: variant.engineName || '',
       engineSummary: variant.engineSummary || '',
@@ -210,7 +210,7 @@ export const downloadVariantsCSV = (variants: any[], brands: any[], models: any[
       rearWindshieldDefogger: variant.rearWindshieldDefogger || '',
       frontWindshieldDefogger: variant.frontWindshieldDefogger || '',
       cooledGlovebox: variant.cooledGlovebox || '',
-      
+
       // Page 3
       globalNCAPRating: variant.globalNCAPRating || '',
       airbags: variant.airbags || '',
@@ -244,7 +244,7 @@ export const downloadVariantsCSV = (variants: any[], brands: any[], models: any[
       twelvevChargingPorts: variant.twelvevChargingPorts || '',
       wirelessCharging: variant.wirelessCharging || '',
       connectedCarTech: variant.connectedCarTech || '',
-      
+
       // Page 4
       engineNamePage4: variant.engineNamePage4 || '',
       engineCapacity: variant.engineCapacity || '',
@@ -286,7 +286,7 @@ export const downloadVariantsCSV = (variants: any[], brands: any[], models: any[
       daytimeRunningLights: variant.daytimeRunningLights || '',
       sideIndicator: variant.sideIndicator || '',
       rearWindshieldWiper: variant.rearWindshieldWiper || '',
-      
+
       // Page 5
       groundClearance: variant.groundClearance || '',
       length: variant.length || '',
@@ -322,64 +322,109 @@ export const downloadVariantsCSV = (variants: any[], brands: any[], models: any[
 
 export const validateCSVData = (data: any[], brands: any[], models: any[]): ValidationError[] => {
   const errors: ValidationError[] = [];
-  
+
   data.forEach((row, index) => {
     const rowNum = index + 2; // +2 because CSV has header row and arrays are 0-indexed
-    
+
     // Required field validations
     if (!row.variantName?.trim()) {
-      errors.push({ row: rowNum, field: 'variantName', value: row.variantName, error: 'Variant name is required' });
+      errors.push({
+        row: rowNum,
+        field: 'variantName',
+        value: row.variantName,
+        error: 'Variant name is required',
+      });
     }
-    
+
     if (!row.brandId?.trim()) {
-      errors.push({ row: rowNum, field: 'brandId', value: row.brandId, error: 'Brand ID is required' });
+      errors.push({
+        row: rowNum,
+        field: 'brandId',
+        value: row.brandId,
+        error: 'Brand ID is required',
+      });
     } else {
-      const brandExists = brands.find(b => b.id === row.brandId);
+      const brandExists = brands.find((b) => b.id === row.brandId);
       if (!brandExists) {
-        errors.push({ row: rowNum, field: 'brandId', value: row.brandId, error: 'Brand ID does not exist' });
+        errors.push({
+          row: rowNum,
+          field: 'brandId',
+          value: row.brandId,
+          error: 'Brand ID does not exist',
+        });
       }
     }
-    
+
     if (!row.modelId?.trim()) {
-      errors.push({ row: rowNum, field: 'modelId', value: row.modelId, error: 'Model ID is required' });
+      errors.push({
+        row: rowNum,
+        field: 'modelId',
+        value: row.modelId,
+        error: 'Model ID is required',
+      });
     } else {
-      const modelExists = models.find(m => m.id === row.modelId);
+      const modelExists = models.find((m) => m.id === row.modelId);
       if (!modelExists) {
-        errors.push({ row: rowNum, field: 'modelId', value: row.modelId, error: 'Model ID does not exist' });
+        errors.push({
+          row: rowNum,
+          field: 'modelId',
+          value: row.modelId,
+          error: 'Model ID does not exist',
+        });
       } else {
         // Check if model belongs to the specified brand
-        const model = models.find(m => m.id === row.modelId);
+        const model = models.find((m) => m.id === row.modelId);
         if (model && model.brandId !== row.brandId) {
-          errors.push({ row: rowNum, field: 'modelId', value: row.modelId, error: 'Model does not belong to the specified brand' });
+          errors.push({
+            row: rowNum,
+            field: 'modelId',
+            value: row.modelId,
+            error: 'Model does not belong to the specified brand',
+          });
         }
       }
     }
-    
+
     // Price validation
     if (row.price !== undefined && row.price !== '') {
       const price = parseFloat(row.price);
       if (isNaN(price) || price < 0) {
-        errors.push({ row: rowNum, field: 'price', value: row.price, error: 'Price must be a valid positive number' });
+        errors.push({
+          row: rowNum,
+          field: 'price',
+          value: row.price,
+          error: 'Price must be a valid positive number',
+        });
       }
     }
-    
+
     // Status validation
     if (row.status && !['active', 'inactive'].includes(row.status.toLowerCase())) {
-      errors.push({ row: rowNum, field: 'status', value: row.status, error: 'Status must be either "active" or "inactive"' });
+      errors.push({
+        row: rowNum,
+        field: 'status',
+        value: row.status,
+        error: 'Status must be either "active" or "inactive"',
+      });
     }
-    
+
     // Boolean field validations
     const booleanFields = ['isValueForMoney'];
-    booleanFields.forEach(field => {
+    booleanFields.forEach((field) => {
       if (row[field] !== undefined && row[field] !== '') {
         const value = row[field].toString().toLowerCase();
         if (!['true', 'false', '1', '0', 'yes', 'no'].includes(value)) {
-          errors.push({ row: rowNum, field, value: row[field], error: 'Must be true/false, yes/no, or 1/0' });
+          errors.push({
+            row: rowNum,
+            field,
+            value: row[field],
+            error: 'Must be true/false, yes/no, or 1/0',
+          });
         }
       }
     });
   });
-  
+
   return errors;
 };
 
@@ -390,14 +435,16 @@ export const parseCSVFile = (file: File): Promise<any[]> => {
       skipEmptyLines: true,
       complete: (results) => {
         if (results.errors.length > 0) {
-          reject(new Error(`CSV parsing errors: ${results.errors.map(e => e.message).join(', ')}`));
+          reject(
+            new Error(`CSV parsing errors: ${results.errors.map((e) => e.message).join(', ')}`)
+          );
         } else {
           resolve(results.data);
         }
       },
       error: (error) => {
         reject(error);
-      }
+      },
     });
   });
 };

@@ -1,14 +1,14 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import RichTextEditor from "@/components/RichTextEditor";
-import { useLocation, useParams } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { Variant } from "@shared/schema";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import RichTextEditor from '@/components/RichTextEditor';
+import { useLocation, useParams } from 'wouter';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { Variant } from '@shared/schema';
 
 export default function VariantFormPage2() {
   const [, setLocation] = useLocation();
@@ -29,13 +29,13 @@ export default function VariantFormPage2() {
     enginePower: '',
     engineTorque: '',
     engineSpeed: '',
-    
+
     // Mileage
     mileageEngineName: '',
     mileageCompanyClaimed: '',
     mileageCityRealWorld: '',
     mileageHighwayRealWorld: '',
-    
+
     // Comfort & Convenience Features
     ventilatedSeats: '',
     sunroof: '',
@@ -104,7 +104,7 @@ export default function VariantFormPage2() {
   }, [existingVariant]);
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const saveMutation = useMutation({
@@ -118,15 +118,15 @@ export default function VariantFormPage2() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
       toast({
-        title: "Success",
-        description: "Variant page 2 data saved successfully.",
+        title: 'Success',
+        description: 'Variant page 2 data saved successfully.',
       });
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error.message || "Failed to save variant data.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'Failed to save variant data.',
+        variant: 'destructive',
       });
     },
   });
@@ -154,7 +154,7 @@ export default function VariantFormPage2() {
         {/* Variant SEO Engine data */}
         <div className="space-y-6">
           <h2 className="text-lg font-semibold">Variant SEO Engine data</h2>
-          
+
           <div className="grid grid-cols-2 gap-8">
             {/* Left Column - Title Name */}
             <div className="space-y-4">
@@ -167,7 +167,7 @@ export default function VariantFormPage2() {
                   placeholder="Engine Name"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label>Summary</Label>
                 <RichTextEditor
@@ -180,7 +180,7 @@ export default function VariantFormPage2() {
             {/* Right Column - Spec's */}
             <div className="space-y-4">
               <h3 className="font-medium">Spec's</h3>
-              
+
               <div className="space-y-2">
                 <Label>Transmission Drop Down</Label>
                 <select
@@ -230,7 +230,7 @@ export default function VariantFormPage2() {
         {/* Variant Mileage */}
         <div className="space-y-6">
           <h2 className="text-lg font-semibold">Variant Mileage</h2>
-          
+
           <div className="space-y-4">
             <h3 className="font-medium">1. Engine & Transmission Name</h3>
             <div className="space-y-2">
@@ -277,7 +277,7 @@ export default function VariantFormPage2() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Comfort & Convenience</h3>
-          
+
           <div className="grid grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label>Ventilated Seats</Label>
@@ -490,13 +490,15 @@ export default function VariantFormPage2() {
 
         {/* Navigation Buttons */}
         <div className="flex justify-between pt-6 border-t">
-          <Button 
-            variant="outline" 
-            onClick={() => setLocation(isEditMode ? `/variants/${params.id}/edit` : '/variants/new')}
+          <Button
+            variant="outline"
+            onClick={() =>
+              setLocation(isEditMode ? `/variants/${params.id}/edit` : '/variants/new')
+            }
           >
             ← Previous Page
           </Button>
-          
+
           <div className="flex gap-4">
             <Button onClick={handleSave} disabled={saveMutation.isPending}>
               {saveMutation.isPending ? 'Saving...' : 'Save Data'}

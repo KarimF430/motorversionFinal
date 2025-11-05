@@ -1,15 +1,15 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Upload } from "lucide-react";
-import RichTextEditor from "@/components/RichTextEditor";
-import FAQBuilder from "@/components/FAQBuilder";
-import { useLocation, useParams } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { Brand, InsertBrand } from "@shared/schema";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Upload } from 'lucide-react';
+import RichTextEditor from '@/components/RichTextEditor';
+import FAQBuilder from '@/components/FAQBuilder';
+import { useLocation, useParams } from 'wouter';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { Brand, InsertBrand } from '@shared/schema';
 
 export default function BrandForm() {
   const { id } = useParams<{ id: string }>();
@@ -28,7 +28,11 @@ export default function BrandForm() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>('');
 
-  const { data: brand, isLoading, error } = useQuery<Brand>({
+  const {
+    data: brand,
+    isLoading,
+    error,
+  } = useQuery<Brand>({
     queryKey: ['/api/brands', id],
     queryFn: async () => {
       console.log('Fetching brand with ID:', id);
@@ -51,10 +55,10 @@ export default function BrandForm() {
         status: brand.status || 'active',
         summary: brand.summary || '',
         logo: brand.logo || '',
-        faqs: brandFaqs.map((faq: any, index: number) => ({ 
-          question: faq.question || '', 
+        faqs: brandFaqs.map((faq: any, index: number) => ({
+          question: faq.question || '',
           answer: faq.answer || '',
-          id: index.toString() 
+          id: index.toString(),
         })),
       });
       if (brand.logo) {
@@ -71,16 +75,16 @@ export default function BrandForm() {
       queryClient.invalidateQueries({ queryKey: ['/api/brands'] });
       queryClient.invalidateQueries({ queryKey: ['/api/stats'] });
       toast({
-        title: "Brand created",
-        description: "The brand has been successfully created.",
+        title: 'Brand created',
+        description: 'The brand has been successfully created.',
       });
       setLocation('/brands');
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to create brand.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to create brand.',
+        variant: 'destructive',
       });
     },
   });
@@ -93,16 +97,16 @@ export default function BrandForm() {
       queryClient.invalidateQueries({ queryKey: ['/api/brands'] });
       queryClient.invalidateQueries({ queryKey: ['/api/brands', id] });
       toast({
-        title: "Brand updated",
-        description: "The brand has been successfully updated.",
+        title: 'Brand updated',
+        description: 'The brand has been successfully updated.',
       });
       setLocation('/brands');
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to update brand.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to update brand.',
+        variant: 'destructive',
       });
     },
   });
@@ -114,9 +118,9 @@ export default function BrandForm() {
     // Validate file type
     if (file.type !== 'image/png') {
       toast({
-        title: "Invalid file type",
-        description: "Only PNG files are allowed for brand logos.",
-        variant: "destructive",
+        title: 'Invalid file type',
+        description: 'Only PNG files are allowed for brand logos.',
+        variant: 'destructive',
       });
       return;
     }
@@ -124,15 +128,15 @@ export default function BrandForm() {
     // Validate file size (5MB)
     if (file.size > 5 * 1024 * 1024) {
       toast({
-        title: "File too large",
-        description: "Logo file must be smaller than 5MB.",
-        variant: "destructive",
+        title: 'File too large',
+        description: 'Logo file must be smaller than 5MB.',
+        variant: 'destructive',
       });
       return;
     }
 
     setLogoFile(file);
-    
+
     // Create preview
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -161,9 +165,9 @@ export default function BrandForm() {
       return result.url;
     } catch (error) {
       toast({
-        title: "Upload failed",
-        description: "Failed to upload logo. Please try again.",
-        variant: "destructive",
+        title: 'Upload failed',
+        description: 'Failed to upload logo. Please try again.',
+        variant: 'destructive',
       });
       return null;
     }
@@ -171,7 +175,7 @@ export default function BrandForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Upload logo if there's a new file
     let logoUrl = formData.logo;
     if (logoFile) {
@@ -186,9 +190,9 @@ export default function BrandForm() {
     const submitData = {
       ...dataWithoutRanking,
       logo: logoUrl,
-      faqs: formData.faqs.map(({ question, answer }) => ({ question, answer }))
+      faqs: formData.faqs.map(({ question, answer }) => ({ question, answer })),
     };
-    
+
     if (isEditing) {
       updateBrand.mutate(submitData);
     } else {
@@ -211,11 +215,11 @@ export default function BrandForm() {
           <h1 className="text-2xl font-semibold">{isEditing ? 'Edit Brand' : 'Add New Brand'}</h1>
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
-              <Button 
+              <Button
                 type="button"
                 className={`px-6 py-2 rounded-md font-medium ${
-                  formData.status === 'active' 
-                    ? 'bg-green-500 hover:bg-green-600 text-white' 
+                  formData.status === 'active'
+                    ? 'bg-green-500 hover:bg-green-600 text-white'
                     : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
                 }`}
                 onClick={() => setFormData({ ...formData, status: 'active' })}
@@ -223,11 +227,11 @@ export default function BrandForm() {
               >
                 activate Brand
               </Button>
-              <Button 
+              <Button
                 type="button"
                 className={`px-6 py-2 rounded-md font-medium ${
-                  formData.status === 'inactive' 
-                    ? 'bg-red-500 hover:bg-red-600 text-white' 
+                  formData.status === 'inactive'
+                    ? 'bg-red-500 hover:bg-red-600 text-white'
                     : 'bg-gray-200 hover:bg-gray-300 text-gray-700'
                 }`}
                 onClick={() => setFormData({ ...formData, status: 'inactive' })}
@@ -239,7 +243,7 @@ export default function BrandForm() {
             {isEditing && brand && (
               <div className="flex items-center gap-2">
                 <Label className="text-sm font-normal">id:</Label>
-                <Input 
+                <Input
                   value={brand.id}
                   disabled
                   className="w-32 font-mono text-sm bg-muted"
@@ -265,7 +269,7 @@ export default function BrandForm() {
           {isEditing && (
             <div className="space-y-2">
               <Label htmlFor="brandRanking">Brand Position (Auto-assigned)</Label>
-              <input 
+              <input
                 id="brandRanking"
                 type="text"
                 className="w-full px-3 py-2 border rounded-md bg-gray-100"
@@ -273,7 +277,9 @@ export default function BrandForm() {
                 disabled
                 readOnly
               />
-              <p className="text-xs text-gray-500">Position is automatically assigned based on creation order</p>
+              <p className="text-xs text-gray-500">
+                Position is automatically assigned based on creation order
+              </p>
             </div>
           )}
 
@@ -281,9 +287,9 @@ export default function BrandForm() {
             <Label>Brand Logo</Label>
             {logoPreview ? (
               <div className="relative">
-                <img 
-                  src={logoPreview} 
-                  alt="Logo preview" 
+                <img
+                  src={logoPreview}
+                  alt="Logo preview"
                   className="w-20 h-20 object-contain border rounded-md"
                 />
                 <Button
@@ -304,12 +310,12 @@ export default function BrandForm() {
               <label className="flex flex-col items-center justify-center h-20 border-2 border-dashed rounded-md cursor-pointer hover:border-primary/50 transition-colors">
                 <Upload className="w-5 h-5 text-muted-foreground mb-1" />
                 <span className="text-xs text-muted-foreground">Upload PNG Logo</span>
-                <input 
-                  type="file" 
-                  className="hidden" 
-                  accept="image/png" 
+                <input
+                  type="file"
+                  className="hidden"
+                  accept="image/png"
                   onChange={handleLogoChange}
-                  data-testid="input-brand-logo" 
+                  data-testid="input-brand-logo"
                 />
               </label>
             )}
@@ -329,7 +335,7 @@ export default function BrandForm() {
 
           <div className="space-y-2">
             <Label>Brand FAQ</Label>
-            <FAQBuilder 
+            <FAQBuilder
               items={formData.faqs}
               onChange={(faqs) => setFormData({ ...formData, faqs })}
             />
@@ -337,16 +343,20 @@ export default function BrandForm() {
         </div>
 
         <div className="flex gap-4 pt-4">
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             data-testid="button-save-brand"
             disabled={createBrand.isPending || updateBrand.isPending}
           >
-            {createBrand.isPending || updateBrand.isPending ? 'Saving...' : isEditing ? 'Update Brand' : 'Save Brand'}
+            {createBrand.isPending || updateBrand.isPending
+              ? 'Saving...'
+              : isEditing
+                ? 'Update Brand'
+                : 'Save Brand'}
           </Button>
-          <Button 
-            type="button" 
-            variant="outline" 
+          <Button
+            type="button"
+            variant="outline"
             data-testid="button-cancel"
             onClick={() => setLocation('/brands')}
           >

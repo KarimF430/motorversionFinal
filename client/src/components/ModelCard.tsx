@@ -1,6 +1,6 @@
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Edit, Trash2 } from "lucide-react";
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Edit, Trash2 } from 'lucide-react';
 
 interface ModelCardProps {
   id: string;
@@ -17,16 +17,16 @@ export default function ModelCard({ id, name, onEdit, onDelete }: ModelCardProps
           {name}
         </span>
         <div className="flex gap-2">
-          <Button 
-            size="icon" 
+          <Button
+            size="icon"
             variant="ghost"
             onClick={onEdit}
             data-testid={`button-edit-model-${id}`}
           >
             <Edit className="w-4 h-4" />
           </Button>
-          <Button 
-            size="icon" 
+          <Button
+            size="icon"
             variant="ghost"
             onClick={onDelete}
             data-testid={`button-delete-model-${id}`}

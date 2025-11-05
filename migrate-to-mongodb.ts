@@ -29,7 +29,7 @@ async function migrate() {
         Model.deleteMany({}),
         Variant.deleteMany({}),
         AdminUser.deleteMany({}),
-        PopularComparison.deleteMany({})
+        PopularComparison.deleteMany({}),
       ]);
       console.log('✅ Empty collections created');
       console.log('\n🎉 Migration completed (no data to migrate)');
@@ -91,7 +91,7 @@ async function migrate() {
       Model.deleteMany({}),
       Variant.deleteMany({}),
       AdminUser.deleteMany({}),
-      PopularComparison.deleteMany({})
+      PopularComparison.deleteMany({}),
     ]);
     console.log('✅ Existing data cleared\n');
 
@@ -130,7 +130,7 @@ async function migrate() {
       Model.countDocuments(),
       Variant.countDocuments(),
       AdminUser.countDocuments(),
-      PopularComparison.countDocuments()
+      PopularComparison.countDocuments(),
     ]);
 
     console.log(`\n📊 Migration Summary:`);

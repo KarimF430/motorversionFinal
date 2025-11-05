@@ -7,7 +7,7 @@ let redis: Redis | null = null;
  */
 export function initRedis() {
   const redisUrl = process.env.REDIS_URL;
-  
+
   if (!redisUrl) {
     console.log('⚠️  Redis URL not configured. Caching disabled.');
     console.log('   Set REDIS_URL in .env to enable caching');
@@ -48,7 +48,7 @@ export async function getCache<T = any>(key: string): Promise<T | null> {
   try {
     const value = await redis.get(key);
     if (!value) return null;
-    
+
     return JSON.parse(value) as T;
   } catch (error) {
     console.error(`Cache get error for key ${key}:`, error);
@@ -59,11 +59,7 @@ export async function getCache<T = any>(key: string): Promise<T | null> {
 /**
  * Set value in cache with TTL (time to live in seconds)
  */
-export async function setCache(
-  key: string,
-  value: any,
-  ttl: number = 3600
-): Promise<boolean> {
+export async function setCache(key: string, value: any, ttl: number = 3600): Promise<boolean> {
   if (!redis) return false;
 
   try {
@@ -99,7 +95,7 @@ export async function deleteCachePattern(pattern: string): Promise<number> {
   try {
     const keys = await redis.keys(pattern);
     if (keys.length === 0) return 0;
-    
+
     await redis.del(...keys);
     return keys.length;
   } catch (error) {
@@ -132,7 +128,7 @@ export async function getCacheStats() {
   try {
     const info = await redis.info('stats');
     const memory = await redis.info('memory');
-    
+
     return {
       connected: redis.status === 'ready',
       info,
@@ -147,11 +143,7 @@ export async function getCacheStats() {
 /**
  * Cache wrapper for functions
  */
-export async function withCache<T>(
-  key: string,
-  ttl: number,
-  fn: () => Promise<T>
-): Promise<T> {
+export async function withCache<T>(key: string, ttl: number, fn: () => Promise<T>): Promise<T> {
   // Try to get from cache
   const cached = await getCache<T>(key);
   if (cached !== null) {

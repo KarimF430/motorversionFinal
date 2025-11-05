@@ -1,15 +1,29 @@
-import React, { useState, useMemo, useRef } from "react";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Plus, Download, Upload, ChevronDown, Edit, Trash2, AlertTriangle, CheckCircle } from "lucide-react";
-import { useLocation } from "wouter";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import { downloadVariantsCSV, parseCSVFile, validateCSVData, ValidationError } from "@/utils/csvUtils";
-import type { Variant, Model, Brand } from "@shared/schema";
+import React, { useState, useMemo, useRef } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import {
+  Plus,
+  Download,
+  Upload,
+  ChevronDown,
+  Edit,
+  Trash2,
+  AlertTriangle,
+  CheckCircle,
+} from 'lucide-react';
+import { useLocation } from 'wouter';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import {
+  downloadVariantsCSV,
+  parseCSVFile,
+  validateCSVData,
+  ValidationError,
+} from '@/utils/csvUtils';
+import type { Variant, Model, Brand } from '@shared/schema';
 
 export default function VariantList() {
   const [, setLocation] = useLocation();
@@ -24,7 +38,11 @@ export default function VariantList() {
     queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
   }, []);
 
-  const { data: variants = [], isLoading, error } = useQuery<Variant[]>({
+  const {
+    data: variants = [],
+    isLoading,
+    error,
+  } = useQuery<Variant[]>({
     queryKey: ['/api/variants'],
     retry: 1,
     staleTime: 0, // Always fetch fresh data
@@ -60,22 +78,24 @@ export default function VariantList() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
       toast({
-        title: "Success",
-        description: "Variant deleted successfully.",
+        title: 'Success',
+        description: 'Variant deleted successfully.',
       });
     },
     onError: (error: any) => {
       console.error('Delete error:', error);
       toast({
-        title: "Error",
-        description: error.message || "Failed to delete variant.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'Failed to delete variant.',
+        variant: 'destructive',
       });
     },
   });
 
   const handleDelete = (id: string, name: string) => {
-    if (window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)) {
+    if (
+      window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)
+    ) {
       deleteVariant.mutate(id);
     }
   };
@@ -83,13 +103,13 @@ export default function VariantList() {
   // Filter variants based on selected model
   const filteredVariants = useMemo(() => {
     if (selectedModelId === 'all') return variants;
-    return variants.filter(variant => variant.modelId === selectedModelId);
+    return variants.filter((variant) => variant.modelId === selectedModelId);
   }, [variants, selectedModelId]);
 
   // Group variants by model
   const variantsByModel = useMemo(() => {
     const grouped: Record<string, Variant[]> = {};
-    filteredVariants.forEach(variant => {
+    filteredVariants.forEach((variant) => {
       if (!grouped[variant.modelId]) {
         grouped[variant.modelId] = [];
       }
@@ -100,12 +120,12 @@ export default function VariantList() {
 
   // Get model and brand info
   const getModelInfo = (modelId: string) => {
-    const model = models.find(m => m.id === modelId);
+    const model = models.find((m) => m.id === modelId);
     if (!model) return { modelName: 'Unknown', brandName: 'Unknown' };
-    const brand = brands.find(b => b.id === model.brandId);
+    const brand = brands.find((b) => b.id === model.brandId);
     return {
       modelName: model.name,
-      brandName: brand?.name || 'Unknown'
+      brandName: brand?.name || 'Unknown',
     };
   };
 
@@ -127,24 +147,24 @@ export default function VariantList() {
             results.push({ success: true, action: 'created', data: result });
           }
         } catch (error: any) {
-          results.push({ 
-            success: false, 
-            action: variant.variantId ? 'update' : 'create', 
+          results.push({
+            success: false,
+            action: variant.variantId ? 'update' : 'create',
             error: error.message,
-            data: variant 
+            data: variant,
           });
         }
       }
       return results;
     },
     onSuccess: (results) => {
-      const successful = results.filter(r => r.success).length;
-      const failed = results.filter(r => !r.success).length;
-      const updated = results.filter(r => r.success && r.action === 'updated').length;
-      const created = results.filter(r => r.success && r.action === 'created').length;
-      
+      const successful = results.filter((r) => r.success).length;
+      const failed = results.filter((r) => !r.success).length;
+      const updated = results.filter((r) => r.success && r.action === 'updated').length;
+      const created = results.filter((r) => r.success && r.action === 'created').length;
+
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
-      
+
       let description = '';
       if (updated > 0 && created > 0) {
         description = `${updated} variants updated, ${created} variants created`;
@@ -155,25 +175,28 @@ export default function VariantList() {
       } else {
         description = `${successful} variants processed`;
       }
-      
+
       if (failed > 0) {
         description += `, ${failed} failed`;
       }
-      
+
       toast({
-        title: "CSV Upload Complete",
+        title: 'CSV Upload Complete',
         description: description + '.',
       });
-      
+
       if (failed > 0) {
-        console.error('Failed uploads:', results.filter(r => !r.success));
+        console.error(
+          'Failed uploads:',
+          results.filter((r) => !r.success)
+        );
       }
     },
     onError: (error: any) => {
       toast({
-        title: "Upload Failed",
-        description: error.message || "Failed to upload CSV data.",
-        variant: "destructive",
+        title: 'Upload Failed',
+        description: error.message || 'Failed to upload CSV data.',
+        variant: 'destructive',
       });
     },
   });
@@ -182,14 +205,14 @@ export default function VariantList() {
     try {
       downloadVariantsCSV(variants, brands, models);
       toast({
-        title: "CSV Downloaded",
-        description: "Variants data has been exported to CSV file.",
+        title: 'CSV Downloaded',
+        description: 'Variants data has been exported to CSV file.',
       });
     } catch (error: any) {
       toast({
-        title: "Download Failed",
-        description: error.message || "Failed to download CSV.",
-        variant: "destructive",
+        title: 'Download Failed',
+        description: error.message || 'Failed to download CSV.',
+        variant: 'destructive',
       });
     }
   };
@@ -204,9 +227,9 @@ export default function VariantList() {
 
     if (!file.name.toLowerCase().endsWith('.csv')) {
       toast({
-        title: "Invalid File",
-        description: "Please select a CSV file.",
-        variant: "destructive",
+        title: 'Invalid File',
+        description: 'Please select a CSV file.',
+        variant: 'destructive',
       });
       return;
     }
@@ -217,16 +240,16 @@ export default function VariantList() {
     try {
       // Parse CSV file
       const csvData = await parseCSVFile(file);
-      
+
       // Validate data
       const errors = validateCSVData(csvData, brands, models);
-      
+
       if (errors.length > 0) {
         setUploadErrors(errors);
         toast({
-          title: "Validation Errors",
+          title: 'Validation Errors',
           description: `Found ${errors.length} validation errors. Please check the error details below.`,
-          variant: "destructive",
+          variant: 'destructive',
         });
         setIsUploading(false);
         return;
@@ -235,147 +258,148 @@ export default function VariantList() {
       // Transform CSV data to variant format
       const variantsData = csvData.map((row: any) => {
         const variantData: any = {
-        brandId: row.brandId,
-        modelId: row.modelId,
-        name: row.variantName,
-        status: row.status || 'active',
-        isValueForMoney: ['true', '1', 'yes'].includes(row.isValueForMoney?.toString().toLowerCase()) || false,
-        price: parseFloat(row.price) || 0,
-        keyFeatures: row.keyFeatures || '',
-        headerSummary: row.headerSummary || '',
-        description: row.description || '',
-        exteriorDesign: row.exteriorDesign || '',
-        comfortConvenience: row.comfortConvenience || '',
-        
-        // Page 2 fields
-        engineName: row.engineName || '',
-        engineSummary: row.engineSummary || '',
-        engineTransmission: row.engineTransmission || '',
-        enginePower: row.enginePower || '',
-        engineTorque: row.engineTorque || '',
-        engineSpeed: row.engineSpeed || '',
-        mileageEngineName: row.mileageEngineName || '',
-        mileageCompanyClaimed: row.mileageCompanyClaimed || '',
-        mileageCityRealWorld: row.mileageCityRealWorld || '',
-        mileageHighwayRealWorld: row.mileageHighwayRealWorld || '',
-        ventilatedSeats: row.ventilatedSeats || '',
-        sunroof: row.sunroof || '',
-        airPurifier: row.airPurifier || '',
-        headsUpDisplay: row.headsUpDisplay || '',
-        cruiseControl: row.cruiseControl || '',
-        rainSensingWipers: row.rainSensingWipers || '',
-        automaticHeadlamp: row.automaticHeadlamp || '',
-        followMeHomeHeadlights: row.followMeHomeHeadlights || '',
-        keylessEntry: row.keylessEntry || '',
-        ignition: row.ignition || '',
-        ambientLighting: row.ambientLighting || '',
-        steeringAdjustment: row.steeringAdjustment || '',
-        airConditioning: row.airConditioning || '',
-        climateZones: row.climateZones || '',
-        rearACVents: row.rearACVents || '',
-        frontArmrest: row.frontArmrest || '',
-        rearArmrest: row.rearArmrest || '',
-        insideRearViewMirror: row.insideRearViewMirror || '',
-        outsideRearViewMirrors: row.outsideRearViewMirrors || '',
-        steeringMountedControls: row.steeringMountedControls || '',
-        rearWindshieldDefogger: row.rearWindshieldDefogger || '',
-        frontWindshieldDefogger: row.frontWindshieldDefogger || '',
-        cooledGlovebox: row.cooledGlovebox || '',
-        
-        // Page 3 fields
-        globalNCAPRating: row.globalNCAPRating || '',
-        airbags: row.airbags || '',
-        airbagsLocation: row.airbagsLocation || '',
-        adasLevel: row.adasLevel || '',
-        adasFeatures: row.adasFeatures || '',
-        reverseCamera: row.reverseCamera || '',
-        reverseCameraGuidelines: row.reverseCameraGuidelines || '',
-        tyrePressureMonitor: row.tyrePressureMonitor || '',
-        hillHoldAssist: row.hillHoldAssist || '',
-        hillDescentControl: row.hillDescentControl || '',
-        rollOverMitigation: row.rollOverMitigation || '',
-        parkingSensor: row.parkingSensor || '',
-        discBrakes: row.discBrakes || '',
-        electronicStabilityProgram: row.electronicStabilityProgram || '',
-        abs: row.abs || '',
-        ebd: row.ebd || '',
-        brakeAssist: row.brakeAssist || '',
-        isofixMounts: row.isofixMounts || '',
-        seatbeltWarning: row.seatbeltWarning || '',
-        speedAlertSystem: row.speedAlertSystem || '',
-        speedSensingDoorLocks: row.speedSensingDoorLocks || '',
-        immobiliser: row.immobiliser || '',
-        touchScreenInfotainment: row.touchScreenInfotainment || '',
-        androidAppleCarplay: row.androidAppleCarplay || '',
-        speakers: row.speakers || '',
-        tweeters: row.tweeters || '',
-        subwoofers: row.subwoofers || '',
-        usbCChargingPorts: row.usbCChargingPorts || '',
-        usbAChargingPorts: row.usbAChargingPorts || '',
-        twelvevChargingPorts: row.twelvevChargingPorts || '',
-        wirelessCharging: row.wirelessCharging || '',
-        connectedCarTech: row.connectedCarTech || '',
-        
-        // Page 4 fields
-        engineNamePage4: row.engineNamePage4 || '',
-        engineCapacity: row.engineCapacity || '',
-        fuel: row.fuel || '',
-        transmission: row.transmission || '',
-        noOfGears: row.noOfGears || '',
-        paddleShifter: row.paddleShifter || '',
-        maxPower: row.maxPower || '',
-        torque: row.torque || '',
-        zeroTo100KmphTime: row.zeroTo100KmphTime || '',
-        topSpeed: row.topSpeed || '',
-        evBatteryCapacity: row.evBatteryCapacity || '',
-        hybridBatteryCapacity: row.hybridBatteryCapacity || '',
-        batteryType: row.batteryType || '',
-        electricMotorPlacement: row.electricMotorPlacement || '',
-        evRange: row.evRange || '',
-        evChargingTime: row.evChargingTime || '',
-        maxElectricMotorPower: row.maxElectricMotorPower || '',
-        turboCharged: row.turboCharged || '',
-        hybridType: row.hybridType || '',
-        driveTrain: row.driveTrain || '',
-        drivingModes: row.drivingModes || '',
-        offRoadModes: row.offRoadModes || '',
-        differentialLock: row.differentialLock || '',
-        limitedSlipDifferential: row.limitedSlipDifferential || '',
-        seatUpholstery: row.seatUpholstery || '',
-        seatsAdjustment: row.seatsAdjustment || '',
-        driverSeatAdjustment: row.driverSeatAdjustment || '',
-        passengerSeatAdjustment: row.passengerSeatAdjustment || '',
-        rearSeatAdjustment: row.rearSeatAdjustment || '',
-        welcomeSeats: row.welcomeSeats || '',
-        memorySeats: row.memorySeats || '',
-        headLights: row.headLights || '',
-        tailLight: row.tailLight || '',
-        frontFogLights: row.frontFogLights || '',
-        roofRails: row.roofRails || '',
-        radioAntenna: row.radioAntenna || '',
-        outsideRearViewMirror: row.outsideRearViewMirror || '',
-        daytimeRunningLights: row.daytimeRunningLights || '',
-        sideIndicator: row.sideIndicator || '',
-        rearWindshieldWiper: row.rearWindshieldWiper || '',
-        
-        // Page 5 fields
-        groundClearance: row.groundClearance || '',
-        length: row.length || '',
-        width: row.width || '',
-        height: row.height || '',
-        wheelbase: row.wheelbase || '',
-        turningRadius: row.turningRadius || '',
-        kerbWeight: row.kerbWeight || '',
-        frontTyreProfile: row.frontTyreProfile || '',
-        rearTyreProfile: row.rearTyreProfile || '',
-        spareTyreProfile: row.spareTyreProfile || '',
-        spareWheelType: row.spareWheelType || '',
-        frontSuspension: row.frontSuspension || '',
-        rearSuspension: row.rearSuspension || '',
-        cupholders: row.cupholders || '',
-        fuelTankCapacity: row.fuelTankCapacity || '',
-        bootSpace: row.bootSpace || '',
-        bootSpaceAfterFoldingRearRowSeats: row.bootSpaceAfterFoldingRearRowSeats || '',
+          brandId: row.brandId,
+          modelId: row.modelId,
+          name: row.variantName,
+          status: row.status || 'active',
+          isValueForMoney:
+            ['true', '1', 'yes'].includes(row.isValueForMoney?.toString().toLowerCase()) || false,
+          price: parseFloat(row.price) || 0,
+          keyFeatures: row.keyFeatures || '',
+          headerSummary: row.headerSummary || '',
+          description: row.description || '',
+          exteriorDesign: row.exteriorDesign || '',
+          comfortConvenience: row.comfortConvenience || '',
+
+          // Page 2 fields
+          engineName: row.engineName || '',
+          engineSummary: row.engineSummary || '',
+          engineTransmission: row.engineTransmission || '',
+          enginePower: row.enginePower || '',
+          engineTorque: row.engineTorque || '',
+          engineSpeed: row.engineSpeed || '',
+          mileageEngineName: row.mileageEngineName || '',
+          mileageCompanyClaimed: row.mileageCompanyClaimed || '',
+          mileageCityRealWorld: row.mileageCityRealWorld || '',
+          mileageHighwayRealWorld: row.mileageHighwayRealWorld || '',
+          ventilatedSeats: row.ventilatedSeats || '',
+          sunroof: row.sunroof || '',
+          airPurifier: row.airPurifier || '',
+          headsUpDisplay: row.headsUpDisplay || '',
+          cruiseControl: row.cruiseControl || '',
+          rainSensingWipers: row.rainSensingWipers || '',
+          automaticHeadlamp: row.automaticHeadlamp || '',
+          followMeHomeHeadlights: row.followMeHomeHeadlights || '',
+          keylessEntry: row.keylessEntry || '',
+          ignition: row.ignition || '',
+          ambientLighting: row.ambientLighting || '',
+          steeringAdjustment: row.steeringAdjustment || '',
+          airConditioning: row.airConditioning || '',
+          climateZones: row.climateZones || '',
+          rearACVents: row.rearACVents || '',
+          frontArmrest: row.frontArmrest || '',
+          rearArmrest: row.rearArmrest || '',
+          insideRearViewMirror: row.insideRearViewMirror || '',
+          outsideRearViewMirrors: row.outsideRearViewMirrors || '',
+          steeringMountedControls: row.steeringMountedControls || '',
+          rearWindshieldDefogger: row.rearWindshieldDefogger || '',
+          frontWindshieldDefogger: row.frontWindshieldDefogger || '',
+          cooledGlovebox: row.cooledGlovebox || '',
+
+          // Page 3 fields
+          globalNCAPRating: row.globalNCAPRating || '',
+          airbags: row.airbags || '',
+          airbagsLocation: row.airbagsLocation || '',
+          adasLevel: row.adasLevel || '',
+          adasFeatures: row.adasFeatures || '',
+          reverseCamera: row.reverseCamera || '',
+          reverseCameraGuidelines: row.reverseCameraGuidelines || '',
+          tyrePressureMonitor: row.tyrePressureMonitor || '',
+          hillHoldAssist: row.hillHoldAssist || '',
+          hillDescentControl: row.hillDescentControl || '',
+          rollOverMitigation: row.rollOverMitigation || '',
+          parkingSensor: row.parkingSensor || '',
+          discBrakes: row.discBrakes || '',
+          electronicStabilityProgram: row.electronicStabilityProgram || '',
+          abs: row.abs || '',
+          ebd: row.ebd || '',
+          brakeAssist: row.brakeAssist || '',
+          isofixMounts: row.isofixMounts || '',
+          seatbeltWarning: row.seatbeltWarning || '',
+          speedAlertSystem: row.speedAlertSystem || '',
+          speedSensingDoorLocks: row.speedSensingDoorLocks || '',
+          immobiliser: row.immobiliser || '',
+          touchScreenInfotainment: row.touchScreenInfotainment || '',
+          androidAppleCarplay: row.androidAppleCarplay || '',
+          speakers: row.speakers || '',
+          tweeters: row.tweeters || '',
+          subwoofers: row.subwoofers || '',
+          usbCChargingPorts: row.usbCChargingPorts || '',
+          usbAChargingPorts: row.usbAChargingPorts || '',
+          twelvevChargingPorts: row.twelvevChargingPorts || '',
+          wirelessCharging: row.wirelessCharging || '',
+          connectedCarTech: row.connectedCarTech || '',
+
+          // Page 4 fields
+          engineNamePage4: row.engineNamePage4 || '',
+          engineCapacity: row.engineCapacity || '',
+          fuel: row.fuel || '',
+          transmission: row.transmission || '',
+          noOfGears: row.noOfGears || '',
+          paddleShifter: row.paddleShifter || '',
+          maxPower: row.maxPower || '',
+          torque: row.torque || '',
+          zeroTo100KmphTime: row.zeroTo100KmphTime || '',
+          topSpeed: row.topSpeed || '',
+          evBatteryCapacity: row.evBatteryCapacity || '',
+          hybridBatteryCapacity: row.hybridBatteryCapacity || '',
+          batteryType: row.batteryType || '',
+          electricMotorPlacement: row.electricMotorPlacement || '',
+          evRange: row.evRange || '',
+          evChargingTime: row.evChargingTime || '',
+          maxElectricMotorPower: row.maxElectricMotorPower || '',
+          turboCharged: row.turboCharged || '',
+          hybridType: row.hybridType || '',
+          driveTrain: row.driveTrain || '',
+          drivingModes: row.drivingModes || '',
+          offRoadModes: row.offRoadModes || '',
+          differentialLock: row.differentialLock || '',
+          limitedSlipDifferential: row.limitedSlipDifferential || '',
+          seatUpholstery: row.seatUpholstery || '',
+          seatsAdjustment: row.seatsAdjustment || '',
+          driverSeatAdjustment: row.driverSeatAdjustment || '',
+          passengerSeatAdjustment: row.passengerSeatAdjustment || '',
+          rearSeatAdjustment: row.rearSeatAdjustment || '',
+          welcomeSeats: row.welcomeSeats || '',
+          memorySeats: row.memorySeats || '',
+          headLights: row.headLights || '',
+          tailLight: row.tailLight || '',
+          frontFogLights: row.frontFogLights || '',
+          roofRails: row.roofRails || '',
+          radioAntenna: row.radioAntenna || '',
+          outsideRearViewMirror: row.outsideRearViewMirror || '',
+          daytimeRunningLights: row.daytimeRunningLights || '',
+          sideIndicator: row.sideIndicator || '',
+          rearWindshieldWiper: row.rearWindshieldWiper || '',
+
+          // Page 5 fields
+          groundClearance: row.groundClearance || '',
+          length: row.length || '',
+          width: row.width || '',
+          height: row.height || '',
+          wheelbase: row.wheelbase || '',
+          turningRadius: row.turningRadius || '',
+          kerbWeight: row.kerbWeight || '',
+          frontTyreProfile: row.frontTyreProfile || '',
+          rearTyreProfile: row.rearTyreProfile || '',
+          spareTyreProfile: row.spareTyreProfile || '',
+          spareWheelType: row.spareWheelType || '',
+          frontSuspension: row.frontSuspension || '',
+          rearSuspension: row.rearSuspension || '',
+          cupholders: row.cupholders || '',
+          fuelTankCapacity: row.fuelTankCapacity || '',
+          bootSpace: row.bootSpace || '',
+          bootSpaceAfterFoldingRearRowSeats: row.bootSpaceAfterFoldingRearRowSeats || '',
         };
 
         // Add variant ID if it exists for updates, otherwise it's a new variant
@@ -388,12 +412,11 @@ export default function VariantList() {
 
       // Upload the data
       uploadVariantsMutation.mutate(variantsData);
-
     } catch (error: any) {
       toast({
-        title: "File Processing Error",
-        description: error.message || "Failed to process CSV file.",
-        variant: "destructive",
+        title: 'File Processing Error',
+        description: error.message || 'Failed to process CSV file.',
+        variant: 'destructive',
       });
     } finally {
       setIsUploading(false);
@@ -424,17 +447,17 @@ export default function VariantList() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <h1 className="text-2xl font-semibold">Edit Variants</h1>
-          
+
           {/* Model Filter Dropdown */}
           <div className="relative">
-            <select 
+            <select
               value={selectedModelId}
               onChange={(e) => setSelectedModelId(e.target.value)}
               className="px-3 py-1.5 pr-8 border rounded-md text-sm bg-white appearance-none cursor-pointer hover:border-gray-400 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
             >
               <option value="all">All Models</option>
               {models.map((model) => {
-                const brand = brands.find(b => b.id === model.brandId);
+                const brand = brands.find((b) => b.id === model.brandId);
                 return (
                   <option key={model.id} value={model.id}>
                     {brand?.name} {model.name}
@@ -447,7 +470,10 @@ export default function VariantList() {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button onClick={() => setLocation('/variants/new')} className="bg-green-500 hover:bg-green-600">
+          <Button
+            onClick={() => setLocation('/variants/new')}
+            className="bg-green-500 hover:bg-green-600"
+          >
             <Plus className="w-4 h-4 mr-2" />
             Add/Edit Variants
           </Button>
@@ -491,7 +517,10 @@ export default function VariantList() {
           <div className="space-y-2 max-h-60 overflow-y-auto">
             {uploadErrors.map((error, index) => (
               <div key={index} className="text-sm text-red-700 bg-red-100 rounded p-2">
-                <strong>Row {error.row}, Field "{error.field}":</strong> {error.error}
+                <strong>
+                  Row {error.row}, Field "{error.field}":
+                </strong>{' '}
+                {error.error}
                 {error.value && <span className="text-red-600"> (Value: "{error.value}")</span>}
               </div>
             ))}
@@ -511,13 +540,15 @@ export default function VariantList() {
         ) : (
           Object.entries(variantsByModel).map(([modelId, modelVariants]) => {
             const { modelName, brandName } = getModelInfo(modelId);
-            
+
             return (
               <div key={modelId} className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold">{brandName} {modelName} Variants</h2>
-                  <Button 
-                    onClick={() => setLocation('/variants/new')} 
+                  <h2 className="text-xl font-semibold">
+                    {brandName} {modelName} Variants
+                  </h2>
+                  <Button
+                    onClick={() => setLocation('/variants/new')}
                     size="sm"
                     className="bg-green-500 hover:bg-green-600"
                   >
@@ -529,7 +560,7 @@ export default function VariantList() {
                 {/* Variants Table */}
                 <div className="space-y-3">
                   {modelVariants.map((variant, index) => (
-                    <div 
+                    <div
                       key={variant.id}
                       className="bg-white border border-gray-200 rounded-lg p-4 flex items-center justify-between hover:shadow-md transition-shadow"
                     >

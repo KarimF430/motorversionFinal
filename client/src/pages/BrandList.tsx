@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import BrandCard from "@/components/BrandCard";
-import { useLocation } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { Brand } from "@shared/schema";
+import { Button } from '@/components/ui/button';
+import { Plus } from 'lucide-react';
+import BrandCard from '@/components/BrandCard';
+import { useLocation } from 'wouter';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { Brand } from '@shared/schema';
 
 export default function BrandList() {
   const [, setLocation] = useLocation();
@@ -23,21 +23,23 @@ export default function BrandList() {
       queryClient.invalidateQueries({ queryKey: ['/api/brands'] });
       queryClient.invalidateQueries({ queryKey: ['/api/stats'] });
       toast({
-        title: "Brand deleted",
-        description: "The brand has been successfully deleted.",
+        title: 'Brand deleted',
+        description: 'The brand has been successfully deleted.',
       });
     },
     onError: () => {
       toast({
-        title: "Error",
-        description: "Failed to delete brand.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to delete brand.',
+        variant: 'destructive',
       });
     },
   });
 
   const handleDeleteBrand = (id: string, name: string) => {
-    if (window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)) {
+    if (
+      window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)
+    ) {
       deleteBrand.mutate(id);
     }
   };

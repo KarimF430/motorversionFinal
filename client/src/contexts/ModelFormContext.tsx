@@ -1,5 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
-import type { InsertModel } from "@shared/schema";
+import { createContext, useContext, useState, ReactNode } from 'react';
+import type { InsertModel } from '@shared/schema';
 
 interface ModelFormContextType {
   formData: Partial<InsertModel>;
@@ -61,7 +61,7 @@ export function ModelFormProvider({ children }: { children: ReactNode }) {
 export function useModelForm() {
   const context = useContext(ModelFormContext);
   if (!context) {
-    throw new Error("useModelForm must be used within ModelFormProvider");
+    throw new Error('useModelForm must be used within ModelFormProvider');
   }
   return context;
 }

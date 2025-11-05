@@ -12,7 +12,9 @@
     "migrate": "tsx migrate-to-mongodb.ts",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\""
   },
   "dependencies": {
     "@elastic/elasticsearch": "^8.19.1",
@@ -133,6 +135,7 @@
     "esbuild": "^0.25.0",
     "jest": "^30.2.0",
     "postcss": "^8.4.47",
+    "prettier": "^3.6.2",
     "supertest": "^7.1.4",
     "tailwindcss": "^3.4.17",
     "ts-jest": "^29.4.5",

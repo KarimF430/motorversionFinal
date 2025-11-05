@@ -15,12 +15,10 @@ export function requestLogger(req: Request, res: Response, next: NextFunction) {
   res.on('finish', () => {
     const duration = Date.now() - start;
     const { statusCode } = res;
-    
+
     const statusEmoji = statusCode >= 500 ? '❌' : statusCode >= 400 ? '⚠️' : '✅';
-    
-    console.log(
-      `${statusEmoji} ${method} ${path} ${statusCode} - ${duration}ms`
-    );
+
+    console.log(`${statusEmoji} ${method} ${path} ${statusCode} - ${duration}ms`);
   });
 
   next();
@@ -35,11 +33,9 @@ export function performanceLogger(req: Request, res: Response, next: NextFunctio
 
   res.on('finish', () => {
     const duration = Date.now() - start;
-    
+
     if (duration > 1000) {
-      console.warn(
-        `🐌 SLOW REQUEST: ${req.method} ${req.path} took ${duration}ms`
-      );
+      console.warn(`🐌 SLOW REQUEST: ${req.method} ${req.path} took ${duration}ms`);
     }
   });
 

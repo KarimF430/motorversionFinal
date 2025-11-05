@@ -1,21 +1,21 @@
-import express, { type Request, Response, NextFunction } from "express";
-import { createServer } from "http";
-import cookieParser from "cookie-parser";
-import helmet from "helmet";
-import compression from "compression";
-import rateLimit from "express-rate-limit";
-import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
-import { MongoDBStorage } from "./db/mongodb-storage";
-import { createBackupService } from "./backup-service";
-import { errorHandler, notFoundHandler } from "./middleware/error-handler";
-import { requestLogger, performanceLogger } from "./middleware/logger";
-import { initSentry, sentryErrorHandler } from "./monitoring/sentry";
-import { initRedis } from "./cache/redis-client";
-import uploadRoutes from "./routes/upload.routes.js";
-import aiSearchRoutes from "../routes/ai-search.routes.js";
-import homepageRoutes from "../routes/homepage.routes.js";
-import dotenv from "dotenv";
+import express, { type Request, Response, NextFunction } from 'express';
+import { createServer } from 'http';
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
+import compression from 'compression';
+import rateLimit from 'express-rate-limit';
+import { registerRoutes } from './routes';
+import { setupVite, serveStatic, log } from './vite';
+import { MongoDBStorage } from './db/mongodb-storage';
+import { createBackupService } from './backup-service';
+import { errorHandler, notFoundHandler } from './middleware/error-handler';
+import { requestLogger, performanceLogger } from './middleware/logger';
+import { initSentry, sentryErrorHandler } from './monitoring/sentry';
+import { initRedis } from './cache/redis-client';
+import uploadRoutes from './routes/upload.routes.js';
+import aiSearchRoutes from '../routes/ai-search.routes.js';
+import homepageRoutes from '../routes/homepage.routes.js';
+import dotenv from 'dotenv';
 // New production-ready middleware
 import { setupSecurity, sanitizeInput } from '../middleware/security.js';
 import { apiLimiter, searchLimiter, authLimiter } from '../middleware/rate-limit.js';
@@ -59,9 +59,12 @@ app.use(performanceLogger);
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, Authorization, Cookie'
+  );
   res.header('Access-Control-Allow-Credentials', 'true');
-  
+
   if (req.method === 'OPTIONS') {
     res.sendStatus(200);
   } else {
@@ -80,16 +83,16 @@ app.use((req, res, next) => {
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
-  res.on("finish", () => {
+  res.on('finish', () => {
     const duration = Date.now() - start;
-    if (path.startsWith("/api")) {
+    if (path.startsWith('/api')) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
         logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
       }
 
       if (logLine.length > 80) {
-        logLine = logLine.slice(0, 79) + "…";
+        logLine = logLine.slice(0, 79) + '…';
       }
 
       log(logLine);
@@ -103,7 +106,7 @@ app.use((req, res, next) => {
   // Initialize MongoDB storage
   const storage = new MongoDBStorage();
   const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/motoroctane';
-  
+
   try {
     await storage.connect(mongoUri);
   } catch (error) {
@@ -113,44 +116,44 @@ app.use((req, res, next) => {
     console.error('   3. Network connection is available');
     process.exit(1);
   }
-  
+
   // Initialize Redis cache
   const redis = initRedis();
-  
+
   // Initialize backup service
   const backupService = createBackupService(storage);
-  
+
   // Start automatic backups every 30 minutes
   backupService.startAutoBackup(30);
-  
+
   // Register API routes FIRST before Vite
   registerRoutes(app, storage, backupService);
-  
+
   // Register Cloudinary upload routes
   app.use('/api/upload', uploadRoutes);
-  
+
   // Register AI search routes
   app.use('/api', aiSearchRoutes);
-  
+
   // Register homepage batch endpoint (critical for performance)
   app.use('/api', homepageRoutes);
-  
+
   const server = createServer(app);
 
   // Setup Vite AFTER all API routes are registered
   // This ensures API routes take precedence over Vite's catch-all
-  if (app.get("env") === "development") {
+  if (app.get('env') === 'development') {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
-  
+
   // 404 handler for unknown routes
   app.use(notFoundHandler);
-  
+
   // Sentry error handler (must be before other error handlers)
   app.use(sentryErrorHandler());
-  
+
   // Global error handler (must be last)
   app.use(errorHandler);
 
@@ -159,7 +162,7 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5001', 10);
-  server.listen(port, "0.0.0.0", () => {
+  server.listen(port, '0.0.0.0', () => {
     log(`serving on port ${port}`);
     console.log('✅ Server features enabled:');
     console.log('   - Rate limiting (100 req/15min)');

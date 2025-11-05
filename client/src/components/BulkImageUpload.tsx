@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Upload, X, CheckCircle, AlertCircle } from "lucide-react";
-import { apiRequest } from "@/lib/queryClient";
+import { useState, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Upload, X, CheckCircle, AlertCircle } from 'lucide-react';
+import { apiRequest } from '@/lib/queryClient';
 
 interface UploadedImage {
   url: string;
@@ -19,10 +19,10 @@ interface BulkImageUploadProps {
   acceptedTypes?: string;
 }
 
-export default function BulkImageUpload({ 
+export default function BulkImageUpload({
   onUploadComplete,
   maxFiles = 20,
-  acceptedTypes = "image/*"
+  acceptedTypes = 'image/*',
 }: BulkImageUploadProps) {
   const [images, setImages] = useState<UploadedImage[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -33,31 +33,31 @@ export default function BulkImageUpload({
     if (!files || files.length === 0) return;
 
     const fileArray = Array.from(files).slice(0, maxFiles);
-    
+
     // Create preview entries
-    const newImages: UploadedImage[] = fileArray.map(file => ({
+    const newImages: UploadedImage[] = fileArray.map((file) => ({
       url: URL.createObjectURL(file),
       filename: file.name,
       originalName: file.name,
       size: file.size,
-      status: 'uploading' as const
+      status: 'uploading' as const,
     }));
 
-    setImages(prev => [...prev, ...newImages]);
+    setImages((prev) => [...prev, ...newImages]);
     setIsUploading(true);
 
     try {
       // Upload all files at once
       const formData = new FormData();
-      fileArray.forEach(file => {
+      fileArray.forEach((file) => {
         formData.append('images', file);
       });
 
       console.log(`📤 Uploading ${fileArray.length} images...`);
-      
+
       const response = await fetch('http://localhost:5001/api/upload/images/bulk', {
         method: 'POST',
-        body: formData
+        body: formData,
       });
 
       if (!response.ok) {
@@ -68,32 +68,35 @@ export default function BulkImageUpload({
       console.log(`✅ Upload complete:`, result);
 
       // Update images with server URLs
-      setImages(prev => prev.map((img, idx) => {
-        const serverFile = result.files[idx];
-        if (serverFile) {
-          return {
-            ...img,
-            url: serverFile.url,
-            filename: serverFile.filename,
-            status: 'success' as const
-          };
-        }
-        return { ...img, status: 'error' as const, error: 'Upload failed' };
-      }));
+      setImages((prev) =>
+        prev.map((img, idx) => {
+          const serverFile = result.files[idx];
+          if (serverFile) {
+            return {
+              ...img,
+              url: serverFile.url,
+              filename: serverFile.filename,
+              status: 'success' as const,
+            };
+          }
+          return { ...img, status: 'error' as const, error: 'Upload failed' };
+        })
+      );
 
       // Notify parent component
       if (onUploadComplete) {
         const uploadedUrls = result.files.map((f: any) => f.url);
         onUploadComplete(uploadedUrls);
       }
-
     } catch (error) {
       console.error('❌ Bulk upload error:', error);
-      setImages(prev => prev.map(img => ({
-        ...img,
-        status: 'error' as const,
-        error: error instanceof Error ? error.message : 'Upload failed'
-      })));
+      setImages((prev) =>
+        prev.map((img) => ({
+          ...img,
+          status: 'error' as const,
+          error: error instanceof Error ? error.message : 'Upload failed',
+        }))
+      );
     } finally {
       setIsUploading(false);
     }
@@ -116,7 +119,7 @@ export default function BulkImageUpload({
   };
 
   const handleRemoveImage = (index: number) => {
-    setImages(prev => prev.filter((_, i) => i !== index));
+    setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   const handleClearAll = () => {
@@ -129,8 +132,8 @@ export default function BulkImageUpload({
     return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
   };
 
-  const successCount = images.filter(img => img.status === 'success').length;
-  const errorCount = images.filter(img => img.status === 'error').length;
+  const successCount = images.filter((img) => img.status === 'success').length;
+  const errorCount = images.filter((img) => img.status === 'error').length;
 
   return (
     <div className="space-y-4">
@@ -151,25 +154,17 @@ export default function BulkImageUpload({
           onChange={(e) => handleFileSelect(e.target.files)}
           className="hidden"
         />
-        
+
         <Upload className="w-12 h-12 mx-auto mb-4 text-gray-400" />
-        
-        <h3 className="text-lg font-semibold mb-2">
-          Upload Multiple Images
-        </h3>
-        
-        <p className="text-sm text-gray-600 mb-4">
-          Drag and drop images here, or click to browse
-        </p>
-        
-        <Button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={isUploading}
-        >
+
+        <h3 className="text-lg font-semibold mb-2">Upload Multiple Images</h3>
+
+        <p className="text-sm text-gray-600 mb-4">Drag and drop images here, or click to browse</p>
+
+        <Button type="button" onClick={() => fileInputRef.current?.click()} disabled={isUploading}>
           {isUploading ? 'Uploading...' : 'Select Images'}
         </Button>
-        
+
         <p className="text-xs text-gray-500 mt-2">
           Maximum {maxFiles} images • Supported: JPG, PNG, WebP
         </p>
@@ -179,25 +174,15 @@ export default function BulkImageUpload({
       {images.length > 0 && (
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h4 className="font-semibold">
-              Uploaded Images ({images.length})
-            </h4>
+            <h4 className="font-semibold">Uploaded Images ({images.length})</h4>
             <div className="flex items-center gap-2">
               {successCount > 0 && (
-                <span className="text-sm text-green-600">
-                  ✓ {successCount} success
-                </span>
+                <span className="text-sm text-green-600">✓ {successCount} success</span>
               )}
               {errorCount > 0 && (
-                <span className="text-sm text-red-600">
-                  ✗ {errorCount} failed
-                </span>
+                <span className="text-sm text-red-600">✗ {errorCount} failed</span>
               )}
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={handleClearAll}
-              >
+              <Button variant="outline" size="sm" onClick={handleClearAll}>
                 Clear All
               </Button>
             </div>
@@ -213,7 +198,7 @@ export default function BulkImageUpload({
                     alt={image.originalName}
                     className="w-full h-full object-cover"
                   />
-                  
+
                   {/* Status Overlay */}
                   <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
                     {image.status === 'uploading' && (
@@ -225,9 +210,7 @@ export default function BulkImageUpload({
                     {image.status === 'success' && (
                       <CheckCircle className="w-12 h-12 text-green-500" />
                     )}
-                    {image.status === 'error' && (
-                      <AlertCircle className="w-12 h-12 text-red-500" />
-                    )}
+                    {image.status === 'error' && <AlertCircle className="w-12 h-12 text-red-500" />}
                   </div>
 
                   {/* Remove Button */}
@@ -241,17 +224,9 @@ export default function BulkImageUpload({
 
                 {/* File Info */}
                 <div className="p-2 bg-white">
-                  <p className="text-xs font-medium truncate">
-                    {image.originalName}
-                  </p>
-                  <p className="text-xs text-gray-500">
-                    {formatFileSize(image.size)}
-                  </p>
-                  {image.error && (
-                    <p className="text-xs text-red-600 mt-1">
-                      {image.error}
-                    </p>
-                  )}
+                  <p className="text-xs font-medium truncate">{image.originalName}</p>
+                  <p className="text-xs text-gray-500">{formatFileSize(image.size)}</p>
+                  {image.error && <p className="text-xs text-red-600 mt-1">{image.error}</p>}
                 </div>
               </Card>
             ))}

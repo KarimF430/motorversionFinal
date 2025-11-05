@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { useLocation, useParams } from "wouter";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, apiRequest } from "@/lib/queryClient";
-import { useToast } from "@/hooks/use-toast";
-import type { Variant } from "@shared/schema";
+import { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { useLocation, useParams } from 'wouter';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import { queryClient, apiRequest } from '@/lib/queryClient';
+import { useToast } from '@/hooks/use-toast';
+import type { Variant } from '@shared/schema';
 
 export default function VariantFormPage4() {
   const [, setLocation] = useLocation();
@@ -46,7 +46,7 @@ export default function VariantFormPage4() {
     offRoadModes: '',
     differentialLock: '',
     limitedSlipDifferential: '',
-    
+
     // Seating Comfort
     seatUpholstery: '',
     seatsAdjustment: '',
@@ -55,7 +55,7 @@ export default function VariantFormPage4() {
     rearSeatAdjustment: '',
     welcomeSeats: '',
     memorySeats: '',
-    
+
     // Exteriors
     headLights: '',
     tailLight: '',
@@ -117,7 +117,7 @@ export default function VariantFormPage4() {
   }, [existingVariant]);
 
   const handleInputChange = (field: string, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const saveMutation = useMutation({
@@ -131,15 +131,15 @@ export default function VariantFormPage4() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['/api/variants'] });
       toast({
-        title: "Success",
-        description: "Variant page 4 data saved successfully.",
+        title: 'Success',
+        description: 'Variant page 4 data saved successfully.',
       });
     },
     onError: (error: any) => {
       toast({
-        title: "Error",
-        description: error.message || "Failed to save variant data.",
-        variant: "destructive",
+        title: 'Error',
+        description: error.message || 'Failed to save variant data.',
+        variant: 'destructive',
       });
     },
   });
@@ -168,7 +168,7 @@ export default function VariantFormPage4() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Engine & Transmission</h3>
-          
+
           <div className="grid grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label>Engine Name</Label>
@@ -393,7 +393,7 @@ export default function VariantFormPage4() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Seating Comfort</h3>
-          
+
           <div className="grid grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label>Seat Upholstery</Label>
@@ -465,7 +465,7 @@ export default function VariantFormPage4() {
         <div className="space-y-6">
           <h2 className="text-lg font-semibold text-center">Specifications and Features</h2>
           <h3 className="text-lg font-medium">Exteriors</h3>
-          
+
           <div className="grid grid-cols-4 gap-4">
             <div className="space-y-2">
               <Label>Head Lights</Label>
@@ -554,13 +554,15 @@ export default function VariantFormPage4() {
 
         {/* Navigation Buttons */}
         <div className="flex justify-between pt-6 border-t">
-          <Button 
-            variant="outline" 
-            onClick={() => setLocation(isEditMode ? `/variants/${params.id}/edit/page3` : '/variants/new/page3')}
+          <Button
+            variant="outline"
+            onClick={() =>
+              setLocation(isEditMode ? `/variants/${params.id}/edit/page3` : '/variants/new/page3')
+            }
           >
             ← Previous Page
           </Button>
-          
+
           <div className="flex gap-4">
             <Button onClick={handleSave} disabled={saveMutation.isPending}>
               {saveMutation.isPending ? 'Saving...' : 'Save Data'}

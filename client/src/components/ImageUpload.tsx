@@ -1,8 +1,8 @@
-import { useState, useRef } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Upload, Edit, Trash2 } from "lucide-react";
-import { Card } from "@/components/ui/card";
+import { useState, useRef } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Upload, Edit, Trash2 } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 
 interface ImageUploadProps {
   caption?: string;
@@ -13,13 +13,13 @@ interface ImageUploadProps {
   initialImage?: string;
 }
 
-export default function ImageUpload({ 
-  caption = '', 
+export default function ImageUpload({
+  caption = '',
   onCaptionChange,
   onDelete,
   onEdit,
   onImageChange,
-  initialImage
+  initialImage,
 }: ImageUploadProps) {
   const [previewUrl, setPreviewUrl] = useState<string>(initialImage || '');
   const [currentFile, setCurrentFile] = useState<File | null>(null);
@@ -59,15 +59,11 @@ export default function ImageUpload({
       <div className="relative group">
         {previewUrl ? (
           <div className="relative">
-            <img 
-              src={previewUrl} 
-              alt="Preview" 
-              className="w-full h-48 object-cover rounded-md"
-            />
+            <img src={previewUrl} alt="Preview" className="w-full h-48 object-cover rounded-md" />
             <div className="absolute top-2 right-2 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-              <Button 
-                size="icon" 
-                variant="secondary" 
+              <Button
+                size="icon"
+                variant="secondary"
                 className="h-8 w-8"
                 onClick={handleEditImage}
                 data-testid="button-edit-image"
@@ -75,9 +71,9 @@ export default function ImageUpload({
               >
                 <Edit className="w-4 h-4" />
               </Button>
-              <Button 
-                size="icon" 
-                variant="destructive" 
+              <Button
+                size="icon"
+                variant="destructive"
                 className="h-8 w-8"
                 onClick={handleDeleteImage}
                 data-testid="button-delete-image"
@@ -92,10 +88,10 @@ export default function ImageUpload({
             <label className="flex flex-col items-center justify-center w-full h-48 border-2 border-dashed rounded-md cursor-pointer hover-elevate active-elevate-2">
               <Upload className="w-8 h-8 text-muted-foreground mb-2" />
               <span className="text-sm text-muted-foreground">Click to upload image</span>
-              <input 
+              <input
                 ref={fileInputRef}
-                type="file" 
-                className="hidden" 
+                type="file"
+                className="hidden"
                 accept="image/*"
                 onChange={handleFileChange}
                 data-testid="input-file-upload"
@@ -104,9 +100,9 @@ export default function ImageUpload({
             {/* Always show delete button */}
             {onDelete && (
               <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                <Button 
-                  size="icon" 
-                  variant="destructive" 
+                <Button
+                  size="icon"
+                  variant="destructive"
                   className="h-8 w-8 bg-red-500 hover:bg-red-600"
                   onClick={(e) => {
                     e.preventDefault();
@@ -123,7 +119,7 @@ export default function ImageUpload({
           </div>
         )}
       </div>
-      <Input 
+      <Input
         placeholder="Image Caption text box"
         value={caption}
         onChange={(e) => onCaptionChange?.(e.target.value)}

@@ -23,9 +23,11 @@ export async function uploadImage(file: File): Promise<string | null> {
   }
 }
 
-export async function uploadMultipleImages(images: { file?: File; caption: string; previewUrl?: string }[]): Promise<{ url: string; caption: string }[]> {
+export async function uploadMultipleImages(
+  images: { file?: File; caption: string; previewUrl?: string }[]
+): Promise<{ url: string; caption: string }[]> {
   console.log('🖼️ Uploading multiple images:', images.length, 'images');
-  
+
   const uploadPromises = images.map(async (img, index) => {
     if (img.file) {
       console.log(`📤 Uploading NEW image ${index + 1}:`, img.file.name, 'Caption:', img.caption);
@@ -39,7 +41,12 @@ export async function uploadMultipleImages(images: { file?: File; caption: strin
       }
     } else if (img.previewUrl && img.previewUrl.startsWith('/uploads/')) {
       // Keep existing uploaded images
-      console.log(`💾 Keeping existing image ${index + 1}:`, img.previewUrl, 'Caption:', img.caption);
+      console.log(
+        `💾 Keeping existing image ${index + 1}:`,
+        img.previewUrl,
+        'Caption:',
+        img.caption
+      );
       return { url: img.previewUrl, caption: img.caption };
     } else {
       console.log(`⏭️ Skipping empty image slot ${index + 1}`);
@@ -49,7 +56,9 @@ export async function uploadMultipleImages(images: { file?: File; caption: strin
 
   const results = await Promise.all(uploadPromises);
   // Filter out null results (failed uploads or empty slots)
-  const validResults = results.filter((result): result is { url: string; caption: string } => result !== null);
+  const validResults = results.filter(
+    (result): result is { url: string; caption: string } => result !== null
+  );
   console.log('🎯 Upload results:', validResults.length, 'valid images out of', images.length);
   return validResults;
 }

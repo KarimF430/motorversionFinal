@@ -1,4 +1,4 @@
-import { LayoutDashboard, Building2, Car, Gauge, GitCompare } from "lucide-react";
+import { LayoutDashboard, Building2, Car, Gauge, GitCompare } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -8,33 +8,33 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { useLocation } from "wouter";
+} from '@/components/ui/sidebar';
+import { useLocation } from 'wouter';
 
 const menuItems = [
   {
-    title: "Dashboard",
-    url: "/",
+    title: 'Dashboard',
+    url: '/',
     icon: LayoutDashboard,
   },
   {
-    title: "Brands",
-    url: "/brands",
+    title: 'Brands',
+    url: '/brands',
     icon: Building2,
   },
   {
-    title: "Models",
-    url: "/models",
+    title: 'Models',
+    url: '/models',
     icon: Car,
   },
   {
-    title: "Variants",
-    url: "/variants",
+    title: 'Variants',
+    url: '/variants',
     icon: Gauge,
   },
   {
-    title: "Popular Comparison",
-    url: "/popular-comparisons",
+    title: 'Popular Comparison',
+    url: '/popular-comparisons',
     icon: GitCompare,
   },
 ];
@@ -51,7 +51,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
+                  <SidebarMenuButton
                     asChild
                     isActive={location === item.url}
                     data-testid={`link-${item.title.toLowerCase()}`}
