@@ -5,7 +5,7 @@ const brandSchema = new mongoose.Schema({
   id: { type: String, required: true, unique: true },
   name: { type: String, required: true },
   logo: { type: String, default: null },
-  ranking: { type: Number, required: true },
+  ranking: { type: Number, default: 999 }, // Auto-assign high ranking if not provided
   status: { type: String, default: 'active' },
   summary: { type: String, default: null },
   faqs: [{

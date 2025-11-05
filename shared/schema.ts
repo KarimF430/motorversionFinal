@@ -6,7 +6,7 @@ export const brands = pgTable("brands", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   logo: text("logo"),
-  ranking: integer("ranking").notNull(),
+  ranking: integer("ranking").default(999), // Optional - auto-assign low priority if not provided
   status: text("status").notNull().default("active"),
   summary: text("summary"),
   faqs: jsonb("faqs").$type<{ question: string; answer: string }[]>().default([]),
